@@ -7,7 +7,7 @@ if [[ "$(uname)" =~ .*"Darwin".* ]]; then
 # Set Locale
 #	LC_COLLATE=en_US.utf8 && export LC_COLLATE
 #	shopt -s nocaseglob
-	export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+	
 #	COLORFLAG="-G"
 	export COLORFLAG="--color=auto"
 #	COLORFLAG="--color=always"
@@ -16,11 +16,6 @@ if [[ "$(uname)" =~ .*"Darwin".* ]]; then
 	export EDITOR=mvim
 # Apple specific Aliases
 # alias vi=/usr/bin/vim
-	if [ "${USER}" = "root" ]; then
-		alias mtr='mtr -b -c 100 ${1}'
-	else
-		alias mtr='sudo mtr -b -c 100 ${1}'
-	fi
 	alias vim='mvim -v'
 	alias gedit="open -a gedit"
 	alias emacs='open -a /Applications/Emacs.app'
@@ -99,11 +94,6 @@ else
 	export FCEDIT=/usr/local/bin/vim
 	export EDITOR=/usr/local/bin/vim
 	export VISUAL=/usr/local/bin/vim
-	if [ "${USER}" == "root" ]; then
-		alias mtr='mtr -b -c 100 ${1}'
-	else
-		alias mtr='sudo mtr -b -c 100 ${1}'
-	fi
 #	alias vi=/usr/local/bin/vim
 	alias vi=/usr/bin/vim
 	if [ "$(hostname -s)" = "sneezy" ]; then

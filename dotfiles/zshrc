@@ -196,9 +196,8 @@ fi
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
 # for setting history length see HISTSIZE and HISTFILESIZE in zsh(1)
-HISTSIZE=10000
-HISTFILE="~/.zsh_$(hostname -s)_hist"
-HISTFILESIZE=10000
+#HISTSIZE=10000
+#HISTFILESIZE=10000
 
 if [ ! -f $HOME/.bash_history ];then 
   touch $HOME/.bash_history
