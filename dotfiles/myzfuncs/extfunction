@@ -1,0 +1,23 @@
+extfunction () {
+	getzfunctions fg_green fg_red get_fcn_list show_function
+	local FuncName=${1} 
+	local FuncDir="${HOME}/.myzfuncs" 
+	case ${FuncName} in
+		(all) /bin/rm -f ~/.myzfuncs/* > /dev/null 2>&1
+			for i in $(get_fcn_list)
+			do
+				echo "Exporting $(fg_green "${i}") function."
+			done ;;
+		(*) for i in $@
+			do
+				result=$(function_exists ${i}) 
+				if [[ $result -eq 0 ]]
+				then
+					echo "Exporting $(fg_green "${i}") function."
+				else
+					echo "Function ${i} NOT Found..."
+				fi
+			done ;;
+	esac
+	chmod 755 ${FuncDir}/*
+}

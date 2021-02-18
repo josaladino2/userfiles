@@ -1,0 +1,3 @@
+bg_fuchsia () {
+	print -P %K{013}$*%k
+}

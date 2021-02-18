@@ -1,0 +1,3 @@
+bg_lightslateblue () {
+	print -P %K{105}$*%k
+}

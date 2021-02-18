@@ -1,0 +1,3 @@
+fg_mediumvioletred () {
+	print -P %F{126}$*%f
+}

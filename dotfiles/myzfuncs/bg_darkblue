@@ -1,0 +1,3 @@
+bg_darkblue () {
+	print -P %K{018}$*%k
+}

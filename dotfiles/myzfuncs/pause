@@ -1,0 +1,6 @@
+pause () {
+	terminal="/dev/tty"
+	printf "press [$(fg_sp "Bold,$(fg_green "Enter")")] to continue..."
+#	read -s < ${terminal}
+	read && printf ""
+}

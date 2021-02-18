@@ -1,0 +1,17 @@
+#!/usr/local/bin/zsh
+if [ -f /tmp/.echo ]; then
+  echo "Using: $(pwd)/.zlogout"
+fi
+#
+# Executes commands at logout.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+setopt norcs
+
+
+# Print the message.
+f_bold "$(fg_yellow "\n\nThank you. Come again!")\n"
+

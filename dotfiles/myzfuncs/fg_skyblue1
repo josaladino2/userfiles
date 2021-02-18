@@ -1,0 +1,3 @@
+fg_skyblue1 () {
+	print -P %F{117}$*%f
+}

@@ -1,0 +1,234 @@
+if [ -f /tmp/.echo ]; then
+  echo "Using: $(pwd)/.zsh_machine"
+fi
+if [[ "$(uname)" =~ .*"Darwin".* ]]; then
+#	Put Apple specific things here
+# Support file for .zshrc for Apple Specific Setup
+# Set Locale
+#	LC_COLLATE=en_US.utf8 && export LC_COLLATE
+#	shopt -s nocaseglob
+	export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+#	COLORFLAG="-G"
+	export COLORFLAG="--color=auto"
+#	COLORFLAG="--color=always"
+	export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"	
+	export FCEDIT=mvim
+	export EDITOR=mvim
+# Apple specific Aliases
+# alias vi=/usr/bin/vim
+	if [ "${USER}" = "root" ]; then
+		alias mtr='mtr -b -c 100 ${1}'
+	else
+		alias mtr='sudo mtr -b -c 100 ${1}'
+	fi
+	alias vim='mvim -v'
+	alias gedit="open -a gedit"
+	alias emacs='open -a /Applications/Emacs.app'
+	alias cot='cot -n'
+	alias stat="gstat"
+	alias date='gdate'
+	alias python=/usr/local/bin/python3 
+# Comment out the ls commands below if no color monitors
+	unalias l 2>/dev/null
+	unalias la 2>/dev/null
+	unalias lr 2>/dev/null
+	unalias lt 2>/dev/null
+	unalias ll 2>/dev/null
+	unalias ldot 2>/dev/null
+	unalias ls 2>/dev/null
+	unalias lS 2>/dev/null
+	unalias lart 2>/dev/null
+	unalias lrt 2>/dev/null
+	alias l="gls -hFl ${COLORFLAG}"		# long listing format
+	alias la="gls -aF ${COLORFLAG}"		# all files
+	alias lr="gls -CFar ${COLORFLAG}"	# list in reverse order
+	alias lt="gls -ltFh ${COLORFLAG}" # list by time
+	alias ll="gls -hlFa ${COLORFLAG}"	# long listing include hidden
+	alias ldot="gls -1d ${COLORFLAG}"	# list only .dot files
+	alias lart="gls -1Fcart ${COLORFLAG}"	# list all files 1 column
+	alias lrt="gls -1Fcrt ${COLORFLAG}"		# list no .dot files
+	alias lc="gls -CFA ${COLORFLAG}"			# list across in columns
+	alias ls="gls -1FSh ${COLORFLAG}"		# list single column
+	alias lh="man gls"		# list single column
+	alias showcolors="spectrum_ls | most"
+	alias kh="k --help
+	awk '/^# Begin MacOS/{flag=1}/^# End MacOS/{flag=0}flag' ${HOME}/.zsh_machine | sed -e 's/alias /	/' 
+	echo \"		kh -- Show this help screen\""  # Show Help
+# Begin MacOS zsh k Command
+	alias k="k -h"			# list All files & Dirs with no .dot files
+	alias ka="k -ah"		# list All Files with .dot files
+	alias kc="k -ach"  # list by ctime
+	alias kd="k -adh"  # list just directories
+	alias kf="k -anh" 	# list just files & links
+	alias kr="k -arh"  # list in reverse order
+	alias ks="k -aSh"	# list by size
+	alias kt="k -ath"	# list by mtime
+	alias kaa="k -auh"	# list by atime
+# End MacOS zsh k Command
+	alias zhelp="run-help ${1}"
+	alias chown="gchown"
+	alias tar="gtar --no-same-owner"
+	alias trash="rmtrash"
+	alias distro="cat /etc/*-release"
+	alias icalb="icalBuddy"
+	alias calendars="icalBuddy calendars | egrep -v 'UID|type:|Found in'|sort"
+	alias -s md=atom
+	alias -s doc=word
+	alias -s docx=word
+	alias -s txt=/usr/local/bin/vim
+	alias cat="/usr/local/bin/gcat"
+	export MANPAGER='most'
+# -------------------------------------------------------------------
+# some alias settings, just for fun
+# -------------------------------------------------------------------
+	#alias 'today=calendar -A 0 -f ~/calendar/calendar.mark | sort'
+	alias 'today=calendar -A 0 -f /usr/share/calendar/calendar.mark | sort'
+# -------------------------------------------------------------------
+# sort files in current directory by the number of words they contain
+	alias wordy='wc -w * | sort | tail -n10'
+	alias lscpu="sysctl -a | grep machdep.cpu"
+	export mail="/usr/bin/mail"
+	export FigletDir="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
+	export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
+else
+# Put Linux specific things here
+# support file for .zshrc for Linux Specific Setup
+	export COLORFLAG="--color=auto"
+# Linux specific Aliases
+	export MANPAGER='most'
+	export FCEDIT=/usr/local/bin/vim
+	export EDITOR=/usr/local/bin/vim
+	export VISUAL=/usr/local/bin/vim
+	if [ "${USER}" == "root" ]; then
+		alias mtr='mtr -b -c 100 ${1}'
+	else
+		alias mtr='sudo mtr -b -c 100 ${1}'
+	fi
+#	alias vi=/usr/local/bin/vim
+	alias vi=/usr/bin/vim
+	if [ "$(hostname -s)" = "sneezy" ]; then
+		alias git="/usr/bin/git"
+	elif [ "$(hostname -s)" = "dopey" ]; then
+		alias git="/usr/local/cpanel/3rdparty/bin/git"
+	fi
+	alias update-zsh="/usr/bin/env ZSH=$ZSH /bin/sh $ZSH/tools/upgrade.sh"
+# Comment out the ls commands below if no color monitors
+	unalias l 2>/dev/null
+	unalias la 2>/dev/null
+	unalias lr 2>/dev/null
+	unalias lt 2>/dev/null
+	unalias ll 2>/dev/null
+	unalias ldot 2>/dev/null
+	unalias ls 2>/dev/null
+	unalias lS 2>/dev/null
+	unalias lart 2>/dev/null
+	unalias lrt 2>/dev/null
+	alias l="\ls -hFl ${COLORFLAG}"
+	alias la="\ls -aF ${COLORFLAG}"
+	alias lr="\ls -CFaR ${COLORFLAG}"
+	alias lt="\ls -ltFh ${COLORFLAG}"
+	alias ll="\ls -hlFa ${COLORFLAG}"
+	alias ldot="\ls -1d ${COLORFLAG}"
+	alias lart="\ls -1Fcart ${COLORFLAG}"
+	alias lrt="\ls -1Fcrt ${COLORFLAG}"
+	alias lc="\ls -CFA ${COLORFLAG}"
+	alias ls="\ls -1FSh ${COLORFLAG}"
+	alias lh="man /opt/heirloom/man/man1/ls.1"
+	alias kh="k --help
+	awk '/^# Begin Linux/{flag=1}/^# End Linux/{flag=0}flag' ${HOME}/.zsh_machine | sed -e 's/alias /	/' 
+	echo \"		kh -- Show this help screen\""  # Show Help
+	# Begin Linux zsh k Command
+	alias k="k -h"			# list All files & Dirs with no .dot files
+	alias ka="k -ah"		# list All Files with .dot files
+	alias kc="k -ach"  # list by ctime
+	alias kd="k -adh"  # list just directories
+	alias kf="k -anh" 	# list just files & links
+	alias kr="k -arh"  # list in reverse order
+	alias ks="k -aSh"	# list by size
+	alias kt="k -ath"	# list by mtime
+	alias kaa="k -auh"	# list by atime
+	# End Linux zsh k Command
+	alias du="du -h"
+	alias suwww='su -s /bin/bash d4x'
+	alias lpad="leafpad"
+	alias tar="tar --no-same-owner"
+	alias grep="/usr/local/bin/gegrep ${COLORFLAG}"
+# -------------------------------------------------------------------
+# Git
+# -------------------------------------------------------------------
+	alias ga='git add'
+	alias gp='git push'
+	alias gl='git log'
+	alias gs='git status'
+	alias gd='git diff'
+	alias gm='git commit -m'
+	alias gma='git commit -am'
+	alias gb='git branch'
+	alias gc='git checkout'
+	alias gra='git remote add'
+	alias grr='git remote rm'
+	alias gpu='git pull'
+	alias gcl='git clone'
+	alias gta='git tag -a -m'
+	alias gf='git reflog'
+
+# leverage an alias from the ~/.gitconfig
+	alias gh='git hist'
+	FigletDir="/usr/share/figlet"
+fi
+# General aliases
+#alias gedit="/usr/bin/gedit --new-window  --new-document"
+alias dotdrop="~/dotfiles/dotdrop/dotdrop.sh --cfg=~/dotfiles/config.yaml"
+alias vi='vim ' # opens an external window.-p
+export CDDIR="$HOME"
+export terminal=$(tty)
+alias su="su -l"
+unalias rm >/dev/null 2>&1
+alias ttop="top -ocpu -R -F -s 2 -n30"
+alias zshconfig=vi ${HOME}/.zshrc
+alias ohmyzsh=vi ${HOME}/.oh-my-zsh
+alias bashx="bash --noprofile --norc"
+alias cdd="CDDIR=$(pwd)"
+alias vless='/usr/local/bin/vim -u .vim/less.vim'
+alias cls=clear
+alias less="less -x2"
+alias egrep="egrep -i ${COLORFLAG}"
+alias fgrep="/usr/local/bin/gfgrep -i ${COLORFLAG}"
+alias grep="/usr/local/bin/ggrep  ${COLORFLAG}"
+alias cdiff='colordiff'
+alias mount='mount |column -t -c80'
+alias path='echo -e ${PATH//:/\\n}'
+alias sshy4x="ssh ${1} root@y4x.biz"
+alias sshsne="ssh ${1} joe@sneezy"
+alias sshsne2="ssh ${1} root@sneezy"
+alias sshi4x="ssh ${1} joe@i4x.biz"
+alias sshi4x2="ssh ${1} root@i4x.biz"
+alias sshama="ssh ${1} joe@amanda-mb"
+alias sshama1="ssh ${1} amandataylor@amanda-mb"
+alias sshama2="ssh ${1} root@amanda-mb"
+alias sshdoc="ssh ${1} joe@doc"
+alias sshdoc2="ssh ${1} root@doc"
+alias sshsle="ssh ${1} joe@sleepy"
+alias sshsle2="ssh ${1} root@sleepy"
+alias sshbas="ssh ${1} joe@bashful"
+alias sshbas2="ssh ${1} root@bashful"
+alias sshjum="ssh ${1} joe@jumpy"
+alias sshjum2="ssh ${1} root@jumpy"
+alias sshspa="ssh ${1} joe@spanky"
+alias sshspa2="ssh ${1} root@spanky"
+alias fhere='find . -name ${1}'
+alias df='df -H'
+alias sudo='sudo -iH'
+alias dircolors="/usr/local/bin/gdircolors"
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias cd1='cd ..s'
+alias cd2='cd ../..'
+alias cd3='cd ../../..'
+alias cd4='cd ../../../..'
+alias cd5='cd ../../../../..'
+alias fm="finger -m"
+
+#alias less="less -r -x2"
+
+#other general things for both MAC and Linux
+#PROMPT_COMMAND='echo -en "\033]0;$(whoami)@$(hostname -s)\a"'

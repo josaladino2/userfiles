@@ -1,0 +1,3 @@
+bg_darkviolet () {
+	print -P %K{128}$*%k
+}

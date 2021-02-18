@@ -1,0 +1,3 @@
+bg_darkolivegreen3 () {
+	print -P %K{149}$*%k
+}

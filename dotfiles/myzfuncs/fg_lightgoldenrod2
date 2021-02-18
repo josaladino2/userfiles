@@ -1,0 +1,3 @@
+fg_lightgoldenrod2 () {
+	print -P %F{222}$*%f
+}

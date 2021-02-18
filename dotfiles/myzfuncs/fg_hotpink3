@@ -1,0 +1,3 @@
+fg_hotpink3 () {
+	print -P %F{168}$*%f
+}

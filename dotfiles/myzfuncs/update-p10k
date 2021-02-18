@@ -1,0 +1,5 @@
+update-p10k () {
+	echo "
+	$(fg_green "Updating powerlevel10k")"
+	git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
+}

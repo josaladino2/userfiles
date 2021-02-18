@@ -1,0 +1,3 @@
+bg_cyan2 () {
+	print -P %K{050}$*%k
+}

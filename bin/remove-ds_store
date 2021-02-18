@@ -1,0 +1,3 @@
+#!/bin/bash
+/usr/local/Cellar/findutils/4.6.0/bin/gfind '/' -mount ! -readable -prune -o -path . -prune -o -name '*.DS_Store' -exec rm -f {} \;
+/usr/local/Cellar/findutils/4.6.0/bin/gfind '/' -mount ! -readable -prune -o -path /dev -prune -o -name '*.DS_Store' -exec rm -f {} \;

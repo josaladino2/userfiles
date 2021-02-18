@@ -1,0 +1,3 @@
+bg_darkmagenta () {
+	print -P %K{091}$*%k
+}

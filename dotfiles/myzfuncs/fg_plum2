@@ -1,0 +1,3 @@
+fg_plum2 () {
+	print -P %F{183}$*%f
+}

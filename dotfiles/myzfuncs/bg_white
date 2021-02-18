@@ -1,0 +1,3 @@
+bg_white () {
+	print -P %K{007}$*%k
+}

@@ -1,0 +1,3 @@
+fg_navajowhite1 () {
+	print -P %F{223}$*%f
+}

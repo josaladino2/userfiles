@@ -1,0 +1,3 @@
+bg_turquoise2 () {
+	print -P %K{045}$*%k
+}

@@ -1,0 +1,3 @@
+bg_blue () {
+	print -P %K{004}$*%k
+}

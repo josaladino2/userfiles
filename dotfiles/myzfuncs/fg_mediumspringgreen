@@ -1,0 +1,3 @@
+fg_mediumspringgreen () {
+	print -P %F{049}$*%f
+}

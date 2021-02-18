@@ -1,0 +1,5 @@
+dec2bin () {
+	if [[ -n $1 ]]; then
+		echo "obase=2 ; $1" | bc
+	fi
+}

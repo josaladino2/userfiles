@@ -1,0 +1,3 @@
+fg_magenta1 () {
+	print -P %F{201}$*%f
+}

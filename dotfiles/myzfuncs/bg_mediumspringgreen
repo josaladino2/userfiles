@@ -1,0 +1,3 @@
+bg_mediumspringgreen () {
+	print -P %K{049}$*%k
+}

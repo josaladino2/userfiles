@@ -1,0 +1,10 @@
+ipall () {
+if [ "$(uname)" = "Darwin" ]; then
+		printf "$(ipext) $(ipmine)"|sed -e 's/ / + /g'
+else
+		printf "$(ipext) $(ipmine)" |sed -e ':a' -e 'N' -e '$!ba' -e 's/
+/ /g'|sed -e 's/ / + /g'
+		printf "
+"
+fi
+}

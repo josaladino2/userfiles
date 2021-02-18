@@ -1,0 +1,3 @@
+fg_blue1 () {
+	print -P %F{021}$*%f
+}

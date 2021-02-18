@@ -1,0 +1,3 @@
+serverfind () {
+  speedserver -n24 -i/root/bin/list --search=${1:-denver}
+}

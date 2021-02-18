@@ -1,0 +1,3 @@
+bg_wheat4 () {
+	print -P %K{101}$*%k
+}

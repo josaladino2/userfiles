@@ -1,0 +1,3 @@
+get_date () {
+	fg_green "$(date "+%a %d %b")"
+}

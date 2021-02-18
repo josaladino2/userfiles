@@ -1,0 +1,3 @@
+fg_darkviolet () {
+	print -P %F{128}$*%f
+}

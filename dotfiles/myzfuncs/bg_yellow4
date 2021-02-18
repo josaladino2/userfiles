@@ -1,0 +1,3 @@
+bg_yellow4 () {
+	print -P %K{003}$*%k
+}

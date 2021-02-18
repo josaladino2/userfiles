@@ -1,0 +1,3 @@
+fg_darkblue () {
+	print -P %F{018}$*%f
+}

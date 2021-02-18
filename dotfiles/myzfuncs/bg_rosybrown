@@ -1,0 +1,3 @@
+bg_rosybrown () {
+	print -P %K{138}$*%k
+}

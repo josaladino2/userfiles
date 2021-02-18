@@ -1,0 +1,3 @@
+bg_aquamarine3 () {
+	print -P %K{079}$*%k
+}

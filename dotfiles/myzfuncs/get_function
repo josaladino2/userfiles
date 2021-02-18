@@ -1,0 +1,6 @@
+get_function () {
+	for i in $@
+	do
+		source /dev/stdin <<< $(show_function ${i})
+	done
+}

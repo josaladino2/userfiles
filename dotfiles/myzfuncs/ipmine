@@ -1,0 +1,7 @@
+ipmine () {
+if [ "$(uname)" = "Darwin" ]; then
+	ipconfig getifaddr $(networkservice.sh x)
+else
+  hostname -I
+fi
+}

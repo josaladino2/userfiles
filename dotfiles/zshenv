@@ -1,0 +1,78 @@
+ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/highlighters
+export myzfuncs=~/.myzfuncs
+export myzfuncsfile=~/.zsh_functions
+
+fpath=(${myzfuncs} ${fpath});
+autoload ${myzfuncs}/*
+
+export reset_s='\033[0m'
+export bold_s='\033[1m'
+export no_bold_s='\033[22m'
+export underline_s='\033[04m'
+export no_underline_s='\033[24m'
+export reverse_s='\033[07m'
+export no_reverse_s='\033[27m'
+export italic_s='\033[03m'
+export no_italic_s='\033[23m'
+export blink_s='\033[05m'
+export no_blink_s='\033[25m'
+
+#for i in ${myzfuncs}/*
+#do
+#	autoload ${i}
+#done
+
+export TERM="xterm-256color"
+
+if [ -f /tmp/.echo ]; then
+	echo "Using: $(pwd)/.zshenv@1"
+fi
+
+#fg_green () {
+#	print -P %F{002}$*%f
+#}
+
+get_fcn_list () {
+  awk '{$1=$1};1' ${myzfuncsfile}|egrep '^.* \(\) {'|egrep -v '#|\&|\||\$'|awk '{ print $1 }'|sort
+}
+
+function_exists () {
+  if [[ -n $(declare -pf ${1}) && ( ! "$(declare -fp ${1})" =~ .*"# undefined".* ) ]] || \
+    [[ -n $(show_function_f ${1}) ]]; then
+    return 0
+  else
+    return $?
+  fi
+}
+
+show_function_f () {
+  if [[ -n ${1} && -n $(sed -n "/^${1} \(\)/,/^}/p" ${myzfuncsfile}) ]]; then
+    sed -n "/^${1} \(\)/,/^}/p" ${myzfuncsfile}
+  else
+    return 1
+  fi
+}
+
+show_function () {
+  if function_exists ${1}
+  then
+    echo -e "$(show_function_f ${1} 2>/dev/null || declare -pf ${1} || cat ${myzfuncs}/${1})"
+  else
+    return 1
+  fi
+}
+
+show_time () {
+  local Prompt=${2:-"Total elapst time"}
+  local T=${1}
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $D == 1 )) && Dy="day" || Dy="days"
+  (( $H == 1 )) && Hy="hr." || Hy="hrs."
+  (( $M == 1 )) && My="min." || My="mins."
+  (( $S == 1 )) && Sy="sec." || Sy="secs."
+  printf "${Prompt}: "
+  echo "$D $Dy $H $Hy $M $My $S $Sy"
+}

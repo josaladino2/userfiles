@@ -1,0 +1,42 @@
+#!/bin/bash
+# $1 "Body of Email"
+# $2 "Subject of Email"
+# $3 SENDTO
+# $4 SENDER
+cd ~
+SERVER="box1242.bluehost.com:465"
+PSW="char11346"
+PROTOCOL="SSMTP"
+if [ ! -s Backup-Files.err ]; then
+	/usr/bin/printf "No Backup Errors\n" > Backup-Files.err
+fi
+# Begin Constructing Email BODY
+# Backups
+( printf "\n+++++++ Begin Backup Error File +++++++\n" 
+	cat Backup-Files.err
+	printf "++++++++ End Backup Error File ++++++++\n"
+	printf "\n======= Begin Backup Output File =======\n"
+	printf ""
+	cat Backup-Files.out
+	printf "======== End Backup Output File ========\n" ) >> tmp.out
+# Email Variables Setup
+BODY=`cat tmp.out`
+SUBJECT="Backup Files Output"
+SENDTO="$3"
+SENDTO="${SENDTO:-joe@h4hm.com}"
+SENDER="$4"
+SENDER="${SENDER:-joe@bram.net}"
+SENDTO="joe@h4hm.org"
+# Send Email to Server
+	printf "${BODY}" | \
+	/usr/local/bin/swaks \
+	--auth PLAIN \
+	--from ${SENDER} \
+	--server ${SERVER} \
+	--au ${SENDER} \
+	--ap ${PSW} \
+	--protocol ${PROTOCOL} \
+	--to ${SENDTO} \
+	--h-Subject: "${SUBJECT}" \
+	--body "${BODY}" | egrep ' 250'
+/bin/rm Backup-Files.err Backup-Files.out tmp.out

@@ -1,0 +1,22 @@
+fix_file_names () {
+#	CurDir=$(pwd)
+	for i in ${1:-*}
+	do
+#		DirName=$(dirname ${i})
+#		cd ${DirName}
+		FileName=${i}
+		NFileName=$(echo ${FileName}|sed -e 's/ /-/g')
+		NFileName=$(echo ${NFileName}|sed -e 's/--*/-/g')
+		NFileName=$(echo ${NFileName}|sed -e 's/_/-/g')
+		NFileName=$(echo ${NFileName}|sed -e 's/,/-/g')
+		NFileName=$(echo ${NFileName}|sed -e 's/&/-/g')
+		NFileName=$(echo ${NFileName}|sed -e 's/--*/-/g')
+		mv ${FileName} ${NFileName}
+#		cd ${CurDir}
+		if [ $? -eq 0 ]; then
+			echo "${FileName} $(fg_green "to") ${NFileName}"
+		else
+			echo "${Filename} change $(fg_red "failed")..."
+		fi
+	done
+}

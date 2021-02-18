@@ -1,0 +1,3 @@
+bg_plum2 () {
+	print -P %K{183}$*%k
+}

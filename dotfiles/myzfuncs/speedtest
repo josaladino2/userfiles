@@ -1,0 +1,13 @@
+speedtest () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${funcstack[1]} [ServerID]
+
+"
+	fi
+	ServerFile=/usr/local/share/info/SpeedTestServers
+	SpeedServer=${1:-16797}
+	printf "Using ServerID: ${SpeedServer}
+
+"
+	speedtest.py --bytes --server ${SpeedServer}
+}

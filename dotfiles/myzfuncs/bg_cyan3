@@ -1,0 +1,3 @@
+bg_cyan3 () {
+	print -P %K{043}$*%k
+}

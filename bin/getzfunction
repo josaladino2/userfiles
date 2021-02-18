@@ -1,0 +1,40 @@
+#!/usr/local/bin/zsh
+fctn=($@)
+endfctn="}"
+gotit=0
+source ${myzfuncsfile}
+if [ -e "${myzfuncsfile}" ]; then
+	for f in "${fctn[@]}]"
+	do
+		( while IFS= read -r line; do
+# Print last line of selected function
+				if [ ${gotit} -eq 1 ] && [[ "${line}" =~ ^"${endfctn}".* ]]; then
+					( echo "${line}"
+					echo "export ${f}" ) >> /dev/stdout
+					gotit=2
+				fi
+				# Print lines in between $f and $endfctn
+				if [ ${gotit} -eq 1 ]; then
+					echo "${line}" >> /dev/stdout
+				fi
+				# Print first line of function
+				if [[ "${line}" =~ ^"${f}".* ]] && [ ${gotit} -eq 0 ]; then
+					( echo "# zsh Function ${f}"
+					echo "${line}" ) > /dev/stdout
+					gotit=1
+				fi
+				if [ ${gotit} -eq 2 ]; then
+					break
+				fi
+			done < ${myzfuncsfile} ) > ${myzfuncs}/${f} \
+				2>${myzfuncs}/${f}_Errors
+			chmod 755 ${myzfuncs}/${f}
+#			set -a; source ${myzfuncs}/${f}; set +a # function in shell
+			source /dev/stdin <<< $(show_function ${f})
+			if [ ! -s ${myzfuncs}/${f}_Errors ]; then
+				rm ${myzfuncs}/${f}_Errors
+		fi
+	done
+else
+	printf "can't find ${myzfuncsfile}\n"
+fi

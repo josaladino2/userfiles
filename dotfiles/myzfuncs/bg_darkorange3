@@ -1,0 +1,3 @@
+bg_darkorange3 () {
+	print -P %K{166}$*%k
+}

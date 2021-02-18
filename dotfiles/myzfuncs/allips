@@ -1,0 +1,3 @@
+allips () {
+	ifconfig | awk '/inet / {sub(/addr:/, "", $2); print $2}'
+}

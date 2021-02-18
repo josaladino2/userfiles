@@ -1,0 +1,3 @@
+f_italic () {
+	printf "${italic_s}$*${no_italic_s}"
+}

@@ -1,0 +1,47 @@
+#!/bin/bash
+pushd ~ > /dev/null 2>&1
+	MasterStatus="Dirty"
+	MasterHost="joe@doc"
+	SourceUser=`echo ${LOGNAME} | tr '[:upper:]' '[:lower:]'`
+	SourceDomain=`echo -e $(hostname) | tr '[:upper:]' '[:lower:]'`
+	SourceHost="${SourceUser}@${SourceDomain}"
+	SITES="cissa@doc admin@doc root@doc joe@sleepy cissa@sleepy admin@sleepy root@sleepy joe@sneezy cissa@sneezy root@sneezy foufouxb@44x.biz cissa@bashful joe@bashful root@bashful"
+	for DestHost in ${SITES}
+	do
+		DestUser=`echo ${DestHost} | cut -d @ -f1`
+		DestDomain=`echo -e ${DestHost} | cut -d @ -f2`
+		if [ ${SourceHost} != ${MasterHost} ] && [ ${MasterStatus} = 'Dirty' ]; then
+			echo -e "=============== ${SourceHost} >> ${MasterHost}"
+			echo -e "Making ~/UserFiles.tzg..."
+			makeuserfile
+			echo -e "Copying ~/UserFiles.tgz to ~/."
+			scp ~/UserFiles.tgz ${MasterHost}:~/.
+			echo -e "Extracting ~/UserFiles.tgz on ${MasterHost}"
+			echo -e "=============== Done"
+			ssh ${MasterHost} "cd ~; tar -xzf ~/UserFiles.tgz"
+			if [ "$?" == "0" ]; then
+				MasterStatus='Clean'
+			fi
+		fi
+#		DestLive=`nmap ${DestDomain} -p 22 --max-retries 1| grep 'open'`
+		DestLive=`ping -t 1 -c 1 ${DestDomain}`
+		if [ "$?" == "0" ]; then
+			echo -e "--------------- ${MasterHost} >> ${DestHost}"
+			if [ ${MasterHost} == ${SourceHost} ]; then
+				echo -e "Copying ~/UserFiles.tgz to ${DestHost}"
+				scp ~/UserFiles.tgz ${DestHost}:~/.
+			else
+				echo -e "Copying ${MasterHost}~/UserFiles.tgz to ${DestHost}"
+				scp ${MasterHost}:~/UserFiles.tgz ${DestHost}:~/.
+			fi
+			echo -e "Extracting ~/UserFiles.tgz on ${DestHost}"
+			ssh ${DestHost} "cd; tar -xzf ~/UserFiles.tgz"
+		else
+			echo -e "--------------- ${MasterHost} >> ${DestHost}"
+			echo -e "** ${DestHost} is **Down**..."
+		fi
+	done
+	echo -e "------------------- Done -------------------"
+	popd > /dev/null 2>&1
+	dirs -c > /dev/null 2>&1
+

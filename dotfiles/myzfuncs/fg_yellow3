@@ -1,0 +1,3 @@
+fg_yellow3 () {
+	print -P %F{184}$*%f
+}

@@ -1,0 +1,6 @@
+#!/usr/local/bin/zsh
+#	Assumes Current Dir
+Dir=${1:-.}
+printf "Deleting all vim .*un~ files in ${Dir}...\n"
+find ${Dir} -type f -name ".*un~" -delete -print
+printf "OK\n"

@@ -1,0 +1,8 @@
+find /home/amanda/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/asalr/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/bram/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/d4x/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/h4hm/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/rejoice2018/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/t4xbiz/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/y4x/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls

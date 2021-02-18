@@ -1,0 +1,5 @@
+dec2oct () {
+	if [[ -n $1 ]]; then
+		echo "obase=8 ; $1" | bc
+	fi
+}

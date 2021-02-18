@@ -1,0 +1,3 @@
+bg_magenta () {
+	print -P %K{005}$*%k
+}

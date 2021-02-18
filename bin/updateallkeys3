@@ -1,0 +1,16 @@
+#!/bin/bash
+SITES="joe@doc cissa@doc admin@doc root@doc cissa@bashful joe@bashful root@bashful joe@sleepy admin@sleepy cissa@sleepy root@sleepy joe@sneezy root@sneezy foufouxb@44x.biz"
+SM="`whoami`@`hostname`"
+SM=$(echo ${SM}|tr '[:upper:]' '[:lower:]')
+echo $SM
+for SM2 in ${SITES}
+do
+	echo "ssh-copy-id: ${SM2} ==> ${SM}"
+#	SM3=`echo ${SM2} | cut -d@ -f2`
+	scp ${SM2}:~/.ssh/id_rsa.pub ~/.ssh/${SM2}-id_rsa.pub
+#	if [ ${SM3} = "bashful" ] || [ ${SM3} = "44x.biz" ] || [ ${SM3} = "sneezy" ]; then
+#		ssh ${SM2} "/usr/bin/ssh-copy-id -i ${SM}"
+#	else
+#		ssh ${SM2} "/usr/local/bin/ssh-copy-id -i ${SM}"
+#	fi
+done

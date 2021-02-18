@@ -1,0 +1,3 @@
+fg_plum3 () {
+	print -P %F{176}$*%f
+}

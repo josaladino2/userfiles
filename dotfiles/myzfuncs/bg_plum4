@@ -1,0 +1,3 @@
+bg_plum4 () {
+	print -P %K{096}$*%k
+}

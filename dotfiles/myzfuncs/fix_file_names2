@@ -1,0 +1,35 @@
+fix_file_names2 () {
+	while read p; do
+		echo "$(fg_green "${p}")"
+		pushd $p >/dev/null
+			for i in *
+			do
+#				DirName=$(dirname ${i})
+				FileName=$(basename ${i})
+				NFileName=$(echo ${FileName}|sed -e 's/ /-/g')
+				NFileName=$(echo ${NFileName}|sed -e 's/--*/-/g')
+				NFileName=$(echo ${NFileName}|sed -e 's/_/-/g')
+				NFileName=$(echo ${NFileName}|sed -e "s/'//g")
+				NFileName=$(echo ${NFileName}|sed -e 's/,/-/g')
+				NFileName=$(echo ${NFileName}|sed -e 's/&/-/g')
+				NFileName=$(echo ${NFileName}|sed -e 's/\"/-/g')
+				NFileName=$(echo ${NFileName}|sed -e 's/!/-/g')
+				NFileName=$(echo ${NFileName}|sed -e 's/:/-/g')
+				NFileName=$(echo ${NFileName}|sed -e 's/\.\./-/g')
+				NFileName=$(echo ${NFileName}|sed -e 's/\._/-/g')
+				NFileName=$(echo ${NFileName}|sed -e 's/\.-/-/g')
+				NFileName=$(echo ${NFileName}|sed -e 's/--*/-/g')
+#				FileName="${DirName}/${FileName}"
+#				NFileName="${DirName}/${NFileName}"
+				if [ "${FileName}" != "${NFileName}" ]; then
+					mv ${FileName} ${NFileName}
+					if [[ $? -eq 0 ]]; then
+						echo "${FileName} $(fg_green "to") ${NFileName}"
+					else
+						echo "${FileName} change $(fg_red "failed")..."
+					fi
+				fi
+			done
+		popd > /dev/null
+		done < joey
+}

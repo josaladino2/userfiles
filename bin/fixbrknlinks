@@ -1,0 +1,5 @@
+#!/usr/local/bin/zsh
+f=${1}
+rm $f
+scp root@y4x.biz:"${f}" ~/.
+echo "${f} fixed."

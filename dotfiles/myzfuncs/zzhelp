@@ -1,0 +1,18 @@
+zzhelp () {
+	if [ -z ${1} ]; then
+		echo "Usage: ${funcstack[1]} all/program"
+	else
+		if [ -d /usr/local/share/zsh/help ]; then
+			cd /usr/local/share/zsh/help
+		else
+			cd /usr/share/man/man1
+		fi
+		case ${1} in
+			all) \ls | sed -e 's/.1.*$//' | column
+			;;
+				*) run-help ${1} || printf "No Help for ${1}
+"
+			;;
+		 esac
+	fi
+}

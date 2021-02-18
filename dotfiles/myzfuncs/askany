@@ -1,0 +1,6 @@
+askany () {
+	terminal="/dev/tty"
+	printf "${1:-"Press [$(fg_sp "Bold,$(fg_green "Any Key")")] to continue..."}"
+#	read -s < ${terminal}
+	read && printf ""
+}

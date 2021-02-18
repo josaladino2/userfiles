@@ -1,0 +1,3 @@
+fg_mediumorchid3 () {
+	print -P %F{133}$*%f
+}

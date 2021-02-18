@@ -1,0 +1,3 @@
+bg_cadetblue () {
+	print -P %K{073}$*%k
+}

@@ -1,0 +1,3 @@
+fg_aquamarine1 () {
+	print -P %F{122}$*%f
+}

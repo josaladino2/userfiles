@@ -1,0 +1,8 @@
+showbgcolors () {
+	pushd ~/.myzfuncs > /dev/null 2>&1
+	for i in bg_*
+	do
+		echo "$(${i} "${i}")" | sort | column
+	done
+	popd >/dev/null 2>&1
+}

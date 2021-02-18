@@ -1,0 +1,3 @@
+fg_navyblue () {
+	print -P %F{017}$*%f
+}

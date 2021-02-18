@@ -1,0 +1,3 @@
+fg_cyan () {
+	print -P %F{006}$*%f
+}

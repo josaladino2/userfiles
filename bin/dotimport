@@ -1,0 +1,34 @@
+#!/usr/local/bin/zsh
+# copy file from .file to ~/dotfiles/file
+# 	assumes the desired ${SrcFile} is in the ${SrcDir}
+if [ -z ${1} ]; then
+  echo "Usage: dotimport .dotfile" 
+else
+	SrcDir=${HOME}
+	GitDir="${HOME}/dotfiles"
+	Exclude=".bash_history .zsh_history .bashdb_hist .zshdb_hist .bash_sessions .zwc"
+	for i in $@
+	do
+		SrcFile="${i}"
+		GitFile=$(echo ${SrcFile}|sed -e 's/\.//')
+		if [[ "${Exclude}" == *"${i}"* ]]; then
+			echo "$(fg_red "Skipping") ${SrcDir}/${SrcFile}"
+		else
+			if [ ! -e ${SrcDir}/${SrcFile} ]; then
+				echo "$(fg_red "Error:") ${SrcDir}/${SrcFile} does not exist."
+			else
+				if [ ! -e ${GitDir}/${GitFile} ]; then
+					echo "Copy ${SrcDir}/${SrcFile} $(fg_green "to") ${GitDir}/${GitFile}"
+					cp -a ${SrcDir}/${SrcFile} ${GitDir}/${GitFile}
+				else
+					if [ "${SrcDir}/${SrcFile}" -nt "${GitDir}/${GitFile}" ]; then
+						echo "Copy ${SrcDir}/${SrcFile} $(fg_green "to") ${GitDir}/${GitFile}"
+						cp -a ${SrcDir}/${SrcFile} ${GitDir}/${GitFile}
+					else
+						echo "${GitDir}/${GitFile} is NEWER than ${SrcDir}/${SrcFile}"
+					fi
+				fi
+			fi
+		fi
+		done
+	fi

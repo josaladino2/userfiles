@@ -1,0 +1,3 @@
+bg_honeydew2 () {
+	print -P %K{194}$*%k
+}

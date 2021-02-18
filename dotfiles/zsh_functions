@@ -1,0 +1,3204 @@
+if [ -f /tmp/.echo ]; then
+  echo "Using: $(pwd)/.zsh_functions"
+fi
+################################
+# Functions start here
+################################
+# ##################################################
+# Foreground colors
+fg_aqua () {
+	print -P %F{014}$*%f
+}
+
+fg_aquamarine1 () {
+	print -P %F{122}$*%f
+}
+
+fg_aquamarine3 () {
+	print -P %F{079}$*%f
+}
+
+fg_black () {
+	print -P %F{000}$*%f
+}
+
+fg_blue () {
+	print -P %F{004}$*%f
+}
+
+fg_blue1 () {
+	print -P %F{021}$*%f
+}
+
+fg_blue3 () {
+	print -P %F{020}$*%f
+}
+
+fg_blueviolet () {
+	print -P %F{057}$*%f
+}
+
+fg_cadetblue () {
+	print -P %F{073}$*%f
+}
+
+fg_chartreuse1 () {
+	print -P %F{118}$*%f
+}
+
+fg_chartreuse2 () {
+	print -P %F{112}$*%f
+}
+
+fg_chartreuse3 () {
+	print -P %F{076}$*%f
+}
+
+fg_chartreuse4 () {
+	print -P %F{064}$*%f
+}
+
+fg_cornflowerblue () {
+	print -P %F{069}$*%f
+}
+
+fg_cornsilk1 () {
+	print -P %F{230}$*%f
+}
+
+fg_cyan () {
+	print -P %F{006}$*%f
+}
+
+fg_cyan1 () {
+	print -P %F{051}$*%f
+}
+
+fg_cyan2 () {
+	print -P %F{050}$*%f
+}
+
+fg_cyan3 () {
+	print -P %F{043}$*%f
+}
+
+fg_darkblue () {
+	print -P %F{018}$*%f
+}
+
+fg_darkcyan () {
+	print -P %F{036}$*%f
+}
+
+fg_darkgoldenrod () {
+	print -P %F{136}$*%f
+}
+
+fg_darkgreen () {
+	print -P %F{022}$*%f
+}
+
+fg_darkkhaki () {
+	print -P %F{143}$*%f
+}
+
+fg_darkmagenta () {
+	print -P %F{091}$*%f
+}
+
+fg_darkolivegreen1 () {
+	print -P %F{192}$*%f
+}
+
+fg_darkolivegreen2 () {
+	print -P %F{155}$*%f
+}
+
+fg_darkolivegreen3 () {
+	print -P %F{149}$*%f
+}
+
+fg_darkorange () {
+	print -P %F{208}$*%f
+}
+
+fg_darkorange3 () {
+	print -P %F{166}$*%f
+}
+
+fg_darkred () {
+	print -P %F{088}$*%f
+}
+
+fg_darkseagreen () {
+	print -P %F{108}$*%f
+}
+
+fg_darkseagreen1 () {
+	print -P %F{193}$*%f
+}
+
+fg_darkseagreen2 () {
+	print -P %F{157}$*%f
+}
+
+fg_darkseagreen3 () {
+	print -P %F{150}$*%f
+}
+
+fg_darkseagreen4 () {
+	print -P %F{071}$*%f
+}
+
+fg_darkslategray1 () {
+	print -P %F{123}$*%f
+}
+
+fg_darkslategray2 () {
+	print -P %F{087}$*%f
+}
+
+fg_darkslategray3 () {
+	print -P %F{116}$*%f
+}
+
+fg_darkturquoise () {
+	print -P %F{044}$*%f
+}
+
+fg_darkviolet () {
+	print -P %F{128}$*%f
+}
+
+fg_deeppink1 () {
+	print -P %F{199}$*%f
+}
+
+fg_deeppink2 () {
+	print -P %F{197}$*%f
+}
+
+fg_deeppink3 () {
+	print -P %F{162}$*%f
+}
+
+fg_deeppink4 () {
+	print -P %F{125}$*%f
+}
+
+fg_deepskyblue1 () {
+	print -P %F{039}$*%f
+}
+
+fg_deepskyblue2 () {
+	print -P %F{038}$*%f
+}
+
+fg_deepskyblue3 () {
+	print -P %F{032}$*%f
+}
+
+fg_deepskyblue4 () {
+	print -P %F{025}$*%f
+}
+
+fg_dodgerblue1 () {
+	print -P %F{033}$*%f
+}
+
+fg_dodgerblue2 () {
+	print -P %F{027}$*%f
+}
+
+fg_dodgerblue3 () {
+	print -P %F{026}$*%f
+}
+
+fg_fuchsia () {
+	print -P %F{013}$*%f
+}
+
+fg_gold1 () {
+	print -P %F{220}$*%f
+}
+
+fg_gold3 () {
+	print -P %F{178}$*%f
+}
+
+fg_green () {
+	print -P %F{002}"$*"%f
+}
+
+fg_green1 () {
+	print -P %F{046}$*%f
+}
+
+fg_green3 () {
+	print -P %F{040}$*%f
+}
+
+fg_green4 () {
+	print -P %F{028}$*%f
+}
+
+fg_greenyellow () {
+	print -P %F{154}$*%f
+}
+
+fg_grey () {
+	print -P %F{008}$*%f
+}
+
+fg_grey0 () {
+	print -P %F{016}$*%f
+}
+
+fg_grey100 () {
+	print -P %F{231}$*%f
+}
+
+fg_grey11 () {
+	print -P %F{234}$*%f
+}
+
+fg_grey15 () {
+	print -P %F{235}$*%f
+}
+
+fg_grey19 () {
+	print -P %F{236}$*%f
+}
+
+fg_grey23 () {
+	print -P %F{237}$*%f
+}
+
+fg_grey27 () {
+	print -P %F{238}$*%f
+}
+
+fg_grey3 () {
+	print -P %F{232}$*%f
+}
+
+fg_grey30 () {
+	print -P %F{239}$*%f
+}
+
+fg_grey35 () {
+	print -P %F{240}$*%f
+}
+
+fg_grey37 () {
+	print -P %F{059}$*%f
+}
+
+fg_grey39 () {
+	print -P %F{241}$*%f
+}
+
+fg_grey42 () {
+	print -P %F{242}$*%f
+}
+
+fg_grey46 () {
+	print -P %F{243}$*%f
+}
+
+fg_grey50 () {
+	print -P %F{244}$*%f
+}
+
+fg_grey53 () {
+	print -P %F{102}$*%f
+}
+
+fg_grey54 () {
+	print -P %F{245}$*%f
+}
+
+fg_grey58 () {
+	print -P %F{246}$*%f
+}
+
+fg_grey62 () {
+	print -P %F{247}$*%f
+}
+
+fg_grey63 () {
+	print -P %F{139}$*%f
+}
+
+fg_grey66 () {
+	print -P %F{248}$*%f
+}
+
+fg_grey69 () {
+	print -P %F{145}$*%f
+}
+
+fg_grey7 () {
+	print -P %F{233}$*%f
+}
+
+fg_grey70 () {
+	print -P %F{249}$*%f
+}
+
+fg_grey74 () {
+	print -P %F{250}$*%f
+}
+
+fg_grey78 () {
+	print -P %F{251}$*%f
+}
+
+fg_grey82 () {
+	print -P %F{252}$*%f
+}
+
+fg_grey84 () {
+	print -P %F{188}$*%f
+}
+
+fg_grey85 () {
+	print -P %F{253}$*%f
+}
+
+fg_grey89 () {
+	print -P %F{254}$*%f
+}
+
+fg_grey93 () {
+	print -P %F{255}$*%f
+}
+
+fg_honeydew2 () {
+	print -P %F{194}$*%f
+}
+
+fg_hotpink () {
+	print -P %F{206}$*%f
+}
+
+fg_hotpink2 () {
+	print -P %F{169}$*%f
+}
+
+fg_hotpink3 () {
+	print -P %F{168}$*%f
+}
+
+fg_indianred () {
+	print -P %F{167}$*%f
+}
+
+fg_indianred1 () {
+	print -P %F{204}$*%f
+}
+
+fg_khaki1 () {
+	print -P %F{228}$*%f
+}
+
+fg_khaki3 () {
+	print -P %F{185}$*%f
+}
+
+fg_lightcoral () {
+	print -P %F{210}$*%f
+}
+
+fg_lightcyan1 () {
+	print -P %F{195}$*%f
+}
+
+fg_lightcyan3 () {
+	print -P %F{152}$*%f
+}
+
+fg_lightgoldenrod1 () {
+	print -P %F{227}$*%f
+}
+
+fg_lightgoldenrod2 () {
+	print -P %F{222}$*%f
+}
+
+fg_lightgoldenrod3 () {
+	print -P %F{179}$*%f
+}
+
+fg_lightgreen () {
+	print -P %F{120}$*%f
+}
+
+fg_lightpink1 () {
+	print -P %F{217}$*%f
+}
+
+fg_lightpink3 () {
+	print -P %F{174}$*%f
+}
+
+fg_lightpink4 () {
+	print -P %F{095}$*%f
+}
+
+fg_lightsalmon1 () {
+	print -P %F{216}$*%f
+}
+
+fg_lightsalmon3 () {
+	print -P %F{173}$*%f
+}
+
+fg_lightseagreen () {
+	print -P %F{037}$*%f
+}
+
+fg_lightskyblue1 () {
+	print -P %F{153}$*%f
+}
+
+fg_lightskyblue3 () {
+	print -P %F{110}$*%f
+}
+
+fg_lightslateblue () {
+	print -P %F{105}$*%f
+}
+
+fg_lightslategrey () {
+	print -P %F{103}$*%f
+}
+
+fg_lightsteelblue () {
+	print -P %F{147}$*%f
+}
+
+fg_lightsteelblue1 () {
+	print -P %F{189}$*%f
+}
+
+fg_lightsteelblue3 () {
+	print -P %F{146}$*%f
+}
+
+fg_lightyellow3 () {
+	print -P %F{187}$*%f
+}
+
+fg_lime () {
+	print -P %F{010}$*%f
+}
+
+fg_magenta () {
+	print -P %F{005}$*%f
+}
+
+fg_magenta1 () {
+	print -P %F{201}$*%f
+}
+
+fg_magenta2 () {
+	print -P %F{200}$*%f
+}
+
+fg_magenta3 () {
+	print -P %F{164}$*%f
+}
+
+fg_maroon () {
+	print -P %F{009}$*%f
+}
+
+fg_mediumorchid () {
+	print -P %F{134}$*%f
+}
+
+fg_mediumorchid1 () {
+	print -P %F{207}$*%f
+}
+
+fg_mediumorchid3 () {
+	print -P %F{133}$*%f
+}
+
+fg_mediumpurple () {
+	print -P %F{104}$*%f
+}
+
+fg_mediumpurple1 () {
+	print -P %F{141}$*%f
+}
+
+fg_mediumpurple2 () {
+	print -P %F{140}$*%f
+}
+
+fg_mediumpurple3 () {
+	print -P %F{098}$*%f
+}
+
+fg_mediumpurple4 () {
+	print -P %F{060}$*%f
+}
+
+fg_mediumspringgreen () {
+	print -P %F{049}$*%f
+}
+
+fg_mediumturquoise () {
+	print -P %F{080}$*%f
+}
+
+fg_mediumvioletred () {
+	print -P %F{126}$*%f
+}
+
+fg_mistyrose1 () {
+	print -P %F{224}$*%f
+}
+
+fg_mistyrose3 () {
+	print -P %F{181}$*%f
+}
+
+fg_navajowhite1 () {
+	print -P %F{223}$*%f
+}
+
+fg_navajowhite3 () {
+	print -P %F{144}$*%f
+}
+
+fg_navy () {
+	print -P %F{012}$*%f
+}
+
+fg_navyblue () {
+	print -P %F{017}$*%f
+}
+
+fg_olive () {
+	print -P %F{011}$*%f
+}
+
+fg_orange1 () {
+	print -P %F{214}$*%f
+}
+
+fg_orange3 () {
+	print -P %F{172}$*%f
+}
+
+fg_orange4 () {
+	print -P %F{094}$*%f
+}
+
+fg_orangered1 () {
+	print -P %F{202}$*%f
+}
+
+fg_orchid () {
+	print -P %F{170}$*%f
+}
+
+fg_orchid1 () {
+	print -P %F{213}$*%f
+}
+
+fg_orchid2 () {
+	print -P %F{212}$*%f
+}
+
+fg_palegreen1 () {
+	print -P %F{156}$*%f
+}
+
+fg_palegreen3 () {
+	print -P %F{114}$*%f
+}
+
+fg_paleturquoise1 () {
+	print -P %F{159}$*%f
+}
+
+fg_paleturquoise4 () {
+	print -P %F{066}$*%f
+}
+
+fg_palevioletred1 () {
+	print -P %F{211}$*%f
+}
+
+fg_pink1 () {
+	print -P %F{218}$*%f
+}
+
+fg_pink3 () {
+	print -P %F{175}$*%f
+}
+
+fg_plum1 () {
+	print -P %F{219}$*%f
+}
+
+fg_plum2 () {
+	print -P %F{183}$*%f
+}
+
+fg_plum3 () {
+	print -P %F{176}$*%f
+}
+
+fg_plum4 () {
+	print -P %F{096}$*%f
+}
+
+fg_purple () {
+	print -P %F{129}$*%f
+}
+
+fg_purple3 () {
+	print -P %F{056}$*%f
+}
+
+fg_purple4 () {
+	print -P %F{055}$*%f
+}
+
+fg_red () {
+	print -P %F{001}$*%f
+}
+
+fg_red1 () {
+	print -P %F{196}$*%f
+}
+
+fg_red3 () {
+	print -P %F{160}$*%f
+}
+
+fg_rosybrown () {
+	print -P %F{138}$*%f
+}
+
+fg_royalblue1 () {
+	print -P %F{063}$*%f
+}
+
+fg_salmon1 () {
+	print -P %F{209}$*%f
+}
+
+fg_sandybrown () {
+	print -P %F{215}$*%f
+}
+
+fg_seagreen1 () {
+	print -P %F{085}$*%f
+}
+
+fg_seagreen2 () {
+	print -P %F{083}$*%f
+}
+
+fg_seagreen3 () {
+	print -P %F{078}$*%f
+}
+
+fg_silver () {
+	print -P %F{015}$*%f
+}
+
+fg_skyblue1 () {
+	print -P %F{117}$*%f
+}
+
+fg_skyblue2 () {
+	print -P %F{111}$*%f
+}
+
+fg_skyblue3 () {
+	print -P %F{074}$*%f
+}
+
+fg_slateblue1 () {
+	print -P %F{099}$*%f
+}
+
+fg_slateblue3 () {
+	print -P %F{062}$*%f
+}
+
+fg_springgreen1 () {
+	print -P %F{048}$*%f
+}
+
+fg_springgreen2 () {
+	print -P %F{047}$*%f
+}
+
+fg_springgreen3 () {
+	print -P %F{041}$*%f
+}
+
+fg_springgreen4 () {
+	print -P %F{029}$*%f
+}
+
+fg_steelblue () {
+	print -P %F{067}$*%f
+}
+
+fg_steelblue1 () {
+	print -P %F{081}$*%f
+}
+
+fg_steelblue3 () {
+	print -P %F{068}$*%f
+}
+
+fg_tan () {
+	print -P %F{180}$*%f
+}
+
+fg_teal () {
+	print -P %F{014}$*%f
+}
+
+fg_thistle1 () {
+	print -P %F{225}$*%f
+}
+
+fg_thistle3 () {
+	print -P %F{182}$*%f
+}
+
+fg_turquoise2 () {
+	print -P %F{045}$*%f
+}
+
+fg_turquoise4 () {
+	print -P %F{030}$*%f
+}
+
+fg_violet () {
+	print -P %F{177}$*%f
+}
+
+fg_wheat1 () {
+	print -P %F{229}$*%f
+}
+
+fg_wheat4 () {
+	print -P %F{101}$*%f
+}
+
+fg_white () {
+	print -P %F{007}$*%f
+}
+
+fg_yellow () {
+	print -P %F{226}$*%f
+}
+
+fg_yellow2 () {
+	print -P %F{190}$*%f
+}
+
+fg_yellow3 () {
+	print -P %F{184}$*%f
+}
+
+fg_yellow4 () {
+	print -P %F{003}$*%f
+}
+
+f_bold () {
+	printf "${bold_s}$*${no_bold_s}"
+}
+
+f_dim () {
+	printf "${dim_s}$*${no_dim_s}"
+}
+
+f_italic () {
+	printf "${italic_s}$*${no_italic_s}"
+}
+
+f_underline () {
+	printf "${underline_s}$*${no_underline_s}"
+}
+
+f_blink () {
+	printf "${blink_s}$*${no_blink_s}"
+}
+
+f_reverse () {
+	printf "${reverse_s}$*${no_reverse_s}"
+}
+
+f_invisible () {
+	printf "${invisible_s}$*${no_invisible_s}"
+}
+
+# ##################################################
+# Background colors
+bg_aqua () {
+	print -P %K{014}$*%k
+}
+
+bg_aquamarine1 () {
+	print -P %K{122}$*%k
+}
+
+bg_aquamarine3 () {
+	print -P %K{079}$*%k
+}
+
+bg_black () {
+	print -P %K{000}$*%k
+}
+
+bg_blue () {
+	print -P %K{004}$*%k
+}
+
+bg_blue1 () {
+	print -P %K{021}$*%k
+}
+
+bg_blue3 () {
+	print -P %K{020}$*%k
+}
+
+bg_blueviolet () {
+	print -P %K{057}$*%k
+}
+
+bg_cadetblue () {
+	print -P %K{073}$*%k
+}
+
+bg_chartreuse1 () {
+	print -P %K{118}$*%k
+}
+
+bg_chartreuse2 () {
+	print -P %K{112}$*%k
+}
+
+bg_chartreuse3 () {
+	print -P %K{076}$*%k
+}
+
+bg_chartreuse4 () {
+	print -P %K{064}$*%k
+}
+
+bg_cornflowerblue () {
+	print -P %K{069}$*%k
+}
+
+bg_cornsilk1 () {
+	print -P %K{230}$*%k
+}
+
+bg_cyan () {
+	print -P %K{006}$*%k
+}
+
+bg_cyan1 () {
+	print -P %K{051}$*%k
+}
+
+bg_cyan2 () {
+	print -P %K{050}$*%k
+}
+
+bg_cyan3 () {
+	print -P %K{043}$*%k
+}
+
+bg_darkblue () {
+	print -P %K{018}$*%k
+}
+
+bg_darkcyan () {
+	print -P %K{036}$*%k
+}
+
+bg_darkgoldenrod () {
+	print -P %K{136}$*%k
+}
+
+bg_darkgreen () {
+	print -P %K{022}$*%k
+}
+
+bg_darkkhaki () {
+	print -P %K{143}$*%k
+}
+
+bg_darkmagenta () {
+	print -P %K{091}$*%k
+}
+
+bg_darkolivegreen1 () {
+	print -P %K{192}$*%k
+}
+
+bg_darkolivegreen2 () {
+	print -P %K{155}$*%k
+}
+
+bg_darkolivegreen3 () {
+	print -P %K{149}$*%k
+}
+
+bg_darkorange () {
+	print -P %K{208}$*%k
+}
+
+bg_darkorange3 () {
+	print -P %K{166}$*%k
+}
+
+bg_darkred () {
+	print -P %K{088}$*%k
+}
+
+bg_darkseagreen () {
+	print -P %K{108}$*%k
+}
+
+bg_darkseagreen1 () {
+	print -P %K{193}$*%k
+}
+
+bg_darkseagreen2 () {
+	print -P %K{157}$*%k
+}
+
+bg_darkseagreen3 () {
+	print -P %K{150}$*%k
+}
+
+bg_darkseagreen4 () {
+	print -P %K{071}$*%k
+}
+
+bg_darkslategray1 () {
+	print -P %K{123}$*%k
+}
+
+bg_darkslategray2 () {
+	print -P %K{087}$*%k
+}
+
+bg_darkslategray3 () {
+	print -P %K{116}$*%k
+}
+
+bg_darkturquoise () {
+	print -P %K{044}$*%k
+}
+
+bg_darkviolet () {
+	print -P %K{128}$*%k
+}
+
+bg_deeppink1 () {
+	print -P %K{199}$*%k
+}
+
+bg_deeppink2 () {
+	print -P %K{197}$*%k
+}
+
+bg_deeppink3 () {
+	print -P %K{162}$*%k
+}
+
+bg_deeppink4 () {
+	print -P %K{125}$*%k
+}
+
+bg_deepskyblue1 () {
+	print -P %K{039}$*%k
+}
+
+bg_deepskyblue2 () {
+	print -P %K{038}$*%k
+}
+
+bg_deepskyblue3 () {
+	print -P %K{032}$*%k
+}
+
+bg_deepskyblue4 () {
+	print -P %K{025}$*%k
+}
+
+bg_dodgerblue1 () {
+	print -P %K{033}$*%k
+}
+
+bg_dodgerblue2 () {
+	print -P %K{027}$*%k
+}
+
+bg_dodgerblue3 () {
+	print -P %K{026}$*%k
+}
+
+bg_fuchsia () {
+	print -P %K{013}$*%k
+}
+
+bg_gold1 () {
+	print -P %K{220}$*%k
+}
+
+bg_gold3 () {
+	print -P %K{178}$*%k
+}
+
+bg_green () {
+	print -P %K{002}$*%k
+}
+
+bg_green1 () {
+	print -P %K{046}$*%k
+}
+
+bg_green3 () {
+	print -P %K{040}$*%k
+}
+
+bg_green4 () {
+	print -P %K{028}$*%k
+}
+
+bg_greenyellow () {
+	print -P %K{154}$*%k
+}
+
+bg_grey () {
+	print -P %K{008}$*%k
+}
+
+bg_grey0 () {
+	print -P %K{016}$*%k
+}
+
+bg_grey100 () {
+	print -P %K{231}$*%k
+}
+
+bg_grey11 () {
+	print -P %K{234}$*%k
+}
+
+bg_grey15 () {
+	print -P %K{235}$*%k
+}
+
+bg_grey19 () {
+	print -P %K{236}$*%k
+}
+
+bg_grey23 () {
+	print -P %K{237}$*%k
+}
+
+bg_grey27 () {
+	print -P %K{238}$*%k
+}
+
+bg_grey3 () {
+	print -P %K{232}$*%k
+}
+
+bg_grey30 () {
+	print -P %K{239}$*%k
+}
+
+bg_grey35 () {
+	print -P %K{240}$*%k
+}
+
+bg_grey37 () {
+	print -P %K{059}$*%k
+}
+
+bg_grey39 () {
+	print -P %K{241}$*%k
+}
+
+bg_grey42 () {
+	print -P %K{242}$*%k
+}
+
+bg_grey46 () {
+	print -P %K{243}$*%k
+}
+
+bg_grey50 () {
+	print -P %K{244}$*%k
+}
+
+bg_grey53 () {
+	print -P %K{102}$*%k
+}
+
+bg_grey54 () {
+	print -P %K{245}$*%k
+}
+
+bg_grey58 () {
+	print -P %K{246}$*%k
+}
+
+bg_grey62 () {
+	print -P %K{247}$*%k
+}
+
+bg_grey63 () {
+	print -P %K{139}$*%k
+}
+
+bg_grey66 () {
+	print -P %K{248}$*%k
+}
+
+bg_grey69 () {
+	print -P %K{145}$*%k
+}
+
+bg_grey7 () {
+	print -P %K{233}$*%k
+}
+
+bg_grey70 () {
+	print -P %K{249}$*%k
+}
+
+bg_grey74 () {
+	print -P %K{250}$*%k
+}
+
+bg_grey78 () {
+	print -P %K{251}$*%k
+}
+
+bg_grey82 () {
+	print -P %K{252}$*%k
+}
+
+bg_grey84 () {
+	print -P %K{188}$*%k
+}
+
+bg_grey85 () {
+	print -P %K{253}$*%k
+}
+
+bg_grey89 () {
+	print -P %K{254}$*%k
+}
+
+bg_grey93 () {
+	print -P %K{255}$*%k
+}
+
+bg_honeydew2 () {
+	print -P %K{194}$*%k
+}
+
+bg_hotpink () {
+	print -P %K{206}$*%k
+}
+
+bg_hotpink2 () {
+	print -P %K{169}$*%k
+}
+
+bg_hotpink3 () {
+	print -P %K{168}$*%k
+}
+
+bg_indianred () {
+	print -P %K{167}$*%k
+}
+
+bg_indianred1 () {
+	print -P %K{204}$*%k
+}
+
+bg_khaki1 () {
+	print -P %K{228}$*%k
+}
+
+bg_khaki3 () {
+	print -P %K{185}$*%k
+}
+
+bg_lightcoral () {
+	print -P %K{210}$*%k
+}
+
+bg_lightcyan1 () {
+	print -P %K{195}$*%k
+}
+
+bg_lightcyan3 () {
+	print -P %K{152}$*%k
+}
+
+bg_lightgoldenrod1 () {
+	print -P %K{227}$*%k
+}
+
+bg_lightgoldenrod2 () {
+	print -P %K{222}$*%k
+}
+
+bg_lightgoldenrod3 () {
+	print -P %K{179}$*%k
+}
+
+bg_lightgreen () {
+	print -P %K{120}$*%k
+}
+
+bg_lightpink1 () {
+	print -P %K{217}$*%k
+}
+
+bg_lightpink3 () {
+	print -P %K{174}$*%k
+}
+
+bg_lightpink4 () {
+	print -P %K{095}$*%k
+}
+
+bg_lightsalmon1 () {
+	print -P %K{216}$*%k
+}
+
+bg_lightsalmon3 () {
+	print -P %K{173}$*%k
+}
+
+bg_lightseagreen () {
+	print -P %K{037}$*%k
+}
+
+bg_lightskyblue1 () {
+	print -P %K{153}$*%k
+}
+
+bg_lightskyblue3 () {
+	print -P %K{110}$*%k
+}
+
+bg_lightslateblue () {
+	print -P %K{105}$*%k
+}
+
+bg_lightslategrey () {
+	print -P %K{103}$*%k
+}
+
+bg_lightsteelblue () {
+	print -P %K{147}$*%k
+}
+
+bg_lightsteelblue1 () {
+	print -P %K{189}$*%k
+}
+
+bg_lightsteelblue3 () {
+	print -P %K{146}$*%k
+}
+
+bg_lightyellow3 () {
+	print -P %K{187}$*%k
+}
+
+bg_lime () {
+	print -P %K{010}$*%k
+}
+
+bg_magenta () {
+	print -P %K{005}$*%k
+}
+
+bg_magenta1 () {
+	print -P %K{201}$*%k
+}
+
+bg_magenta2 () {
+	print -P %K{200}$*%k
+}
+
+bg_magenta3 () {
+	print -P %K{164}$*%k
+}
+
+bg_maroon () {
+	print -P %K{009}$*%k
+}
+
+bg_mediumorchid () {
+	print -P %K{134}$*%k
+}
+
+bg_mediumorchid1 () {
+	print -P %K{207}$*%k
+}
+
+bg_mediumorchid3 () {
+	print -P %K{133}$*%k
+}
+
+bg_mediumpurple () {
+	print -P %K{104}$*%k
+}
+
+bg_mediumpurple1 () {
+	print -P %K{141}$*%k
+}
+
+bg_mediumpurple2 () {
+	print -P %K{140}$*%k
+}
+
+bg_mediumpurple3 () {
+	print -P %K{098}$*%k
+}
+
+bg_mediumpurple4 () {
+	print -P %K{060}$*%k
+}
+
+bg_mediumspringgreen () {
+	print -P %K{049}$*%k
+}
+
+bg_mediumturquoise () {
+	print -P %K{080}$*%k
+}
+
+bg_mediumvioletred () {
+	print -P %K{126}$*%k
+}
+
+bg_mistyrose1 () {
+	print -P %K{224}$*%k
+}
+
+bg_mistyrose3 () {
+	print -P %K{181}$*%k
+}
+
+bg_navajowhite1 () {
+	print -P %K{223}$*%k
+}
+
+bg_navajowhite3 () {
+	print -P %K{144}$*%k
+}
+
+bg_navy () {
+	print -P %K{012}$*%k
+}
+
+bg_navyblue () {
+	print -P %K{017}$*%k
+}
+
+bg_olive () {
+	print -P %K{011}$*%k
+}
+
+bg_orange1 () {
+	print -P %K{214}$*%k
+}
+
+bg_orange3 () {
+	print -P %K{172}$*%k
+}
+
+bg_orange4 () {
+	print -P %K{094}$*%k
+}
+
+bg_orangered1 () {
+	print -P %K{202}$*%k
+}
+
+bg_orchid () {
+	print -P %K{170}$*%k
+}
+
+bg_orchid1 () {
+	print -P %K{213}$*%k
+}
+
+bg_orchid2 () {
+	print -P %K{212}$*%k
+}
+
+bg_palegreen1 () {
+	print -P %K{156}$*%k
+}
+
+bg_palegreen3 () {
+	print -P %K{114}$*%k
+}
+
+bg_paleturquoise1 () {
+	print -P %K{159}$*%k
+}
+
+bg_paleturquoise4 () {
+	print -P %K{066}$*%k
+}
+
+bg_palevioletred1 () {
+	print -P %K{211}$*%k
+}
+
+bg_pink1 () {
+	print -P %K{218}$*%k
+}
+
+bg_pink3 () {
+	print -P %K{175}$*%k
+}
+
+bg_plum1 () {
+	print -P %K{219}$*%k
+}
+
+bg_plum2 () {
+	print -P %K{183}$*%k
+}
+
+bg_plum3 () {
+	print -P %K{176}$*%k
+}
+
+bg_plum4 () {
+	print -P %K{096}$*%k
+}
+
+bg_purple () {
+	print -P %K{129}$*%k
+}
+
+bg_purple3 () {
+	print -P %K{056}$*%k
+}
+
+bg_purple4 () {
+	print -P %K{055}$*%k
+}
+
+bg_red () {
+	print -P %K{001}$*%k
+}
+
+bg_red1 () {
+	print -P %K{196}$*%k
+}
+
+bg_red3 () {
+	print -P %K{160}$*%k
+}
+
+bg_rosybrown () {
+	print -P %K{138}$*%k
+}
+
+bg_royalblue1 () {
+	print -P %K{063}$*%k
+}
+
+bg_salmon1 () {
+	print -P %K{209}$*%k
+}
+
+bg_sandybrown () {
+	print -P %K{215}$*%k
+}
+
+bg_seagreen1 () {
+	print -P %K{085}$*%k
+}
+
+bg_seagreen2 () {
+	print -P %K{083}$*%k
+}
+
+bg_seagreen3 () {
+	print -P %K{078}$*%k
+}
+
+bg_silver () {
+	print -P %K{015}$*%k
+}
+
+bg_skyblue1 () {
+	print -P %K{117}$*%k
+}
+
+bg_skyblue2 () {
+	print -P %K{111}$*%k
+}
+
+bg_skyblue3 () {
+	print -P %K{074}$*%k
+}
+
+bg_slateblue1 () {
+	print -P %K{099}$*%k
+}
+
+bg_slateblue3 () {
+	print -P %K{062}$*%k
+}
+
+bg_springgreen1 () {
+	print -P %K{048}$*%k
+}
+
+bg_springgreen2 () {
+	print -P %K{047}$*%k
+}
+
+bg_springgreen3 () {
+	print -P %K{041}$*%k
+}
+
+bg_springgreen4 () {
+	print -P %K{029}$*%k
+}
+
+bg_steelblue () {
+	print -P %K{067}$*%k
+}
+
+bg_steelblue1 () {
+	print -P %K{081}$*%k
+}
+
+bg_steelblue3 () {
+	print -P %K{068}$*%k
+}
+
+bg_tan () {
+	print -P %K{180}$*%k
+}
+
+bg_teal () {
+	print -P %K{014}$*%k
+}
+
+bg_thistle1 () {
+	print -P %K{225}$*%k
+}
+
+bg_thistle3 () {
+	print -P %K{182}$*%k
+}
+
+bg_turquoise2 () {
+	print -P %K{045}$*%k
+}
+
+bg_turquoise4 () {
+	print -P %K{030}$*%k
+}
+
+bg_violet () {
+	print -P %K{177}$*%k
+}
+
+bg_wheat1 () {
+	print -P %K{229}$*%k
+}
+
+bg_wheat4 () {
+	print -P %K{101}$*%k
+}
+
+bg_white () {
+	print -P %K{007}$*%k
+}
+
+bg_yellow () {
+	print -P %K{226}$*%k
+}
+
+bg_yellow2 () {
+	print -P %K{190}$*%k
+}
+
+bg_yellow3 () {
+	print -P %K{184}$*%k
+}
+
+bg_yellow4 () {
+	print -P %K{003}$*%k
+}
+
+# Function to modify test with styles like Bold, Blink, etc.
+#	fg_sp "Bold,$(fg_red "my String")"
+# Instructions and examples below
+#
+fg_sp () {
+	Style=$(printf "${1}" | awk -F, '{print $1}')
+	Str=$(printf "${1}" | awk -F, '{print $2}')
+	Normal="\033[0m"
+	case $Style in
+		Nor|nor|Normal|normal) Style="\033[0m"
+		;;
+		Bold|bold) Style="\033[1m"
+		;;
+		Dim|dim)  Style="\033[2m"
+		;;
+		Ital|ital|Italics|italics) Style="\033[3m"
+		;;
+		Under|under|Underline|underline) Style="\033[4m"
+		;;
+		Blink|blink) Style="\033[5m"
+		;;
+		Reverse|Rev|reverse|rev) Style="\033[7m"
+		;;
+		*) echo "Usage: fg_sp \"Nor|Bold|Dim|Ital|Under|Blink|Rev,String\""
+			return 1
+		;;
+	esac
+	echo -e "${Style}${Str}${Normal}"
+}
+#
+# How fg_sp is used
+#
+# Bold
+# Use like this fg_sp "Bold,$(fg_red "String")"
+# where Mode=Bold
+#
+# Dim
+# Use like this fg_sp "Dim,$(fg_red "String")"
+# where Mode=Dim
+#
+# Italics
+# Use like this fg_sp "Itali|Italics,$(fg_red "String")"
+# where Mode=Ital|Italics
+#
+# Underline
+# Use like this fg_sp "Under|Underline,$(fg_red "String")"
+# where Mode=Under|Underline
+#
+# Blink
+# Use like this fg_sp "Blink,$(fg_red "String")"
+# where Mode=Blink
+# Reverse
+# Use like this fg_sp "Rev|Reverse,$(fg_red "String")"
+# where Mode=Rev|Reverse
+
+act_shell () {
+	local FileName=$(ps -p $$|awk -F " " '{print $NF}'|egrep -v "CMD")
+	local base=${FileName##*/}
+	printf "${base}\n"
+}
+
+myfunctions () {
+	get_fcn_list | sort | column
+}
+
+get_fcn_list () {
+	awk '{$1=$1};1' ${myzfuncsfile}|egrep '^.* \(\) {'|egrep -v '^#'|awk '{ print $1 }'|sort
+}
+
+function_exists () {
+	if [[ -n $(declare -pf ${1}) && ( ! "$(declare -fp ${1})" =~ .*"# undefined".* ) ]] || \
+		[[ -n $(show_function_f ${1}) ]]; then
+		return 0
+	else
+		return $?
+	fi
+}
+
+show_function_f () {
+	if [[ -n ${1} && -n $(sed -n "/^${1} \(\)/,/^}/p" ${myzfuncsfile}) ]]; then
+		sed -n "/^${1} \(\)/,/^}/p" ${myzfuncsfile}
+	else
+		return 1
+	fi
+}
+
+show_function () {
+	if function_exists ${1}
+	then
+		echo -e "$(show_function_f ${1} 2>/dev/null || declare -pf ${1} || cat ${myzfuncs}/${1})"
+	else
+		return 1
+	fi
+}
+
+get_function () {
+	for i in $@
+	do
+		source /dev/stdin <<< $(show_function ${i})
+	done
+}
+
+unsetfunction () {
+	if [ -z ${1} ]; then
+		echo "Usage: ${funcstack[1]} function_name"
+	elif [ "${Comp}" = "bash" ]; then
+		unset -f ${1}
+	else
+		disable -f -m ${1}
+	fi
+	if function_exists ${1}; then
+		echo "Function ${1} exists"
+	else
+		echo "Function ${1} undefined"
+	fi
+}
+
+showpath () {
+  export PATH
+  awk -v RS=: '{print}' <<<$PATH
+}
+
+path_remove () {
+	if [ -z ${1} ]; then
+		echo "Usage: ${funcstack[1]} PATH_To_Remove"
+	else
+  # Delete path by parts so we can never accidentally remove sub paths
+		PATH=${PATH//":$1:"/":"} # delete any instances in the middle
+		PATH=${PATH/#"$1:"/} # delete any instance at the beginning
+		PATH=${PATH/%":$1"/} # delete any instance in the at the end
+	fi
+}
+
+nodupes () {
+	if [ -n "$PATH" ]; then
+		local old_PATH=$PATH:; PATH=
+		local x
+		local Comp
+		while [ -n "$old_PATH" ]; do
+			x=${old_PATH%%:*}       # the first remaining entry
+			case $PATH: in
+				*:"$x":*) ;;          # already there
+				*) PATH=$PATH:$x;;    # not there yet
+			esac
+			old_PATH=${old_PATH#*:}
+		done
+		Comp=$(act_shell)
+		if [ "${Comp}" = "bash" ]; then
+			export PATH=${PATH#:}
+		else
+			PATH=${PATH#:}
+		fi
+	fi
+}
+
+show_time () {
+  local Prompt=${2:-"Total elapst time"}
+  local T=${1}
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $D == 1 )) && Dy="day" || Dy="days"
+  (( $H == 1 )) && Hy="hr." || Hy="hrs."
+  (( $M == 1 )) && My="min." || My="mins."
+  (( $S == 1 )) && Sy="sec." || Sy="secs."
+  printf "${Prompt}: "
+  #printf '%d %s %d %s %d %s %d %s' $D $Dy $H $Hy $M $My $S $Sy
+  echo "$D $Dy $H $Hy $M $My $S $Sy"
+}
+
+# fix_file_names will replace spaces with dashes in the filename
+# Must be in the directory to execute 
+fix_file_names () {
+#	CurDir=$(pwd)
+	for i in ${1:-*}
+	do
+#		DirName=$(dirname ${i})
+#		cd ${DirName}
+		FileName=${i}
+		NFileName=$(echo ${FileName}|sed -e 's/ /-/g')
+		NFileName=$(echo ${NFileName}|sed -e 's/--*/-/g')
+		NFileName=$(echo ${NFileName}|sed -e 's/_/-/g')
+		NFileName=$(echo ${NFileName}|sed -e 's/,/-/g')
+		NFileName=$(echo ${NFileName}|sed -e 's/&/-/g')
+		NFileName=$(echo ${NFileName}|sed -e 's/--*/-/g')
+		mv ${FileName} ${NFileName}
+#		cd ${CurDir}
+		if [ $? -eq 0 ]; then
+			echo "${FileName} $(fg_green "to") ${NFileName}"
+		else
+			echo "${Filename} change $(fg_red "failed")..."
+		fi
+	done
+}
+
+# List of files with string in filename
+ftext () {
+grep -iIHrn --color=always "$1" . | less -R -r
+}
+
+center_text () {
+	if [[ $# == 0 ]]; then
+		echo "Usage: ${funcstack[1]} text columns"
+		return 1
+	else
+		declare -i TERM_COLS="$(tput cols)"
+		declare -i str_len="${#1}"
+		[[ $str_len -ge $TERM_COLS ]] && {
+			echo "$1";
+			return 0;
+		}
+
+		declare -i filler_len="$(( (TERM_COLS - str_len) / 2 ))"
+		[[ $# -ge 2 ]] && ch="${2:0:1}" || ch=" "
+		filler=""
+		for (( i = 0; i < filler_len; i++ )); do
+			filler="${filler}${ch}"
+		done
+
+		printf "%s%s%s" "$filler" "$1" "$filler"
+		[[ $(( (TERM_COLS - str_len) % 2 )) -ne 0 ]] && printf "%s" "${ch}"
+		printf "\n"
+
+		return 0
+	fi
+}
+
+zzhelp () {
+	if [ -z ${1} ]; then
+		echo "Usage: ${funcstack[1]} all/program"
+	else
+		if [ -d /usr/local/share/zsh/help ]; then
+			cd /usr/local/share/zsh/help
+		else
+			cd /usr/share/man/man1
+		fi
+		case ${1} in
+			all) \ls | sed -e 's/.1.*$//' | column
+			;;
+				*) run-help ${1} || printf "No Help for ${1}\n"
+			;;
+		 esac
+	fi
+}
+
+get_date () {
+	fg_green "$(date "+%a %d %b")"
+}
+
+# get_date_p to be used with the shell prompt
+get_date_p () {
+	pfg_green "$(date "+%a %d %b")"
+}
+
+get_time () {
+	fg_green "$(date "+%I:%M:%S")"
+}
+
+# get_time_p to be used with the shell prompt
+get_time_p () {
+	pfg_green "$(date "+%I:%M:%S")"
+}
+
+safe_exit () {
+	exit 1
+}
+
+tfiles () {
+	printf "$(ls -a -1 | wc -l|sed 's/ //g')\n"
+}
+
+dirsize () {
+	printf "${1:-$(pwd)} $(ls -hs ${1} | head -1)\n"
+}
+
+tsize () {
+	printf "$(dirsize ${1:-$(pwd)} | sed 's/.*total //g')\n"
+}
+
+islarger () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} A B\n"
+	else
+		local A=${1}
+		local B=${2}
+		if (( $(echo "$A > $B" |bc -l) )); then
+			return 0
+		else
+			return 1
+		fi
+	fi
+}
+
+fsize () {
+	fileName="${1}"
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} FileName\n"
+		return
+	fi
+	mfs=$(\ls -lah ${fileName} | awk '{ print $5 }')
+	printf "%s ${mfs}"
+}
+
+fsize2 () {
+	fileName="${1}"
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} FileName\n"
+		return
+	fi
+	mfs=$(\ls -la ${fileName} | awk '{ print $5 }')
+	printf "%s ${mfs}"
+}
+
+pause () {
+	terminal="/dev/tty"
+	printf "press [$(fg_sp "Bold,$(fg_green "Enter")")] to continue..."
+#	read -s < ${terminal}
+	read && printf ""
+}
+
+fork () {
+	printf "Removing old Fork output files..."
+	rm ~/fork.out ~/fork.err > /dev/null 2>&1
+	result=$?
+	if [ $result -eq 0 ]; then
+		fg_green "OK"
+	else
+		fg_red "Error"
+	fi
+	(setsid "$@" > ~/fork.out 2>~/fork.err &);
+	echo "Forking $@"
+}
+
+askany () {
+	terminal="/dev/tty"
+	printf "${1:-"Press [$(fg_sp "Bold,$(fg_green "Any Key")")] to continue..."}"
+#	read -s < ${terminal}
+	read && printf ""
+}
+
+ask () {
+	# Usage: ask "Continue..." "Y"
+local prompt="${1:-'Continue...'}"
+local prompt2 default reply
+	while true; do
+		if [ "${2:-}" = "Y" ]; then
+			prompt2="Y/n"
+			default=Y
+		elif [ "${2:-}" = "N" ]; then
+			prompt2="y/N"
+			default=N
+		else
+			prompt2="y/n"
+			default=
+		fi
+	echo -n "${prompt} [$prompt2] "
+	read reply </dev/tty
+	if [ -z "$reply" ]; then
+		reply=$default
+	fi
+	case "$reply" in
+		Y*|y*) return 0 ;;
+		N*|n*) return 1 ;;
+	esac
+  done
+}
+
+wordnet () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} word\n"
+		return
+	fi
+	printf "${1}\n"
+	curl dict://dict.org/d:${1}#:wn 2>/dev/null | sed -e '/^[0-9]/d' \
+		| sed -e '/Xferd/d' 
+}
+
+# Needs work
+hgrep2 () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} lookup-word\n"
+		return
+	fi
+	history | sed s/.*\ \ // | grep $@ | tail -n 30
+}
+
+# Needs work
+hgrep () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} lookup-word\n"
+		return
+	fi
+	history | sed s/.*\ \ // | grep $@
+}
+
+update-fonts () {
+	echo "
+	$(fg_green "Updating fonts")"
+	( cd ${HOME}/fonts
+		git reset --hard
+		git pull origin master
+	)
+}
+
+update-p10k () {
+	echo "
+	$(fg_green "Updating powerlevel10k")"
+	git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
+}
+
+update-ohmyzsh () {
+	echo "
+	$(fg_green "Updating oh-my-zsh")"
+	ZSH="$ZSH"
+	sh "$ZSH/tools/upgrade.sh"
+	update_last_updated_file
+}
+
+web_search () {
+	emulate -L zsh
+	# define search engine URLS
+	typeset -A urls
+	urls=(
+	  google    "https://www.google.com/search?q="
+	  ddg       "https://www.duckduckgo.com/?q="
+		bing			"https://www.bing.com/?q="
+		yahoo			"https://search.yahoo.com/search?p="
+	  github    "https://github.com/search?q="
+	)
+	# check whether the search engine is supported
+	if [[ -z "$urls[$1]" ]]; then
+	  echo "Search engine $1 not supported."
+	  return 1
+	fi
+	# search or go to main page depending on number of arguments passed
+	if [[ $# -gt 1 ]]; then
+	  # build search url:
+	  # join arguments passed with '+', then append to search engine URL
+	  url="${urls[$1]}${(j:+:)@[2,-1]}"
+	else
+	  # build main page url:
+	  # split by '/', then rejoin protocol (1) and domain (2) parts with '//'
+	  url="${(j://:)${(s:/:)urls[$1]}[1,2]}"
+	fi
+	open_command "$url"
+}
+
+# intellegently extract archives based on extension. 
+extract () {	
+	if [ -z ${2} ]; then
+		printf "Usage: extract CompressedFile DirPath"
+	else
+		file=$1
+		dir=$2
+		if [[ -n $dir ]]; then
+			mkdir -p $dir; 
+			echo Extracting $1 into $2 ...
+		else 
+			echo Extracting $1 ...
+		fi
+		if [[ ! -f $1 ]] ; then
+			echo "'$1' is not a valid file"
+		else
+			case $1 in
+				*.tar.bz2)	 
+					if [[ -n $dir ]]; then
+						dc="-C $dir";
+					fi
+					cmd="tar -xjvf $1 $dc" 
+					echo $cmd
+					eval ${cmd}
+				 ;;	 
+				*.tar.gz)	
+					if [[ -n $dir ]]; then
+						dc="-C $dir";
+					fi
+					cmd="tar -xzvf $1 $dc"; 
+					echo $cmd;
+					eval ${cmd}
+				 ;;
+				*.tar)
+					if [[ -n $dir ]]; then
+						dc="-C $dir";
+					fi
+					cmd="tar -vxf $1 $dc";
+					echo $cmd;
+					eval ${cmd}
+				 ;;
+				*.tbz2)
+					if [[ -n $dir ]]; then
+						dc="-C $dir";
+					fi
+					cmd="tar -xjvf $1 $dc";
+					echo $cmd; 
+					eval ${cmd}
+				 ;;	
+				*.tgz) 
+					if [[ -n $dir ]]; then
+						dc="-C $dir";
+					fi
+					cmd="tar -xzf $1 $dc"; 
+					echo $cmd; 
+					eval ${cmd} 
+				 ;;	
+				*.bz2)
+					if [[ -n $dir ]]; then
+						dc="-C $dir";
+					fi
+					cmd="tar -jf $1 $dc"; 
+					echo $cmd; 
+					eval ${cmd} 
+				 ;;	 
+				*.zip)
+					if [[ -n $dir ]]; then
+						dc="-d $dir";
+					fi
+					cmd="unzip $1 $dc"; 
+					echo $cmd; 
+					eval ${cmd}
+				 ;;
+				*.gz)
+					if [[ -n $dir ]]; then
+						dc="-C $dir";
+					fi
+					cmd="tar -zf $1 $dc"; 
+					echo $cmd; 
+					eval ${cmd}
+				 ;;
+	#			*.7z
+	#				# TODO dir
+	#				cmd="7z x -o$dir $1"; 
+	#				echo $cmd; 
+	#				eval ${cmd} 
+	#			 ;;
+	#			*.rar)
+	#				# TODO Dir
+	#				cmd="unrar x $1 $dir";
+	#				echo $cmd;
+	#				eval ${cmd}
+	#			 ;;
+				*)
+					echo "'$1' cannot be extracted via extract()" 
+				;;
+			esac
+		fi
+	fi
+}
+
+compress_ () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} tarfile.ext [File-Folder]\n"
+		return
+	fi
+	FILE=$1
+	printf "${@}"
+	ExtPWD="${2:-${PWD}}"
+	shift
+	printf "Want to create $(fg_byellow "${FILE}") using $(fg_byellow "${ExtPWD}/") directory(s)?"
+	if ask; then
+		printf "Creating $(fg_byellow "${FILE}") using $(fg_byellow "${ExtPWD}/") directory(s).\n"
+		case ${FILE} in
+			*.bz2) 	tar cjf ${FILE} ${ExtPWD} 	 ;;
+			*.tgz) 	tar czf ${FILE} ${ExtPWD} 	 ;;
+			*.gz) 	tar czf ${FILE} ${ExtPWD}		 ;;
+			*.zip)	unzip ${FILE} -d ${ExtPWD}   ;;
+			*.rar)	unrar ${FILE} x ${ExtPWD}    ;;
+			*)	echo "${FILE} Filetype not recognized" ;;
+		esac
+	else
+		printf "${FILE} not extracted.\n"
+	fi
+}
+
+pullout () {
+  if [ $# -ne 2 ]; then
+    echo "need proper arguments:"
+    echo "Usage: ${funcstack[1]} [file] [archive.tar.gz]"
+    return 1
+  fi
+  case $2 in
+    *.tar.gz|*.tgz)
+    gunzip < $2 | tar -xf - $1
+    ;;
+    *)
+    echo $2 is not a valid archive
+    return 1
+    ;;
+  esac
+  return 0
+}
+
+ctar () {
+	ACTION=`echo ${1/-//}`
+	ACTION=`echo ${1/c/r}`
+	if [ ${ACTION:0:1} != "r" ]; then
+		echo "Usage: ctar [-][c|r]f OutFileName.tar FileDirName"
+		return 1
+		exit
+	fi
+	OUTFILE=`echo ${2/.tgz/.tar}`
+	OUTFILE=`echo ${2/.tar.gz/.tar}`
+	CURRENT=0
+	echo "Activity: tar ${1} ${OUTFILE} ${3} [$SIZE] ${4} ${5}"
+	for FILE in $(find ${3} -type f); do
+		tar ${ACTION} ${OUTFILE} $FILE
+		CURRENT=$(($CURRENT+$(du -s $FILE | cut -f 1)))
+		echo -en "\r"$((100*($CURRENT-1)/$TOTAL+1))"%"
+	done
+	bar ${OUTFILE} | gzip > ${OUTFILE}.gz
+	trash ${OUTFILE}
+}
+
+forecast () {
+_ZIP=$1
+if   [ $# = 1 ];then
+     printf "$_ZIP\n" | egrep '^[0-9][0-9][0-9][0-9][0-9]$' >>/dev/null
+     if   [ $? = 0 ];then
+          printf "Your 10 Day Weather Forecast as follows:\n";
+          lynx -dump "http://www.weather.com/weather/print/$_ZIP" | sed -n '/%$/s/\[.*\]//p';
+          printf "\n"
+     elif [ $? = 1 ];then
+          printf "Bad ZIP code!\n"
+     fi
+elif [ $# != 1 ];then
+     printf "You need to supply a ZIP code!\n"
+fi
+}
+
+clock () {
+	while true;do clear;echo $(date +"%r");sleep 1;done
+}
+
+sqrt () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} number\n"
+		return
+	fi
+	echo "sqrt ("$1")" | bc -l
+}
+
+dec2all () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} 100\n"
+		return
+	fi
+	if [[ -n $1 ]]; then
+		echo "decimal $1 = roman $(a2roman $1)"
+		echo "decimal $1 = binary $(dec2bin $1)"
+		echo "decimal $1 = octal $(dec2oct $1)"
+		echo "decimal $1 = hexadecimal $(dec2hex $1)"
+		echo "decimal $1 = base32 $(dec2b32 $1)"
+		echo "decimal $1 = base64 $(dec2b64 $1)"
+		echo "deciaml $1 = ascii $(dec2asc $1)"
+	fi
+}
+
+a2roman () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} 100\n"
+		return
+	fi
+	echo $1 | sed -e 's/1...$/M&/;s/2...$/MM&/;s/3...$/MMM&/;s/4...$/MMMM&/
+	s/6..$/DC&/;s/7..$/DCC&/;s/8..$/DCCC&/;s/9..$/CM&/
+	s/1..$/C&/;s/2..$/CC&/;s/3..$/CCC&/;s/4..$/CD&/;s/5..$/D&/
+	s/6.$/LX&/;s/7.$/LXX&/;s/8.$/LXXX&/;s/9.$/XC&/
+	s/1.$/X&/;s/2.$/XX&/;s/3.$/XXX&/;s/4.$/XL&/;s/5.$/L&/
+	s/1$/I/;s/2$/II/;s/3$/III/;s/4$/IV/;s/5$/V/
+	s/6$/VI/;s/7$/VII/;s/8$/VIII/;s/9$/IX/
+	s/[0-9]//g'
+}
+
+dec2asc () {
+	if [[ -n $1 ]]; then
+		if [ $(( $1 )) -gt 31 ]; then
+			printf "$(printf '\%o' $1)\n"
+		else
+			printf "Non-printable\n"
+		fi
+	fi
+}
+
+dec2bin () {
+	if [[ -n $1 ]]; then
+		echo "obase=2 ; $1" | bc
+	fi
+}
+
+dec2b64 () {
+if [[ -n $1 ]]; then
+	echo "obase=64;$1" | bc
+fi
+}
+
+dec2b32 () {
+	if [[ -n $1 ]]; then
+		echo "obase=32;$1" | bc
+	fi
+}
+
+dec2hex () {
+	if [[ -n $1 ]]; then
+		echo "obase=16 ; $1" | bc
+	fi
+}
+
+dec2oct () {
+	if [[ -n $1 ]]; then
+		echo "obase=8 ; $1" | bc
+	fi
+}
+
+cvtemp () {
+	if [[ $# -eq 0 ]] ; then
+	  echo "
+		Usage: ${Funcstack[1]} temperature[F|C|K]
+		where the suffix:
+			F	indicates input is in Fahrenheit (default)
+	    C	indicates input is in Celsius
+			K	indicates input is in Kelvin"
+	fi
+	unit="$(echo $1|sed -e 's/[-[[:digit:]]*//g' | \
+		tr '[:lower:]' '[:upper:]' )"
+	temp="$(echo $1|sed -e 's/[^-[[:digit:]]*//g')"
+	case ${unit:=F}
+		in
+		F ) # Fahrenheit to Celsius formula:  Tc = (F -32 ) / 1.8
+			farn="$temp"
+			cels="$(echo "scale=2;($farn - 32) / 1.8" | bc)"
+			kelv="$(echo "scale=2;$cels + 273.15" | bc)";;
+		C ) # Celsius to Fahrenheit formula: Tf = (9/5)*Tc+32
+			cels=$temp
+			kelv="$(echo "scale=2;$cels + 273.15" | bc)"
+			farn="$(echo "scale=2;((9/5) * $cels) + 32" | bc)";;
+		K ) # Celsius = Kelvin + 273.15, then use Cels -> Fahr formula
+			kelv=$temp
+			cels="$(echo "scale=2; $kelv - 273.15" | bc)"
+			farn="$(echo "scale=2; ((9/5) * $cels) + 32" | bc)"
+	esac
+	echo "Fahrenheit = $farn"
+	echo "Celsius    = $cels"
+	echo "Kelvin     = $kelv"
+}
+
+allips () {
+	ifconfig | awk '/inet / {sub(/addr:/, "", $2); print $2}'
+}
+
+apath () {
+	if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+		echo "Temporarily add to PATH"
+		echo "usage: apath [dir]"
+	else
+		PATH=$1:$PATH
+	fi
+}
+
+portcheck () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} Port#\n"
+		return
+	fi
+	for i in $@
+		do
+		curl -s "https://deluge-torrent.org/test-port.php?port=$i" | \
+			sed '/^$/d;s/<br><br>/ /g'
+		done
+}
+
+cdlc () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} Directory\n"
+		return
+	fi
+	cd $1 2>/dev/null && lc || printf "Directory \"${1}\" does not exist\n"
+}
+
+ccd () {
+	if [ "$1" = "" ]; then
+		echo "Usage: ccd location"
+		shift
+	elif [ -d "$1" ]; then
+		#if it is a directory, go there
+		cd "$1"
+	else #must not be a directory
+		# Cut off filename and cd to the containing directory
+		cd "${1%/*}"
+	fi
+}
+
+showdist () {
+	hostnamectl|grep 'Operating'|awk '{ print substr($0, index($0,$3)) }'
+}
+
+listallapps () {
+	if [ "$(uname)" = "Darwin" ]; then
+		if [ ${USER} = "root" ]; then
+			dfind 'kMDItemContentTypeTree == "com.apple.application"c'
+		else
+			sudo dfind 'kMDItemContentTypeTree == "com.apple.application"c'
+		fi
+	else
+		if [ ${USER} = "root" ]; then
+			yum list installed|less
+		else
+			sudo yum list installed|less
+		fi
+	fi
+}
+
+showservices () {
+	if [ "$(uname)" = "Darwin" ]; then
+		if [ ${USER} = "root" ]; then
+			launchctl list
+		else
+			sudo launchctl list
+		fi
+	else
+		if [ ${USER} = "root" ]; then
+			systemctl list-unit-files
+		else
+			sudo systemctl list-unit-files
+		fi
+	fi
+}
+
+convertsecs () {
+	h=$(bc <<< "${1}/3600")
+	m=$(bc <<< "(${1}%3600)/60")
+	s=$(bc <<< "${1}%60")
+	printf "%02d:%02d:%02d\n" $h $m $s
+}
+
+psinfo () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} ProcessName\n"
+		return
+	fi
+  ps -axww | head -1
+	ps -axww | grep ${1}
+}
+
+psmax () {
+	if [ "$(uname)" = "Darwin" ]; then
+		if [ ${USER} = "root" ]; then
+			ps -axco pid,ppid,command,%mem,%cpu -r|head -n 20
+		else
+			sudo ps -axco pid,ppid,command,%mem,%cpu -r|head -n 20
+		fi
+	else
+		if [ ${USER} = "root" ]; then
+			ps -axco  pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head --lines=20
+		else
+			sudo ps -axco  pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head --lines=20
+		fi
+	fi
+}
+
+cleardns () {
+	if [ "$(uname)" = "Darwin" ]; then # Apple
+		if [ "${USER}" = "root" ]; then
+			killall -HUP mDNSResponder && echo "macOS DNS Cache Reset"
+		else
+			sudo killall -HUP mDNSResponder && echo "macOS DNS Cache Reset"
+		fi
+	elif [ -f "/etc/init.d/networking" ]; then # Linux Ubuntu
+		if [ "${USER}" = "root" ]; then
+			/etc/init.d/networking force-reload && echo "Ubuntu DNS Cache Reset"
+		else
+			sudo /etc/init.d/networking force-reload && echo "Ubuntu DNS Cache Reset"
+		fi
+	elif [ -f /usr/lib/systemd/system/nscd.service ]; then # Linux Centos 7
+		if [ "${USER}" = "root" ]; then
+			/bin/systemctl restart nscd.service && echo "Centos 7 DNS Cache Reset"
+		else
+			sudo /bin/systemctl restart nscd.service && echo "Centos 7 DNS Cache Reset"
+		fi
+	else
+		printf "Unable to flush DNS Cache...\n"
+	fi
+}
+
+halt () {
+	if [ $(hostname -s) != "dopey" ]; then
+		if [ $UID -ne 0 ]; then
+	    sudo shutdown -h now
+		else
+	    shutdown -h now
+		fi
+	else
+		printf "halt not available on $(hostname -s)\n"
+	fi
+}
+
+reboot () {
+	if [ $UID -ne 0 ]; then
+    sudo shutdown -r now
+	else
+    shutdown -r now
+	fi
+}
+
+osver () {
+	printf "$(showdist) $(lsb_release -r -s)\n"
+}
+
+delhistory () {
+	history -c && history -w
+}
+
+serverfind () {
+  speedserver -n24 -i/root/bin/list --search=${1:-denver}
+}
+
+speedtest () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${funcstack[1]} [ServerID]\n\n"
+	fi
+	ServerFile=/usr/local/share/info/SpeedTestServers
+	SpeedServer=${1:-16797}
+	printf "Using ServerID: ${SpeedServer}\n\n"
+	speedtest.py --bytes --server ${SpeedServer}
+}
+
+vimupdate () {
+	vim +'PlugUpdate' # +qa to auto close after update
+}
+
+mkuserbashbk () {
+( pushd ~ > /dev/null 2>&1
+	printf "$(fg_cyan "	UserFilesbashbk.tgz")..."
+	tar --absolute-names -cvzf UserFilesbashbk.tgz -X "UserFiles-bashExclude" -T "UserFiles-bashInclude" >mkuserfilesbashbk.out
+	printf "$(fg_white " Done")\n"
+	popd > /dev/null 2>&1
+	dirs -c > /dev/null 2>&1
+	) 2>mkuserfilesbk.err
+}
+
+mkuserbash () {
+( pushd ~ > /dev/null 2>&1
+	printf "$(fg_cyan "	UserFilesbash.tgz")..."
+	tar --absolute-names -cvzf UserFilesbash.tgz -X "UserFiles-bashExclude" -T "UserFiles-bashInclude" >mkuserfilesbash.out
+	printf "$(fg_white " Done")\n"
+	popd > /dev/null 2>&1
+	dirs -c > /dev/null 2>&1
+	) 2>mkuserfilesbk.err
+}
+
+mkuserbk () {
+( pushd ~ > /dev/null 2>&1
+	printf "$(fg_cyan "	UserFilesbk.tgz")..."
+	tar --absolute-names -cvzf UserFilesbk.tgz -X "UserFiles-Exclude" -T "UserFiles-Include" >mkuserfilesbk.out
+	printf "$(fg_white " Done")\n"
+	popd > /dev/null 2>&1
+	dirs -c > /dev/null 2>&1
+	) 2>mkuserfilesbk.err
+}
+
+mkuserfile () {
+( pushd ~ > /dev/null 2>&1
+	FileName="UserFiles.tgz"
+	BackupDir="ufBackup"
+	VerFile=".zsh_shver"
+	OldVer="$(< ${VerFile})"
+	printf "\nCurrent $(fg_cyan "${FileName} ") Version: $(fg_green "${OldVer}")\n"
+	cp -a ${FileName} ${BackupDir}/${FileName}-${OldVer}
+	printf "  Backup... $(fg_cyan "${FileName}") to $(fg_cyan "${FileName}-${OldVer}")\n"
+	( cd ${BackupDir};ls -1tr | head -n -20 | xargs -d '\n' rm -f -- )
+	trash mkuserfile.*	# Delete old .out/.err files
+	printf "Creating $(fg_cyan " UserFiles.tgz")...\n"
+	tar --absolute-names -cvzf UserFiles.tgz -X "UserFiles-Exclude" -T "UserFiles-Include" >mkuserfiles.out
+	printf "$(fg_white " Done")\n"
+	popd > /dev/null 2>&1
+	dirs -c > /dev/null 2>&1
+	) 2>mkuserfiles.err
+}
+
+cpuserfiles () {
+( cd ~
+printf "$(pwd)"
+ScriptName="cpuserfiles"
+trash ${ScriptName}.*
+if [ -z ${1} ]; then
+	printf "Usage: cpuserfiles DestUserHost\n"
+	return
+else
+	DestUserHost=${1}
+	DestHost=$(printf "${DestUserHost}" | cut -d @ -f2)
+	ServerStatus="$(ping -c1 -W1 ${DestHost} > /dev/null && echo \"up\" || echo \"down\")"
+	StartingHosts=" sneezy "
+	LocalHost="$(hostname -s)"
+	ThisHost="joe@${LocalHost}"
+	SITES2="root@sneezy root@y4x.biz"
+	FileName="UserFiles.tgz"
+	BackupDir="ufBackup/"
+	SkelDir="/etc/skel/"
+	VerFile=".zsh_shver"
+	OldVer="$(< ${VerFile})"
+	NewVer="`echo $OldVer + .001 | bc`"
+	ThisVer="$OldVer"
+	RFolder="~/"
+	printf "\nCurrent $(fg_cyan "${FileName} ") Version: $(fg_green "${OldVer}")"
+	printf "\nIncrement Version:$(fg_green "${OldVer}") to $(fg_red "${NewVer}:") (Y/N)? "
+	read answer
+	if echo "$answer" | grep -i --color=auto -iq "^y"; then
+		ThisVer="${NewVer}"
+		echo ${ThisVer} > ${VerFile}
+		cp ${FileName} ${BackupDir}${FileName}-${OldVer}
+		printf "  Backup... $(fg_cyan "${FileName}") to $(fg_cyan "${FileName}-${OldVer}")"
+		( cd ${BackupDir};ls -1tr | head -n -20 | xargs -d '\n' rm -f -- )
+		trash mkuserfile.*	# Delete old .out/.err files
+		mkuserfile      # Compile a UserFiles.tgz file
+	else
+		ThisVer="${OldVer}"
+	fi
+	printf "Update $(fg_cyan "${FileName}") (ver:$(fg_red "${ThisVer}") on $(fg_green "${DestUserHost}") (Y/N) "
+	read answer
+	SECONDS=0
+	if echo "$answer" | grep -i --color=auto -iq "^y"; then
+		SECONDS=0
+		DestUser=$(echo ${DestUserHost} | cut -d @ -f1)
+		if [ "${ServerStatus}" = "up" ]; then
+			if [[ "${StartingHosts}" =~ "${LocalHost}" ]]; then
+				printf "Updating $(fg_cyan "${FileName}") Version:$(fg_red "${ThisVer}") to:\n\n"
+				if [ "${DestUserHost}" != "${ThisHost}" ]; then
+					printf "  $(fg_yellow "${DestUserHost}")"
+			# 	ssh ${DestUserHost} "trash ~/.swaksp"
+					scp -Cp ${FileName} ${DestUserHost}:${RFolder} >/dev/null
+					# >> ${ScriptName}.out
+					fg_green "."
+					ssh ${DestUserHost} "trash ${RFolder}.vim >/dev/null"
+					fg_green "."
+					cat ${FileName}|ssh ${DestUserHost} "tar xzf - -C ${RFolder}"
+					fg_green "."
+					CatVersion=$(ssh ${DestUserHost} "cat ${RFolder}${VerFile}")
+					printf "($(fg_cyan "v:")${CatVersion} (skel)"
+					if [[ ${SITES2} =~ "${DestUserHost}" ]] && [ ${DestUser} = "root" ]; then
+						ssh ${DestUserHost} "cp -a ${RFolder}${FileName} ${SkelDir}"
+						fg_green "."
+						cat ${FileName}|ssh ${DestUserHost} "tar xzf - -C ${SkelDir}"
+						fg_green "."
+						CatVersion=$(ssh ${DestUserHost} "cat ${SkelDir}${VerFile}")
+						fg_green "."
+						printf "($(fg_cyan "v:")${CatVersion})"
+					else
+						fg_red " x"
+					fi
+				else
+					fg_yellow "	${DestUserHost} "
+					fg_red "(Skipped)"
+				fi
+				printf "($(fg_yellow "$SECONDS sec."))"
+			else
+				printf "Must be on \"$(printf "${StartingHosts}" | sed -e 's/ / or /')\" to update servers\n"
+			fi
+		else
+			fg_yellow "	${DestUserHost} "
+			printf "$(fg_red "Skipped") server down)\n"
+		fi
+	else
+		printf "\n${ScriptName} cancelled...\n"
+		echo ${OldVer} > ${VerFile}
+	fi
+fi
+duration=${SECONDS}
+printf "\n$(show_time ${duration} "$(fg_green "Total Update Time")")\n"
+printf "\n\n" ) 2>${ScriptName}.err
+}
+
+cpalluserfiles ()
+{
+    ( cd ~;
+    printf "$(pwd)";
+    ScriptName="cpalluserfiles";
+    trash ${ScriptName}.*;
+    StartingHosts=" sneezy ";
+    LocalHost="$(hostname -s)";
+    ThisHost="joe@${LocalHost}";
+    SITES="joe@doc cissa@doc admin@doc root@doc joe@sleepy cissa@sleepy admin@sleepy root@sleepy joe@sneezy cissa@sneezy root@sneezy joe@spanky cissa@spanky admin@spanky root@spankys 	cissa@bashful joe@bashful garymartel@bashful root@bashful root@y4x.biz y4x@y4x.biz joe@y4x.biz amanda@y4x.biz bram@y4x.biz d4x@y4x.biz h4hm@y4x.biz joevnc@y4x.biz rejoice2018@y4x.biz t4xbiz@y4x.biz y4xvnc@y4x.biz";
+    SITES2="root@sneezy root@y4x.biz";
+    STARTY4X="root@y4x.biz";
+    FileName="UserFiles.tgz";
+    BackupDir="ufBackup/";
+    SkelDir="/etc/skel/";
+    VerFile=".zsh_shver";
+    OldVer="$(< ${VerFile})";
+    NewVer="$(echo $OldVer + .001 | bc)";
+    ThisVer="$OldVer";
+    RFolder="~/";
+    printf "Current $(fg_cyan "${FileName}") Version:$(fg_green "${OldVer}")";
+    printf "\nIncrement Version:$(fg_green "${OldVer}") to $(fg_red "${NewVer}") (Y/N)? ";
+    read answer;
+    if echo "$answer" | grep --color=auto -i --color=auto -iq "^y"; then
+        ThisVer="${NewVer}";
+        echo "${ThisVer}" > ${VerFile};
+        cp ${FileName} ${BackupDir}${FileName}-${OldVer};
+        printf "  Backup... $(fg_cyan "${FileName}") to $(fg_cyan "${FileName}-${OldVer}")\n";
+        ( cd ${BackupDir};
+        ls -hF1 --color=auto -1tr | head -n -20 | xargs -d '\n' rm -f -- );
+        trash mkuserfile.*;
+        mkuserfile;
+    else
+        ThisVer="${OldVer}";
+    fi;
+    printf "Update $(fg_cyan "${FileName}") (ver:$(fg_red "${ThisVer}") on $(fg_green "All Machines")? (Y/N) ";
+    read answer;
+    if echo "$answer" | grep --color=auto -i --color=auto -iq "^y"; then
+        SECONDS=0;
+        printf "Updating $(fg_cyan) "${FileName}") Version: $(fg_red "${ThisVer}") to:\n\n";
+        for DestUserHost in ${SITES};
+        do
+            SECONDS=0;
+            DestHost=$(printf "${DestUserHost}" | cut -d @ -f2);
+            ServerStatus=$(ping -c1 -W1 ${DestHost} > /dev/null && echo "up" || echo "down");
+            if [[ "${ServerStatus}" =~ "up" ]]; then
+                if [[ "${StartingHosts}" =~ "${LocalHost}" ]]; then
+                    if [ ${DestUserHost} != "${ThisHost}" ]; then
+                        DestUser=$(echo ${DestUserHost} | cut -d @ -f1);
+                        fg_yellow "	${DestUserHost}";
+                        scp -Cp ${FileName} ${DestUserHost}:${RFolder} > /dev/null;
+                        fg_green ".";
+                        ssh ${DestUserHost} "/usr/local/bin/postcpallusrfiles ${RFolder} >/dev/null";
+                        fg_green ".";
+                        CatVersion=$(ssh ${DestUserHost} "cat ${RFolder}${VerFile}");
+                        fg_green ".";
+                        printf "($(fg_cyan "v:")${CatVersion})(skel)";
+                        if [[ ${SITES2} =~ "${DestUserHost}" ]] && [ ${DestUser} = "root" ]; then
+                            ssh ${DestUserHost} "/usr/local/bin/postcpallusrfiles ${SkelDir} >/dev/null";
+                            fg_green ".";
+                            CatVersion=$(ssh ${DestUserHost} "cat ${SkelDir}${VerFile}");
+                            fg_green ".";
+                            printf "($(fg_cyan "v:")${CatVersion})";
+                        else
+                            fg_red " x";
+                        fi;
+                    else
+                        fg_yellow "	${DestUserHost} ";
+                        printf "($(fg_red "Skipped"))";
+                    fi;
+                else
+                    printf "Must be on \"$(printf "${StartingHosts}" | sed -e 's/ / or /')\" to update servers\n";
+                    exit 2;
+                fi;
+            else
+                fg_yellow "	${DestUserHost} ";
+                printf "($(fg_red "Skipped") server down)";
+            fi;
+            printf " ($(fg_yellow "$SECONDS sec."))\n";
+        done;
+    else
+        printf "\n${ScriptName} cancelled...\n";
+        echo ${OldVer} > ${VerFile};
+    fi;
+	duration=${SECONDS}
+	printf "\n$(show_time ${duration} "$(fg_green "Total Update Time")")" \
+		) 2> ${ScriptName}.err
+}
+
+gethostip () {
+#	alias egrep="/usr/local/bin/gegrep"
+	DomIP=$(arp -a|egrep "${1}" | egrep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
+	if [ -n "${DomIP}" ]; then
+			echo ${DomIP}
+	else
+		dig +short ${1:-$(ipext)}
+	fi
+}
+
+cpallhostsfiles () {
+(
+cd /etc
+ScriptName="cpallhostsfiles"
+trash ${ScriptName}.*
+StartingHosts=" sneezy "
+LocalHost="$(hostname -s)"
+ThisHost="joe@${LocalHost}"
+SITES="root@doc root@sleepy root@spanky root@bashful root@jumpy"
+FileName="hosts"
+RFolder="/etc/"
+printf "\nUpdate $(fg_cyan "${RFolder}${FileName}") to $(fg_red "${RFolder}${FileName}") on $(fg_green "All Machines")? (Y/N) "
+read answer
+SECONDS=0
+if echo "$answer" | grep -i --color=auto -iq "^y"; then
+	start=$(date +'%s')
+	printf "Updating $(fg_cyan "${FileName}") to:\n\n"
+	for DestUserHost in ${SITES}
+	do
+		SECONDS=0
+		DestHost=$(printf "${DestUserHost}" | cut -d @ -f2)
+		ServerStatus=$(ping -c1 -W1 ${DestHost} > /dev/null && echo "up" || echo "down")
+		if [[ "${ServerStatus}" =~ "up" ]]; then
+			if [[ "${StartingHosts}" =~ "${LocalHost}" ]]; then
+				if [ ${DestUserHost} != "${ThisHost}" ]; then
+					DestUser=$(echo ${DestUserHost} | cut -d @ -f1)
+					fg_yellow "	${DestUserHost}"
+					scp -Cp ${FileName} ${DestUserHost}:${RFolder} >/dev/null
+					fg_green "."
+				fi
+			else
+				printf "Must be on \"$(printf "${StartingHosts}" | sed -e 's/ / or /')\" to update servers\n"
+				exit 2
+			fi
+		else
+			fg_yellow "	${DestUserHost} "
+			printf "($(fg_reds "Skipped") server down)"
+		fi
+		printf "($(fg_yellow "$SECONDS sec."))\n"
+	done
+else
+	printf "\n${ScriptName} cancelled...\n"
+	echo ${OldVer} > ${VerFile}
+fi
+duration=${SECONDS}
+printf "\n$(show_time ${duration} "$(fg_green "**Copy all /etc/hosts files in")")" \
+	) 2> ${ScriptName}.err
+}
+
+glances-spanky () {
+	glances -c $(gethostip "spanky")
+}
+
+glances-dopey () {
+	glances -c $(gethostip "y4x.biz")
+}
+
+historysum () {
+	history|awk '{a[$2]++}END{for(i in a){printf"%5d\t%s\n",a[i],i}}'|sort -nr|head -n 20
+}
+
+man2 () {
+	env \
+		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+		LESS_TERMCAP_md=$(printf "\e[1;31m") \
+		LESS_TERMCAP_me=$(printf "\e[0m") \
+		LESS_TERMCAP_se=$(printf "\e[0m") \
+		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+		LESS_TERMCAP_ue=$(printf "\e[0m") \
+		LESS_TERMCAP_us=$(printf "\e[1;32m") \
+			man "$@"
+}
+
+# Gewnerage QR code
+generateqr ()
+{
+printf "$@" | curl -F-=\<- qrenco.de
+}
+
+# Find duplicate files with same content
+duplicatefind ()
+{
+find -not -empty -type f -printf "%s\n" | sort -rn | uniq -d | xargs -I{} -n1 find -type f -size {}c -print0 | xargs -0 md5sum | sort | uniq -w32 --all-repeated=separate
+}
+
+findlarger () {
+	find . -type f -size +${1}c
+}
+
+fawk () {
+	first="awk '{print "
+	last="}'"
+	cmd="${first}\$${1}${last}"
+	eval $cmd
+}
+
+ipext () {
+  wget http://ipecho.net/plain -O - -q ; echo
+}
+
+valid_ip () {
+  local  ip=$1
+  if [ -z ${ip} ]; then
+    printf "Usage: valid_ip IP_ADDRESS\n"
+  else
+    local  stat=1
+    if [[ $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+        OIFS=$IFS
+        IFS='.'
+        ip=($ip)
+        IFS=$OIFS
+        [[ ${ip[0]} -le 255 && ${ip[1]} -le 255 \
+            && ${ip[2]} -le 255 && ${ip[3]} -le 255 ]]
+        stat=$?
+    fi
+    printf "$stat"
+    return $stat
+  fi
+}
+
+ipmine () {
+if [ "$(uname)" = "Darwin" ]; then
+	ipconfig getifaddr $(networkservice.sh x)
+else
+  hostname -I
+fi
+}
+
+ipall () {
+if [ "$(uname)" = "Darwin" ]; then
+		printf "$(ipext) $(ipmine)"|sed -e 's/ / + /g'
+else
+		printf "$(ipext) $(ipmine)" |sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'|sed -e 's/ / + /g'
+		printf "\n"
+fi
+}
+
+isalive () {
+	if [ -z $1 ]; then
+		echo "Usage: ${Funcstack[1]} {192.168.1.10|44x.biz}"
+		return 1
+	fi
+	IP=${1}
+	ServerStatus=$(ping -c1 -W1 ${IP} > /dev/null && echo "up" || echo "down")
+	printf "\nServer: ${IP} is ${ServerStatus}.\n\n"
+}
+
+ipnet () {
+	if [ "$(uname)" = "Darwin" ]; then
+		IP="$(/usr/sbin/ipconfig getifaddr en0|cut -d '.' -f 1-3)."
+	else
+		IP="$(/sbin/ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'| sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'| cut -d '.' -f 1-3)."
+	fi
+	echo -e "Nodes: .0 and .255 excluded"
+	xx=0
+	( for i in ${IP}{1..254}
+	do
+		if [ $xx -lt 22 ]; then
+			ServerStatus=$(ping -c1 -W1 ${i} > /dev/null && echo "up" || echo "down")
+			printf "${i} is ${ServerStatus}\n"
+			xx=$((xx + 1))
+		else
+			ServerStatus=$(ping -c1 -W1 ${i} > /dev/null && echo "up" || echo "down")
+			printf "${i} is ${ServerStatus}\n"
+			read -n 1 -s -r -p "Press any key to continue"
+			clear
+			echo -e "Nodes: .0 and .255 excluded"
+			xx=0
+		fi
+	done ) # | sed -e '/^\[.*$/d' | sort -t . -n -k 4
+}
+
+url-info () {
+  doms=$@
+  if [[ $# -eq 0 ]]; then
+    echo -e "No domain given\nTry ${Funcstack[1]} domain.com domain2.org anyotherdomain.net"
+  fi
+  for i in $doms; do
+    _ip=$(host $i|grep 'has address'|awk {'print $4'})
+    if [ "$_ip" == "" ]; then
+      echo -e "\nERROR: $i DNS error or not a valid domain\n"
+      continue
+    fi
+    ip=`echo ${_ip[*]}|tr " " "|"`
+    echo -e "\nInformation for domain: $i [ $ip ]\nQuerying individual IPs"
+    for j in ${_ip[*]}; do
+      echo -e "\n$j results:"
+      whois $j |egrep -w 'OrgName:|City:|Country:|OriginAS:|NetRange:'
+    done
+  done
+}
+
+
+################################
+# fromhex A52A2A
+fromhex () {
+  hex=$1
+  if [[ $hex == "#"* ]]; then
+    hex=$(echo $1 | awk '{print substr($0,2)}')
+  fi
+  r=$(printf '0x%0.2s' "$hex")
+  g=$(printf '0x%0.2s' ${hex#??})
+  b=$(printf '0x%0.2s' ${hex#????})
+  echo -e `printf "%03d" "$(((r<75?0:(r-35)/40)*6*6+(g<75?0:(g-35)/40)*6+(b<75?0:(b-35)/40)+16))"`
+}
+
+showcolortags () {
+	for COLOR in {0..255}
+	do
+    for STYLE in "38;5"
+    do
+        TAG="\033[${STYLE};${COLOR}m"
+        STR="${STYLE};${COLOR}"
+        echo -ne "${TAG}${STR}${NONE}  "
+    done
+    echo
+	done
+}
+
+showbgcolors () {
+	pushd ~/.myzfuncs > /dev/null 2>&1
+	for i in bg_*
+	do
+		echo "$(${i} "${i}")" | sort | column
+	done
+	popd >/dev/null 2>&1
+}
+
+showfgcolors () {
+	pushd ~/.myzfuncs > /dev/null 2>&1
+	for i in fg_*
+	do
+		echo "$(${i} "${i}")" | sort | column
+	done
+	popd >/dev/null 2>&1
+}
+
+showcolor () {
+	if [ -z ${1} ]; then
+		echo "Usage: ${funcstack[1]} dec"
+	else
+		case $1 in
+			all)
+				for i in {000..255}
+				do
+					echo -e "$(fg_nc)$(tput setaf ${1}) - $i"
+					echo -e "$(fg_nc)$(tput setab ${1}) - $i"
+				done
+			;;
+			[0-9].*)
+					echo -e "$(fg_nc)$(tput setaf ${1}) - $1"
+					echo -e "$(fg_nc)$(tput setab ${1}) - $1"
+			;;
+		esac
+	fi
+}
+
+showzcolors () {
+	Mode=${1:-"foreground"}
+	getColorCode ${Mode}
+}
+
+showcolors () {
+	printf "Show Color commands:\n"
+	printf "	getColorCode background\n"
+	printf "	getColorCode foreground\n"
+	printf "	spectrum_ls\n"
+	printf "	showcolortags\n"
+	printf "	showbgcolors\n"
+	printf "	showfgcolors\n"
+	printf "	showzcolors\n"
+	echo "
+	ESC[ 38;5;⟨n⟩ m Select foreground color
+	ESC[ 48;5;⟨n⟩ m Select background color
+  0-  7:  standard colors (as in ESC [ 30–37 m)
+  8- 15:  high intensity colors (as in ESC [ 90–97 m)
+	16-231:  6 × 6 × 6 cube (216 colors): 16 + 36 × r + 6 × g + b (0 ≤ r, g, b ≤ 5)
+	232-255:  grayscale from black to white in 24 steps"
+}
+
+gitalias () {
+	if [ -z ${1} ]; then
+		echo "Usage: ${funcstack[1]} alias_category"
+	else
+		if [ "${1}" = "all" ]; then
+			echo "########## ALL ##########"
+			git aliases|most
+		else
+			echo "########## $(to_upper "${1}") ##########"
+			git aliases|egrep ${1}
+		fi
+	fi
+}
+pbcopyr () {
+	if [ -z ${2} ]; then
+		echo "Usage: ${funcstack[1]} remote_host path-to-file"
+	else
+		local Dest=${1}
+		local FileName="${2}"
+		ssh ${Dest} "cat \"${FileName}\"" | pbcopy -1
+	fi
+}
+
+to_lower () {
+	echo "${1}" | tr '[:upper:]' '[:lower:]'
+}
+
+to_upper () {
+	echo "${1}" | tr '[:lower:]' '[:upper:]'
+}
+
+repeat_char () {
+	if [ -z ${1} ]; then
+		echo "Usage: ${funcstack[1]} character num"
+	else
+		printf "${1}%.0s" {1..${2}}
+		echo ""
+	fi
+}
+
+#dotdrop-rmfile () {
+#	if [ -z ${1} ]; then
+#		echo "Usage: ${funcstack[1]} dotfile"
+#	else
+#		cd ${DOTDROPDIR}
+#		local d=${1}
+#		local s=$(readlink ${d})
+#		local n=$(echo ${d}|sed -e 's/\.//')
+#		if [ -L "${d}" ]; then
+#			if [ -d "${s}" ]; then
+#				trash ${d}
+#				mv ${s} ${d}
+#				result=$?
+#				if [[ "$?" -eq 0 ]]; then
+#					echo "${d} link removed"
+#					patt="d_${n}:"
+#					cat config.yaml | sed -e "/${patt}$/{N;N;N;d;}" | sed -e "/d_${n}$/d" > config.tmp
+#					mv config.tmp config.yaml
+#					result=$?
+#					if [[ "$?" -eq 0 ]]; then
+#						echo "config.yaml modified"
+#					else
+#						echo "Modification Errors"
+#					fi
+#				else
+#					echo "${d} link NOT removed"
+#				fi
+#			elif [ -e "${s}" ]; then
+#				mv ${s} ${d}
+#				result=$?
+#				if [[ "$?" -eq 0 ]]; then
+#					echo "${d} link removed"
+#					patt="f_${n}:"
+#					cat config.yaml | sed -e "/${patt}$/{N;N;N;d;}" | sed -e "/f_${n}$/d" > config.tmp
+#					mv config.tmp config.yaml
+#					result=$?
+#					if [[ "$?" -eq 0 ]]; then
+#						echo "config.yaml modified"
+#					else
+#						echo "Modification Errors"
+#					fi
+#				else
+#					echo "${d} link NOT removed"
+#				fi
+#				echo "${d} link removed"
+#			else
+#				echo "${d} not a regular file or directory"
+#			fi
+#		else
+#			echo "${d} not symbolic link"
+#		fi
+#	fi
+#}
+

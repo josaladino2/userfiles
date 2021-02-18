@@ -1,0 +1,3 @@
+bg_darkseagreen4 () {
+	print -P %K{071}$*%k
+}

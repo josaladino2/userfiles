@@ -1,0 +1,18 @@
+#!/bin/bash
+LASTDIR=`pwd`
+cd ~
+SITES="cissa@doc admin@doc root@doc joe@sleepy cissa@sleepy admin@sleepy root@sleepy joe@sneezy cissa@sneezy root@sneezy joe@bram.net bramcom@bram.net root@bram.net cissa@bashful joe@bashful root@bashful"
+for sm in ${SITES}
+do
+	dm=`echo ${sm} | cut -d @ -f2`
+	dmlive=`arp -n ${dm} | grep -v 'no entry'`
+	if [ -n ${dmlive} ]; then
+		echo "** Copying UserFiles.tar to ${sm}"
+		scp UserFiles.tar ${sm}:~/.
+		echo "Extracting ~/UserFiles.tar on ${sm}"
+		ssh ${sm} "tar -xf ~/UserFiles.tar; echo "Running \". ~/.bashrc\" on ${sm}"; . ~/.bashrc" 
+	else
+		echo "** ${dmlive} Not Online..."
+	fi
+done
+cd ${LASTDIR}

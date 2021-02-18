@@ -1,0 +1,3 @@
+bg_greenyellow () {
+	print -P %K{154}$*%k
+}

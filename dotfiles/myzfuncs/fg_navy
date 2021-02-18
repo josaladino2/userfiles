@@ -1,0 +1,3 @@
+fg_navy () {
+	print -P %F{012}$*%f
+}

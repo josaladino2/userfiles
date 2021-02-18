@@ -1,0 +1,3 @@
+bg_navajowhite1 () {
+	print -P %K{223}$*%k
+}

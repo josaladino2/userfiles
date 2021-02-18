@@ -1,0 +1,15 @@
+listallapps () {
+	if [ "$(uname)" = "Darwin" ]; then
+		if [ ${USER} = "root" ]; then
+			dfind 'kMDItemContentTypeTree == "com.apple.application"c'
+		else
+			sudo dfind 'kMDItemContentTypeTree == "com.apple.application"c'
+		fi
+	else
+		if [ ${USER} = "root" ]; then
+			yum list installed|less
+		else
+			sudo yum list installed|less
+		fi
+	fi
+}

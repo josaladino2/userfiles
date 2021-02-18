@@ -1,0 +1,25 @@
+fg_sp () {
+	Style=$(printf "${1}" | awk -F, '{print $1}')
+	Str=$(printf "${1}" | awk -F, '{print $2}')
+	Normal="[0m"
+	case $Style in
+		Nor|nor|Normal|normal) Style="[0m"
+		;;
+		Bold|bold) Style="[1m"
+		;;
+		Dim|dim)  Style="[2m"
+		;;
+		Ital|ital|Italics|italics) Style="[3m"
+		;;
+		Under|under|Underline|underline) Style="[4m"
+		;;
+		Blink|blink) Style="[5m"
+		;;
+		Reverse|Rev|reverse|rev) Style="[7m"
+		;;
+		*) echo "Usage: fg_sp \"Nor|Bold|Dim|Ital|Under|Blink|Rev,String\""
+			return 1
+		;;
+	esac
+	echo -e "${Style}${Str}${Normal}"
+}

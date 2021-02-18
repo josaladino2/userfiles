@@ -1,0 +1,3 @@
+bg_darkred () {
+	print -P %K{088}$*%k
+}

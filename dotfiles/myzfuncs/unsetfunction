@@ -1,0 +1,14 @@
+unsetfunction () {
+	if [ -z ${1} ]; then
+		echo "Usage: ${funcstack[1]} function_name"
+	elif [ "${Comp}" = "bash" ]; then
+		unset -f ${1}
+	else
+		disable -f -m ${1}
+	fi
+	if function_exists ${1}; then
+		echo "Function ${1} exists"
+	else
+		echo "Function ${1} undefined"
+	fi
+}

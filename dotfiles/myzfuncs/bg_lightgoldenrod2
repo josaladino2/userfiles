@@ -1,0 +1,3 @@
+bg_lightgoldenrod2 () {
+	print -P %K{222}$*%k
+}

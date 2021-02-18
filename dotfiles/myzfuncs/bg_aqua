@@ -1,0 +1,3 @@
+bg_aqua () {
+	print -P %K{014}$*%k
+}

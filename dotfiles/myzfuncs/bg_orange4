@@ -1,0 +1,3 @@
+bg_orange4 () {
+	print -P %K{094}$*%k
+}

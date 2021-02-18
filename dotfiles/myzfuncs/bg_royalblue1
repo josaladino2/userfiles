@@ -1,0 +1,3 @@
+bg_royalblue1 () {
+	print -P %K{063}$*%k
+}

@@ -1,0 +1,3 @@
+fg_darkslategray1 () {
+	print -P %F{123}$*%f
+}

@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+MasterHost="joe@doc"
+SourceUser=`echo ${LOGNAME} | tr '[:upper:]' '[:lower:]'`
+SourceDomain=`echo -e $(hostname) | tr '[:upper:]' '[:lower:]'`
+SourceHost="${SourceUser}@${SourceDomain}"
+SITES="cissa@doc admin@doc root@doc joe@sleepy cissa@sleepy admin@sleepy root@sleepy joe@sneezy cissa@sneezy root@sneezy joe@bram.net bramcom@bram.net root@bram.net cissa@bashful joe@bashful root@bashful amanda@dell-pc joe@dell-pc root@dell-pc"
+cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
+echo -ne "Updating ~/.ssh/authorized_keys from...\n"
+for DestHost in $SITES
+do
+	DestDomain=`echo -e ${DestHost} | cut -d @ -f2`
+	DestLive=`nmap ${DestDomain} -p 22 --max-retries 1| grep 'open'`
+	if [ "$?" == "0" ]; then
+		echo ${DestHost}
+		ssh ${DestHost} "cat ~/.ssh/id_rsa.pub" | cat >> ~/.ssh/authorized_keys
+	else
+		echo -e "** ${DestHost} is **Down**...\n"
+	fi
+done
+echo -en "\nCopying ~/.ssh/authorized_keys to...\n"
+for DestHost in $SITES
+do
+	DestDomain=`echo -e ${DestHost} | cut -d @ -f2`
+	DestLive=`nmap ${DestDomain} -p 22 --max-retries 1| grep 'open'`
+	if [ "$?" == "0" ]; then
+		echo ${DestDomain}
+		scp ~/.ssh/authorized_keys ${DestHost}:~/.ssh/.
+	else
+		echo -e "** ${DestHost} is **Down**...\n"
+	fi
+done

@@ -1,0 +1,3 @@
+fg_darkturquoise () {
+	print -P %F{044}$*%f
+}

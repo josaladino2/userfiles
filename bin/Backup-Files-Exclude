@@ -1,0 +1,11 @@
+*.icloud
+*.bak
+*.tmp
+~*
+*.DS_Store
+/dev/*
+*lost+found
+/Volumes
+/tmp
+*cache*
+*Cache*

@@ -1,0 +1,3 @@
+fg_lightsteelblue1 () {
+	print -P %F{189}$*%f
+}

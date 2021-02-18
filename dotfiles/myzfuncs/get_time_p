@@ -1,0 +1,3 @@
+get_time_p () {
+	pfg_green "$(date "+%I:%M:%S")"
+}

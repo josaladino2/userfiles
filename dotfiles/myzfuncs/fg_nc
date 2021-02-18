@@ -1,0 +1,4 @@
+fg_nc () {
+	echo -e "$(tput setaf 15)"
+}
+

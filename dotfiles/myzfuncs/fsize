@@ -1,0 +1,10 @@
+fsize () {
+	fileName="${1}"
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} FileName
+"
+		return
+	fi
+	mfs=$(\ls -lah ${fileName} | awk '{ print $5 }')
+	printf "%s ${mfs}"
+}

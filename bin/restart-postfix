@@ -1,0 +1,4 @@
+#!/usr/local/bin/zsh
+sudo launchctl unload /Library/LaunchDaemons/org.postfix.custom.plist
+sleep 2
+sudo launchctl load /Library/LaunchDaemons/org.postfix.custom.plist

@@ -1,0 +1,3 @@
+bg_navy () {
+	print -P %K{012}$*%k
+}

@@ -1,0 +1,3 @@
+bg_mediumturquoise () {
+	print -P %K{080}$*%k
+}

@@ -1,0 +1,3 @@
+fg_lightgreen () {
+	print -P %F{120}$*%f
+}

@@ -1,0 +1,3 @@
+bg_seagreen2 () {
+	print -P %K{083}$*%k
+}

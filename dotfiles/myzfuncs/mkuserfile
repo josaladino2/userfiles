@@ -1,0 +1,24 @@
+mkuserfile () {
+( pushd ~ > /dev/null 2>&1
+	FileName="UserFiles.tgz"
+	BackupDir="ufBackup"
+	VerFile=".zsh_shver"
+	OldVer="$(< ${VerFile})"
+	printf "
+Current $(fg_cyan "${FileName} ") Version: $(fg_green "${OldVer}")
+"
+	cp -a ${FileName} ${BackupDir}/${FileName}-${OldVer}
+	printf "  Backup... $(fg_cyan "${FileName}") to $(fg_cyan "${FileName}-${OldVer}")
+"
+	( cd ${BackupDir};ls -1tr | head -n -20 | xargs -d '
+' rm -f -- )
+	trash mkuserfile.*	# Delete old .out/.err files
+	printf "Creating $(fg_cyan " UserFiles.tgz")...
+"
+	tar --absolute-names -cvzf UserFiles.tgz -X "UserFiles-Exclude" -T "UserFiles-Include" >mkuserfiles.out
+	printf "$(fg_white " Done")
+"
+	popd > /dev/null 2>&1
+	dirs -c > /dev/null 2>&1
+	) 2>mkuserfiles.err
+}

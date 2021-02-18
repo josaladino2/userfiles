@@ -1,0 +1,3 @@
+bg_lightgreen () {
+	print -P %K{120}$*%k
+}

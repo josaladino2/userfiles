@@ -1,0 +1,3 @@
+bg_lightslategrey () {
+	print -P %K{103}$*%k
+}

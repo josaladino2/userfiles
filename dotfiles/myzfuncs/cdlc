@@ -1,0 +1,9 @@
+cdlc () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} Directory
+"
+		return
+	fi
+	cd $1 2>/dev/null && lc || printf "Directory \"${1}\" does not exist
+"
+}

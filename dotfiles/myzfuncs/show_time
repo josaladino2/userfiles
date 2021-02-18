@@ -1,0 +1,15 @@
+show_time () {
+  local Prompt=${2:-"Total elapst time"}
+  local T=${1}
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $D == 1 )) && Dy="day" || Dy="days"
+  (( $H == 1 )) && Hy="hr." || Hy="hrs."
+  (( $M == 1 )) && My="min." || My="mins."
+  (( $S == 1 )) && Sy="sec." || Sy="secs."
+  printf "${Prompt}: "
+  #printf '%d %s %d %s %d %s %d %s' $D $Dy $H $Hy $M $My $S $Sy
+  echo "$D $Dy $H $Hy $M $My $S $Sy"
+}

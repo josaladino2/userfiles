@@ -1,0 +1,19 @@
+showcolor () {
+	if [ -z ${1} ]; then
+		echo "Usage: ${funcstack[1]} dec"
+	else
+		case $1 in
+			all)
+				for i in {000..255}
+				do
+					echo -e "$(fg_nc)$(tput setaf ${1}) - $i"
+					echo -e "$(fg_nc)$(tput setab ${1}) - $i"
+				done
+			;;
+			[0-9].*)
+					echo -e "$(fg_nc)$(tput setaf ${1}) - $1"
+					echo -e "$(fg_nc)$(tput setab ${1}) - $1"
+			;;
+		esac
+	fi
+}

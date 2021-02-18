@@ -1,0 +1,3 @@
+bg_yellow1 () {
+	print -P %K{226}$*%k
+}

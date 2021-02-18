@@ -1,0 +1,90 @@
+#!/usr/local/bin/zsh
+# ~/bin/rclonemount-All
+#		Assumes that you want all drives mounted
+#		Unmounting first gives Drive a fresh mount
+PATH="~/.myzfuncs:${PATH}"
+if [ "$(uname)" = "Darwin" ]; then
+	CloudDir="/Users/joe/Cloud"
+else
+	CloudDir=/home/Cloud
+fi
+sizemount () {
+	sleep 1
+	printf "${1} ->> "
+	rclone size ${1}:/
+}
+Job=${1:-all}
+case ${Job} in
+
+	all)
+		# Checking Google Drive
+		sizemount GDrive
+
+		# Checking Mega Drive
+		sizemount Mega
+
+		# Checking DropBox
+		sizemount DropBox
+
+		# Checking nc-cissa
+		sizemount nc-cissa
+
+		# Checking nc-joe
+		sizemount nc-joe
+
+		# Checking OneDrive
+		sizemount OneDrive
+
+		# Checking OneDriveST
+		sizemount OneDriveST
+
+		# Checking OneDriveCS
+		sizemount OneDriveCS
+	;;
+
+	GD)
+		# Checking Google Drive
+		sizemount GDrive
+	;;
+
+	Mega)
+		# Checking Mega Drive
+		sizemount Mega
+	;;
+
+	DB)
+		# Checking DropBox
+		sizemount DropBox
+	;;
+
+	ncc)
+		# Checking nc-cissa
+		sizemount nc-cissa
+	;;
+
+	ncj)
+		# Checking nc-joe
+		sizemount nc-joe
+	;;
+
+	OD)
+		# Checking OneDrive
+		sizemount OneDrive
+	;;
+
+	ODST)
+		# Checking OneDriveST
+		sizemount OneDriveST
+	;;
+
+	ODCS)
+		# Checking OneDriveCS
+		sizemount OneDriveCS
+	;;
+
+	*)
+		echo "Usage: $0 [all|GD|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
+	;;
+esac
+
+echo ""

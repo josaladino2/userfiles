@@ -1,0 +1,3 @@
+bg_khaki3 () {
+	print -P %K{185}$*%k
+}

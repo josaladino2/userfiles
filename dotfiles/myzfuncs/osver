@@ -1,0 +1,4 @@
+osver () {
+	printf "$(showdist) $(lsb_release -r -s)
+"
+}

@@ -1,0 +1,3 @@
+fg_orchid () {
+	print -P %F{170}$*%f
+}

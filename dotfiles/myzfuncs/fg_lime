@@ -1,0 +1,3 @@
+fg_lime () {
+	print -P %F{010}$*%f
+}

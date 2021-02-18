@@ -1,0 +1,3 @@
+bg_darkgoldenrod () {
+	print -P %K{136}$*%k
+}

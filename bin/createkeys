@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# Create ssh keys
+#
+LASTDIR=`pwd`
+cd /Users/joe
+MACHINES="joe@doc admin@doc cissa@doc joe@sleepy admin@sleepy root@sleepy joe@sneezy root@sneezy foufouxb@44x.biz"
+for m in $MACHINES
+do
+	echo $m
+	ssh $m /bin/bash <<\EOF 
+	printf 'y\n\n\n' | ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+EOF
+done
+cd ${LASTDIR}

@@ -1,0 +1,28 @@
+#!/usr/local/bin/zsh
+# dotdiff - check diff between ~/dotfiles/file and ~/.file
+#		assumes the desired ${SrcFile} is in the ${SrcDir}
+type emulate >/dev/null 2>/dev/null || alias emulate=true
+emulate -L ksh
+if [ -z ${1} ]; then
+	echo "Usage: dotdiff \"filename\" (without '.')" 
+else
+	SrcDir="${HOME}/dotfiles"
+	DestDir=${HOME}
+	cd ${SrcDir}
+	for i in $@; do
+		SrcFile="${i}"
+		DestFile=".${i}"
+		if [ ! -e ${SrcDir}/${SrcFile} ]; then
+			echo "$(fg_red "Error:") ${SrcDir}/${SrcFile} does not exist."
+		elif [ "${DestDir}/${DestFile}" -nt "${SrcDir}/${SrcFile}" ]; then
+			echo "${DestDir}/${DestFile} is $(fg_red "NEWER") than ${SrcDir}/${SrcFile}"
+			if [ "#(diff -q ${DestFile} ${SrcFile} >/dev/null 2>&1)" ]; then
+				echo "AND ${DestDir}/${DestFile} is $(fg_yellow "DIFFERENT") than ${SrcDir}/${SrcFile}"
+			fi
+		else
+			if [ "#(diff -q ${DestFile} ${SrcFile} >/dev/null 2>&1)" ]; then
+				echo "${DestDir}/${DestFile} is $(fg_yellow "DIFFERENT") than ${SrcDir}/${SrcFile}"
+			fi
+		fi
+	done
+fi

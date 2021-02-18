@@ -1,0 +1,3 @@
+bg_maroon () {
+	print -P %K{009}$*%k
+}

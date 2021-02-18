@@ -1,0 +1,3 @@
+fg_mediumturquoise () {
+	print -P %F{080}$*%f
+}

@@ -1,0 +1,3 @@
+bg_palegreen3 () {
+	print -P %K{114}$*%k
+}

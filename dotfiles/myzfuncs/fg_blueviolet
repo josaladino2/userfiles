@@ -1,0 +1,3 @@
+fg_blueviolet () {
+	print -P %F{057}$*%f
+}

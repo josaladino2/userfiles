@@ -1,0 +1,3 @@
+bg_sandybrown () {
+	print -P %K{215}$*%k
+}

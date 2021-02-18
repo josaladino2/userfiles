@@ -1,0 +1,3 @@
+fg_orange3 () {
+	print -P %F{172}$*%f
+}

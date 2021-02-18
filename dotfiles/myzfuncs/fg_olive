@@ -1,0 +1,3 @@
+fg_olive () {
+	print -P %F{011}$*%f
+}

@@ -1,0 +1,3 @@
+bg_grey7 () {
+	print -P %K{233}$*%k
+}

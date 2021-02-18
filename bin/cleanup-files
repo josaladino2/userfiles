@@ -1,0 +1,26 @@
+#!/bin/bash
+export PATH="/usr/local/bin:/usr/sbin:/bin:/Users/joe/bin:/var/root/bin:/usr/local/sbin:/usr/bin:/sbin"
+# Cleanup .DS_Store and *un~ files
+if [[ -t 1 ]]; then # Terminal output
+  STDout=$(tty)
+  STDerr=$(tty)
+else
+  STDout=/tmp/cleanup-files.stdout
+  STDerr=/tmp/cleanup-files.stderr
+fi
+if [ "${USER}" = "root" ]; then
+  DEST="/"
+else
+  DEST="~/."
+fi
+( cd ${DEST}
+date 
+printf "Delete .DS_Store and *.un~ files...\n"
+printf "Start Searching from \"$(pwd)\"\n"
+find . \( -name .DS_Store -o -name \*.un~ \) \
+  -not \( -path "/Volumes" -o \
+  -path "*/OneDrive" -o \
+  -path "*/Google Drive" \) \
+  -print -exec rm -f {} \;
+date
+printf "\n" ) >${STDout} 2>${STDerr}

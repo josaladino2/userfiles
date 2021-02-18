@@ -1,0 +1,3 @@
+bg_dodgerblue2 () {
+	print -P %K{027}$*%k
+}

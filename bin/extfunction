@@ -1,0 +1,33 @@
+#!/usr/local/bin/zsh
+#echo "${myzfuncs}"
+autoload show_time
+if [ -z ${1} ]; then
+	printf "Usage: extfunction all|function_name\n"
+else
+	SECONDS=0
+	local FuncName=${1}
+	case ${FuncName} in
+		all)	
+			for i in $(get_fcn_list)
+			do
+				printf "Exporting $(fg_green "${i}") function.\n"
+				show_function ${i} | sed '/is a function/d' > ${myzfuncs}/${i}
+			done
+			;;
+		*)
+			for i in $@
+			do
+			result=$(function_exists ${i})
+			if [[ $result -eq 0 ]];then
+				echo "Exporting $(fg_green "${i}") function."
+				show_function ${i} | sed "/is a function/d" > ${myzfuncs}/${i}
+			else
+				echo "Function ${i} NOT Found..."
+			fi
+			done
+			;;
+	esac
+	chmod 755 ${myzfuncs}/*
+	duration=${SECONDS}
+	show_time ${duration} "$(fg_aqua "Functions exported in")"
+fi

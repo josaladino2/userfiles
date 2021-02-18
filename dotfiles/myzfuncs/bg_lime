@@ -1,0 +1,3 @@
+bg_lime () {
+	print -P %K{010}$*%k
+}

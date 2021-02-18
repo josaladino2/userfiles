@@ -1,0 +1,3 @@
+bg_chartreuse2 () {
+	print -P %K{112}$*%k
+}

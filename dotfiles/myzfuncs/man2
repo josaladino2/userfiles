@@ -1,0 +1,11 @@
+man2 () {
+	env \
+		LESS_TERMCAP_mb=$(printf "[1;31m") \
+		LESS_TERMCAP_md=$(printf "[1;31m") \
+		LESS_TERMCAP_me=$(printf "[0m") \
+		LESS_TERMCAP_se=$(printf "[0m") \
+		LESS_TERMCAP_so=$(printf "[1;44;33m") \
+		LESS_TERMCAP_ue=$(printf "[0m") \
+		LESS_TERMCAP_us=$(printf "[1;32m") \
+			man "$@"
+}

@@ -1,0 +1,27 @@
+compress_ () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} tarfile.ext [File-Folder]
+"
+		return
+	fi
+	FILE=$1
+	printf "${@}"
+	ExtPWD="${2:-${PWD}}"
+	shift
+	printf "Want to create $(fg_byellow "${FILE}") using $(fg_byellow "${ExtPWD}/") directory(s)?"
+	if ask; then
+		printf "Creating $(fg_byellow "${FILE}") using $(fg_byellow "${ExtPWD}/") directory(s).
+"
+		case ${FILE} in
+			*.bz2) 	tar cjf ${FILE} ${ExtPWD} 	 ;;
+			*.tgz) 	tar czf ${FILE} ${ExtPWD} 	 ;;
+			*.gz) 	tar czf ${FILE} ${ExtPWD}		 ;;
+			*.zip)	unzip ${FILE} -d ${ExtPWD}   ;;
+			*.rar)	unrar ${FILE} x ${ExtPWD}    ;;
+			*)	echo "${FILE} Filetype not recognized" ;;
+		esac
+	else
+		printf "${FILE} not extracted.
+"
+	fi
+}

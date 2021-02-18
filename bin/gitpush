@@ -1,0 +1,18 @@
+#!/usr/local/bin/zsh
+git s -u
+echo ""
+ask "Do you want to add, commit, and push?" "N"
+result=$?
+if [ $result -eq 0 ]; then
+	echo "*** Add files ***"
+	git aa
+	printf "\n*** Commit files ***\n"
+	gitmsg="${1:-updated}"
+	git c -m "${gitmsg}"
+	printf "\n*** Push files ***\n"
+	git psom
+	printf "\n*** Check Results ***\n"
+	git s -u
+else
+	printf "\nDo Nothing\n"
+fi

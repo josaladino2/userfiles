@@ -1,0 +1,3 @@
+showdist () {
+	hostnamectl|grep 'Operating'|awk '{ print substr($0, index($0,$3)) }'
+}

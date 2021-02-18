@@ -1,0 +1,12 @@
+isalive () {
+	if [ -z $1 ]; then
+		echo "Usage: ${Funcstack[1]} {192.168.1.10|44x.biz}"
+		return 1
+	fi
+	IP=${1}
+	ServerStatus=$(ping -c1 -W1 ${IP} > /dev/null && echo "up" || echo "down")
+	printf "
+Server: ${IP} is ${ServerStatus}.
+
+"
+}

@@ -1,0 +1,3 @@
+bg_lightpink1 () {
+	print -P %K{217}$*%k
+}

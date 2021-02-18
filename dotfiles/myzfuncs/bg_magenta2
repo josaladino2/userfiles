@@ -1,0 +1,3 @@
+bg_magenta2 () {
+	print -P %K{200}$*%k
+}

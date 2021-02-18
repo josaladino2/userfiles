@@ -1,0 +1,3 @@
+fg_chartreuse3 () {
+	print -P %F{076}$*%f
+}

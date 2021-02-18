@@ -1,0 +1,3 @@
+bg_hotpink () {
+	print -P %K{206}$*%k
+}

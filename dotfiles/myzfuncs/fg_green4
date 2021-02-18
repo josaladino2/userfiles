@@ -1,0 +1,3 @@
+fg_green4 () {
+	print -P %F{028}$*%f
+}

@@ -1,0 +1,118 @@
+#!/usr/local/bin/zsh
+# ~/bin/rclonemount-All
+#		Assumes that you want all drives mounted
+#		Unmounting first gives Drive a fresh mount
+PATH="~/.myzfuncs:${PATH}"
+if [ "$(uname)" = "Darwin" ]; then
+	CloudDir="/Users/joe/Cloud"
+else
+	if [ "$EUID" -ne 0 ]
+		then echo "Mount/Umount must be run as root"
+		exit
+	fi
+	CloudDir=/home/Cloud
+fi
+if [ "$1" = "-l" ]; then
+	LOGit="Y"
+	shift
+fi
+checkmount () {
+	if [[ $(/bin/ps axww | egrep "umask=0.*${1}:" | egrep -v "grep") ]]; then
+		echo "\n${1} **Already Mounted...**"
+		return
+	else
+		echo "\n${1} Not Mounted..."
+    printf " Mount Cleanup:"
+    umount ${CloudDir}/${1} > /dev/null 2>&1
+		echo " **OK**"
+		printf " Mounting ${1}..."
+		if [ "$LOGit" = "Y" ]; then
+			LOGitFile="/tmp/rclone.log"
+			rm -rf ${LOGitFile}
+			LOGit="--log-file=${LOGitFile}"
+			LOGitLvl="--log-level DEBUG"
+		else
+			LOGit=""
+		fi
+		if [ "$(uname)" = "Darwin" ]; then
+			rclone cmount --umask=0 ${LOGitLvl} --allow-other --buffer-size 32M --daemon --vfs-cache-mode full ${1}: ${CloudDir}/${1} && echo " **OK**" || echo " **Error(s)**"
+		else
+			rclone mount --umask=0 ${LOGitLvl} --allow-other --buffer-size 32M --daemon --vfs-cache-mode full ${1}: ${CloudDir}/${1} && echo " **OK**" || echo " **Error(s)**"
+		fi
+  fi
+}
+Job=${1:-all}
+case ${Job} in
+
+	all)
+		# Checking Google Drive
+		checkmount GDrive
+
+		# Checking Mega Drive
+		checkmount Mega
+
+		# Checking DropBox
+		checkmount DropBox
+
+		# Checking nc-cissa
+		checkmount nc-cissa
+
+		# Checking nc-joe
+		checkmount nc-joe
+
+		# Checking OneDrive
+		checkmount OneDrive
+
+		# Checking OneDriveST
+		checkmount OneDriveST
+
+		# Checking OneDriveCS
+		checkmount OneDriveCS
+	;;
+
+	GD)
+		# Checking Google Drive
+		checkmount GDrive
+	;;
+
+	Mega)
+		# Checking Mega Drive
+		checkmount Mega
+	;;
+
+	DB)
+		# Checking DropBox
+		checkmount DropBox
+	;;
+
+	ncc)
+		# Checking nc-cissa
+		checkmount nc-cissa
+	;;
+
+	ncj)
+		# Checking nc-joe
+		checkmount nc-joe
+	;;
+
+	OD)
+		# Checking OneDrive
+		checkmount OneDrive
+	;;
+
+	ODST)
+		# Checking OneDriveST
+		checkmount OneDriveST
+	;;
+
+	ODCS)
+		# Checking OneDriveCS
+		checkmount OneDriveCS
+	;;
+
+	*)
+		echo "Usage: $0 [all|GD|Mega|DB|ncj|ncc|OD|ODST|ODCS]"
+	;;
+esac
+
+echo ""

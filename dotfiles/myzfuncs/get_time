@@ -1,0 +1,3 @@
+get_time () {
+	fg_green "$(date "+%I:%M:%S")"
+}

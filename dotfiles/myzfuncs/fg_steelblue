@@ -1,0 +1,3 @@
+fg_steelblue () {
+	print -P %F{067}$*%f
+}

@@ -1,0 +1,3 @@
+bg_mediumvioletred () {
+	print -P %K{126}$*%k
+}

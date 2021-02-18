@@ -1,0 +1,4 @@
+fg_lbrown () {
+	echo -e "$(tput setaf 136)$*$(fg_nc)"
+}
+

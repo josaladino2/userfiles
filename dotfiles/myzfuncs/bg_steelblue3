@@ -1,0 +1,3 @@
+bg_steelblue3 () {
+	print -P %K{068}$*%k
+}

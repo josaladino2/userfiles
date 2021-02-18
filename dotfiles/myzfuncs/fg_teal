@@ -1,0 +1,3 @@
+fg_teal () {
+	print -P %F{014}$*%f
+}

@@ -1,0 +1,3 @@
+bg_darkslategray3 () {
+	print -P %K{116}$*%k
+}

@@ -1,0 +1,3 @@
+bg_darkkhaki () {
+	print -P %K{143}$*%k
+}

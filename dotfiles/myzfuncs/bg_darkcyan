@@ -1,0 +1,3 @@
+bg_darkcyan () {
+	print -P %K{036}$*%k
+}

@@ -1,0 +1,3 @@
+bg_purple3 () {
+	print -P %K{056}$*%k
+}

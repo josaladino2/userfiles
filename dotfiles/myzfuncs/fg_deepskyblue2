@@ -1,0 +1,3 @@
+fg_deepskyblue2 () {
+	print -P %F{038}$*%f
+}

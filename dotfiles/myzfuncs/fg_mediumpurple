@@ -1,0 +1,3 @@
+fg_mediumpurple () {
+	print -P %F{104}$*%f
+}

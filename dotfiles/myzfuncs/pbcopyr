@@ -1,0 +1,9 @@
+pbcopyr () {
+	if [ -z ${2} ]; then
+		echo "Usage: ${funcstack[1]} remote_host path-to-file"
+	else
+		local Dest=${1}
+		local FileName="${2}"
+		ssh ${Dest} "cat \"${FileName}\"" | pbcopy -1
+	fi
+}

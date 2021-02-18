@@ -1,0 +1,15 @@
+psmax () {
+	if [ "$(uname)" = "Darwin" ]; then
+		if [ ${USER} = "root" ]; then
+			ps -axco pid,ppid,command,%mem,%cpu -r|head -n 20
+		else
+			sudo ps -axco pid,ppid,command,%mem,%cpu -r|head -n 20
+		fi
+	else
+		if [ ${USER} = "root" ]; then
+			ps -axco  pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head --lines=20
+		else
+			sudo ps -axco  pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head --lines=20
+		fi
+	fi
+}

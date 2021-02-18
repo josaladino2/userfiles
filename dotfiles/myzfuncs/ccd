@@ -1,0 +1,12 @@
+ccd () {
+	if [ "$1" = "" ]; then
+		echo "Usage: ccd location"
+		shift
+	elif [ -d "$1" ]; then
+		#if it is a directory, go there
+		cd "$1"
+	else #must not be a directory
+		# Cut off filename and cd to the containing directory
+		cd "${1%/*}"
+	fi
+}

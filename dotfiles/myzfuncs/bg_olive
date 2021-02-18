@@ -1,0 +1,3 @@
+bg_olive () {
+	print -P %K{011}$*%k
+}

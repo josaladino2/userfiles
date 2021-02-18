@@ -1,0 +1,3 @@
+fg_dodgerblue3 () {
+	print -P %F{026}$*%f
+}

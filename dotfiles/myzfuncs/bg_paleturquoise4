@@ -1,0 +1,3 @@
+bg_paleturquoise4 () {
+	print -P %K{066}$*%k
+}

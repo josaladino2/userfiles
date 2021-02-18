@@ -1,0 +1,12 @@
+portcheck () {
+	if [ -z ${1} ]; then
+		printf "Usage: ${Funcstack[1]} Port#
+"
+		return
+	fi
+	for i in $@
+		do
+		curl -s "https://deluge-torrent.org/test-port.php?port=$i" | \
+			sed '/^$/d;s/<br><br>/ /g'
+		done
+}

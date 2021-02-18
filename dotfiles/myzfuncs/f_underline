@@ -1,0 +1,3 @@
+f_underline () {
+	printf "${underline_s}$*${no_underline_s}"
+}

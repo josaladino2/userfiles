@@ -1,0 +1,3 @@
+fg_palegreen1 () {
+	print -P %F{156}$*%f
+}

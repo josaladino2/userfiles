@@ -1,0 +1,3 @@
+bg_turquoise4 () {
+	print -P %K{030}$*%k
+}

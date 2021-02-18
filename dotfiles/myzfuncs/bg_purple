@@ -1,0 +1,3 @@
+bg_purple () {
+	print -P %K{129}$*%k
+}

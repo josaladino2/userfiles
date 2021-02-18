@@ -1,0 +1,4 @@
+#!/bin/bash
+if [ -d /Volumes/Users ]; then
+	umount /Volumes/Users
+fi

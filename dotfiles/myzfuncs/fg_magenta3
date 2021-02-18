@@ -1,0 +1,3 @@
+fg_magenta3 () {
+	print -P %F{164}$*%f
+}

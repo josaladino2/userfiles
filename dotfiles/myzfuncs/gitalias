@@ -1,0 +1,13 @@
+gitalias () {
+	if [ -z ${1} ]; then
+		echo "Usage: ${funcstack[1]} alias_category"
+	else
+		if [ "${1}" = "all" ]; then
+			echo "########## ALL ##########"
+			git aliases|most
+		else
+			echo "########## $(to_upper "${1}") ##########"
+			git aliases|egrep ${1}
+		fi
+	fi
+}

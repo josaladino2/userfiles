@@ -1,0 +1,3 @@
+bg_lightgoldenrod3 () {
+	print -P %K{179}$*%k
+}

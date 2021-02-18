@@ -1,0 +1,17 @@
+#!/usr/local/bin/zsh
+d=${1}
+s=$(readlink ${d})
+if [ -L "${d}" ]; then
+	if [ -d "${s}" ]; then
+		rm ${d}
+		mv ${s} ${d}
+		echo "${d} link removed"
+	elif [ -e "${s}" ]; then
+		mv ${s} ${d}
+		echo "${d} link removed"
+	else
+		echo "${d} not a regular file or directory"
+	fi
+else
+	echo "${d} not symbolic link"
+fi

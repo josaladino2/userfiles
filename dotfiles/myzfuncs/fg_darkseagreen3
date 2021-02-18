@@ -1,0 +1,3 @@
+fg_darkseagreen3 () {
+	print -P %F{150}$*%f
+}

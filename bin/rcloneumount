@@ -1,0 +1,103 @@
+#!/usr/local/bin/zsh
+# ~/bin/rcloneumount-All
+#		Assumes that you want all Drives unmounted
+autoload fg_green fg_red1 fg_yellow
+if [ "$(uname)" = "Darwin" ]; then
+	CloudDir="/Users/joe/Cloud"
+else
+	if [ "$EUID" -ne 0 ]
+		then echo "Mount/Umount must be run as root"
+		exit
+	fi
+	CloudDir=/home/Cloud
+fi
+fixmount () {
+	if [ "$(uname)" = "Darwin" ]; then
+		/sbin/umount ${CloudDir}/${1} > /dev/null 2>&1
+		result=$?
+	else
+		/usr/bin/umount ${CloudDir}/${1} > /dev/null 2>&1
+		result=$?
+	fi
+	if [[ $result -eq 0 ]]; then
+		printf "\n${1}: $(fg_green "**Unmounted...**\n")"
+	else
+		printf "\n${1}: $(fg_red "**Not Mounted...**\n")"
+	fi
+}
+
+Job=${1:-all}
+case ${Job} in
+
+	all)
+		# Fixing Google Drive
+		fixmount GDrive
+
+		# Fixing Mega Drive
+		fixmount Mega
+
+		# Fixing DropBox
+		fixmount DropBox
+
+		# Fixing nc-cissa
+		fixmount nc-cissa
+
+		# Fixing nc-joe
+		fixmount nc-joe
+
+		# Fixing OneDrive
+		fixmount OneDrive
+
+		# Fixing OneDriveST
+		fixmount OneDriveST
+
+		# Fixing OneDriveCS
+		fixmount OneDriveCS
+	;;
+
+	GD)
+		# Fixing Google Drive
+		fixmount GDrive
+	;;
+
+	Mega)
+		# Fixing Mega Drive
+		fixmount Mega
+	;;
+
+	DB)
+		# Fixing DropBox
+		fixmount DropBox
+	;;
+
+	ncc)
+		# Fixing cissa
+		fixmount cissa
+	;;
+
+	ncj)
+		# Fixing joe
+		fixmount joe
+	;;
+
+	OD)
+		# Fixing OneDrive
+		fixmount OneDrive
+	;;
+
+	ODST)
+		# Fixing OneDriveST
+		fixmount OneDriveST
+	;;
+
+	ODCS)
+		# Fixing OneDriveCS
+		fixmount OneDriveCS
+	;;
+
+	*)
+		echo "Usage: $0 [all|GD|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
+	;;
+esac
+
+echo ""

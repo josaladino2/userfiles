@@ -1,0 +1,3 @@
+fg_darkolivegreen1 () {
+	print -P %F{192}$*%f
+}

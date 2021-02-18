@@ -1,0 +1,3 @@
+delhistory () {
+	history -c && history -w
+}

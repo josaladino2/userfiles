@@ -1,0 +1,3 @@
+fg_seagreen1 () {
+	print -P %F{085}$*%f
+}

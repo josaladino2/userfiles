@@ -1,0 +1,3 @@
+bg_green3 () {
+	print -P %K{040}$*%k
+}

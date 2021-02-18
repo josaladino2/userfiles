@@ -1,0 +1,3 @@
+bg_darkorange () {
+	print -P %K{208}$*%k
+}

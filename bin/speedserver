@@ -1,0 +1,126 @@
+#!/bin/bash
+# . /root/bin/getfunction askany
+SetLineOut() {
+	if [[ ${#line} -gt 80 ]]; then
+		if [ "$ShortLine" == "y" ]; then
+			((--MaxLines))
+			LineOut="${line:0:80}"
+		else
+			((MaxLines=MaxLines-2))
+			#LineOut="${MaxLines} - ${line:0:70}==>>"
+			LineOut="${line}"
+		fi
+	else
+		((--MaxLines))
+		#LineOut="${MaxLines} - ${line:0:70}==>>"
+		LineOut="${line}"
+	fi
+}
+
+CheckPage() {
+	if [[ ${PageNo} -eq 0 ]]; then
+		clear   # show the first page header only
+		((++PageNo))
+		printf "Page ${PageNo}...	Searching for "
+		printf "\"${answer}\" - (${LineSize})\n";
+		((MaxLines=N-1))
+	elif [[ ${MaxLines} -le 0 ]]; then
+		askany
+		clear
+		((++PageNo))
+		printf "Page ${PageNo}...	Searching for "
+		printf "${answer}\" - (${LineSize})\n";
+		((MaxLines=N-1))
+	fi
+}	# End CheckPage
+
+ShowPage() {
+	while IFS= read -r line || [[ -n "$line" ]]; do
+		CheckPage
+		if [[ ${line} =~ ^"Retrieving".* ]]; then
+			:
+		else
+			SetLineOut
+			echo "$LineOut"
+		fi
+	done </dev/stdin #${infile}
+	if [[ ${MaxLines} -le 0 ]]; then
+		askany
+	fi
+	printf "Search finsihed...\n"
+}	# End ShowPage
+
+truncate() {
+	if ( ask "Truncate lines to 80 characters max? " "N"); then
+		ShortLine="y"
+		LineSize="Truncated." 
+	else
+		Shortline="n"
+		LineSize="Full Line."
+	fi
+}
+
+ServerFile=/usr/local/share/info/SpeedTestServers
+for i in [1..$@]; do
+	case ${@} in
+		-n[0-9]*) N=${1:2} ;;
+		-sy*|-sn*) ShortLine=${1:2:1} ;;
+		-i[a-zA-Z0-9]*) infile=${1:2} ;;
+		-o[a-zA-Z0-9]*) outfile=${1:2} ;;
+		--[a-zA-Z]*) actionstr=${1:2} ;;
+##	  *) printf "Usage: ${FUNCNAME[0]} [-n24] [-i|<]filename [-o|>]filename [--action]\n" ;;
+	 esac
+	 shift
+	 echo "$@"
+	 echo "$1"
+done
+
+LineOut=""
+infile=${infile:-/root/bin/list}
+outfile=${outfile:-/dev/stdout}
+N=${N:-20}
+PageNo=0
+MaxLines=${N:-20}
+answer=$(echo ${actionstr}|cut -d "=" -f2) 
+action=$(echo ${actionstr}|cut -d "=" -f1) 
+action=${action:-all}
+ShortLine=${ShortLine:-n}
+
+echo "$N"
+echo "$ShortLine"
+echo "$infile"
+echo "$outfile"
+echo "$actionstr"
+echo "$action"
+echo "$answer"
+
+case ${action} in
+	newlist) speedtest.py --list >/root/bin/list 2>/root/bin/list.err
+	printf "New \"/root/bin/list\" file created.\n"
+		;;
+	all)
+		truncate
+		Criteria=""
+		answer="All"
+		speedtest.py --list | ShowPage
+		;;
+	search|search\=.*)
+		if [[ ${ShortLine} ]]; then
+			:
+		else
+			truncate
+		fi
+		if [[ ${actionstr} =~ .*"=".* ]]; then
+			:
+		else
+			askinput "Enter Search Criteria by City, State, or Country: "
+		fi
+		clear
+		Criteria=${answer}
+		egrep -i "${Criteria}" ${infile} | ShowPage
+		;;
+	*) echo "Usage: ${FUNCNAME[0]} [-n24] [-i|<]filename [-o|>]filename [--action"
+			echo "--action options, newlist, all, long, short"
+		;;
+esac
+

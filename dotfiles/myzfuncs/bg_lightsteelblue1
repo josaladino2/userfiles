@@ -1,0 +1,3 @@
+bg_lightsteelblue1 () {
+	print -P %K{189}$*%k
+}

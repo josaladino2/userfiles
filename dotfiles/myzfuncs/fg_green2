@@ -1,0 +1,4 @@
+fg_green2 () {
+	echo -e "$(tput setaf 40)$*$(fg_nc)"
+}
+

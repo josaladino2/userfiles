@@ -1,0 +1,5 @@
+dec2hex () {
+	if [[ -n $1 ]]; then
+		echo "obase=16 ; $1" | bc
+	fi
+}

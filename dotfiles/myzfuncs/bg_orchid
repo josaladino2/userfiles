@@ -1,0 +1,3 @@
+bg_orchid () {
+	print -P %K{170}$*%k
+}

@@ -1,0 +1,6 @@
+[submodule "fonts"]
+	path = fonts
+	url = git@github.com:powerline/fonts.git
+[submodule "dotfiles"]
+	path = dotfiles
+	url = git@github.com:josaladino2/dotfiles.git

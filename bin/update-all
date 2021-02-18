@@ -1,0 +1,5 @@
+#!/usr/local/bin/zsh
+PATH="~/.myzfuncs:${PATH}"
+update-ohmyzsh
+update-p10k
+update-fonts

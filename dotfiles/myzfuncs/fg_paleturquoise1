@@ -1,0 +1,3 @@
+fg_paleturquoise1 () {
+	print -P %F{159}$*%f
+}

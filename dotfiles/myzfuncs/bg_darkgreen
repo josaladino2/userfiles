@@ -1,0 +1,3 @@
+bg_darkgreen () {
+	print -P %K{022}$*%k
+}

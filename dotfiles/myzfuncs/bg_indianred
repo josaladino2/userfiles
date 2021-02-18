@@ -1,0 +1,3 @@
+bg_indianred () {
+	print -P %K{167}$*%k
+}

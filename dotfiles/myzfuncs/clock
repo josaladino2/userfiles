@@ -1,0 +1,3 @@
+clock () {
+	while true;do clear;echo $(date +"%r");sleep 1;done
+}

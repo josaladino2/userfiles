@@ -1,0 +1,13 @@
+xtar () {
+	ACTION=${1:0:1} 
+	if [ ${ACTION} != "x" ]
+	then
+		echo "Usage: xtar xf OutFileName.tgz [-C TargetDirectory]"
+		return 1
+		exit
+	fi
+	(
+		bar -n -w 79 ${2} | tar xzpf - ${3} ${4}
+	)
+}
+

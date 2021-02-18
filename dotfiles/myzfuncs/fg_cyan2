@@ -1,0 +1,3 @@
+fg_cyan2 () {
+	print -P %F{050}$*%f
+}
