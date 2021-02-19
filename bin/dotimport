@@ -6,12 +6,12 @@ if [ -z ${1} ]; then
 else
 	SrcDir=${HOME}
 	GitDir="${HOME}/dotfiles"
-	Exclude=".bash_history .zsh_$(hostname -s)_hist .zsh_history .bashdb_hist .zshdb_hist .bash_sessions .zshrc.zwc .zsh_shver"
+	Exclude=".bash_history .zsh_$(hostname -s)_hist  .bashdb_hist .zshdb_hist .bash_sessions .zshrc.zwc .zsh_shver "
 	for i in $@
 	do
 		SrcFile="${i}"
 		GitFile=$(echo ${SrcFile}|sed -e 's/\.//')
-		if [[ "${Exclude}" == *"${i}"* ]]; then
+		if [[ "${Exclude}" == *"${i} "* ]]; then
 			echo "$(fg_red "Skipping") ${SrcDir}/${SrcFile}"
 		else
 			if [ ! -e ${SrcDir}/${SrcFile} ]; then
