@@ -12,7 +12,9 @@
 /Mail/
 /Movies/
 /My\ Theme.xtf
+/N2/
 /Nextcloud/
+/NC*
 /Pictures/
 /Public/
 /Regensoft/
@@ -21,15 +23,7 @@
 /VirtualBox\ VMs/
 /atom-projects/
 /basex/
-/bin-osx.tgz
-/bin/HBEmail.plist
-/bin/HBUpdate.plist
-/bin/HBUpgrade.plist
-/bin/HBUpgradeCask.plist
 /boobology
-/ffonts.tgz
-/figlet-fonts-master.zip
-/fonts/
 /git-completion.bash
 /iCloudDocs
 /local.tgz
