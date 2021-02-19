@@ -1,0 +1,12 @@
+XDG_SESSION_ID=8262
+MAILTO=joe@bram.net
+SHELL=/bin/bash
+USER=root
+PATH=/usr/local/cpanel/bin:/root/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:
+PWD=/root
+LANG=en_US.UTF-8
+SHLVL=1
+HOME=/root
+LOGNAME=root
+XDG_RUNTIME_DIR=/run/user/0
+_=/usr/bin/env

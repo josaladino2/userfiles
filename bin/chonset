@@ -1,0 +1,2 @@
+#!/bin/bash
+chcon -h system_u:object_r:bin_t:s0 ${1} # ${1} is the dir to set

@@ -1,0 +1,2 @@
+#!/bin/bash
+date; /usr/local/cpanel/3rdparty/bin/clamscan -ir --exclude-dir="^/sys" ${1}; date

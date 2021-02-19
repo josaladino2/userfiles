@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "Updating rkhunter settings."
+rkhunter --update --propupd

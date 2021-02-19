@@ -1,0 +1,6 @@
+#!/bin/bash
+PID=$(pgrep testing)
+while s=`ps -p $PID -o s=` && [[ "$s" && "$s" != 'Z' ]]; do
+    sleep 1
+done
+printf "done\n"

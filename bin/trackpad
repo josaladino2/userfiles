@@ -1,0 +1,12 @@
+#!/bin/bash
+if [ -z ${1} ]; then
+  printf "Usage: $(basename $0) on/off\n"
+  exit
+fi
+case "${1}" in
+  on|On)sudo kextload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTrackpad.kext
+      printf "Turning trackpad ON...\n" ;;
+  off|Off) sudo kextunload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTrackpad.kext
+      printf "Turning trackpad OFF...\n" ;;
+esac
+

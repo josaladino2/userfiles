@@ -1,0 +1,2 @@
+#!/bin/bash
+mysql --user="d4x_ncuser" --password="bokstari46" --database="d4x_nc_data" --execute="DELETE FROM oc_file_locks WHERE 1;commit;"

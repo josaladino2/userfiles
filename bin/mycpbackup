@@ -1,0 +1,9 @@
+#!/bin/bash
+PATH="/usr/local/cpanel/bin/:$PATH"
+logname="/usr/local/cpanel/logs/cpbackup/$(date +%s).log"
+mydate="[$(date '+%F %T')]"
+( echo "${mydate} [mycpbackup] Started at $(date "+%a %c")"
+echo "${mydate} [mycpbackup] Backup is running in fg process ${BASHPID}."
+echo "${mydate} [mycpbackup] Backup process log file is “${logname}”."
+echo -e "\nRunning /usr/local/cpanel/bin/backup Now.\n\n" ) | tee ${logname}
+backup --debug >>${logname} 2>&1

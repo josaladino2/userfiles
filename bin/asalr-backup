@@ -1,0 +1,106 @@
+#!/usr/local/bin/zsh
+source ~/.zsh_functions
+rcpurge () {
+  local cmd=${1}
+  local RFileName="${Dest}/${2}"
+  local result=0
+  rclone lsf ${RFileName} >/dev/null 2>&1
+  result=$?
+  if [ ${result} -eq 0 ]; then
+    rclone ${cmd} --drive-use-trash=false ${RFileName} && \
+      printf "	${RFileName} Deleted.\n" || \
+      { printf "	${RFileName} Delete Errors.\n";
+       d_errors=$((d_errors+1)); }
+    sleep 60
+  else
+    printf "	${RFileName} does not exist.\n"
+  fi
+}
+
+rcsync () {
+  local cmd=${1}
+  local FileName=${2}
+  local RFileName="${Dest}/${FileName}+${day}"
+  local result=0
+  printf "	${RFileName} transfer..."
+  rclone ${cmd} ${FileName} ${RFileName}
+  result=$?
+  if [ ${result} -eq 0 ]; then
+    printf "OK\n"
+  else
+    printf "FAILED!\n"
+    t_errors=$((t_errors+1))
+    exit 1
+  fi
+}
+
+SECONDS=0
+#export TERM=xterm-256color 
+#########################################################
+day="$(printf "${FileDate}" | date +%u)"
+SourceDir="/var/nc_data/joe"
+RStorage="OneDrive:"
+WorkDir="/cpbackup"
+Dest="${RStorage}/ASALR-Backups"
+t_errors=0
+d_errors=0
+# Remove remote files
+#########################################################
+printf "\n** ${Dest}/ Cleanup\n"
+#rcpurge delete "ASA-Files-ver.tgz+${day}"
+rcpurge delete "ASA-Files.tgz+${day}"
+#rm -rf ${WorkDir}/ASA-Files-ver.tgz >/dev/null 2>&1
+rm -rf ${WorkDir}/ASA-Files.tgz >/dev/null 2>&1
+cd ${SourceDir}
+#sleep 60
+# Creating ASA-Files-ver.tgz
+#########################################################
+#printf "\n** Creating local ASA-Files-ver.tgz..."
+#/usr/bin/tar -czf ${WorkDir}/ASA-Files-ver.tgz files_versions/@ASA-Library-Resources >/dev/null 2>&1 && \
+#	printf "Done.\n" || printf "Failed.\n"
+#cd ${WorkDir}
+#sleep 120
+# Transferring ASA-Files-ver.tgz to remote
+#########################################################
+#LocalFileSize="Local: $(rclone size ASA-Files-ver.tgz)"
+#printf "Transferring ASA-Files-ver.tgz - *Size:$(fsize "ASA-Files-ver.tgz")...\n"
+#rcsync copyto "ASA-Files-ver.tgz"
+#printf "** $LocalFileSize\n"
+#printf "** Remote: $(rclone size ${Dest}/ASA-Files-ver.tgz+${day})\n"
+# Remove local files
+#########################################################
+#printf "Removing local ASA-Files-ver.tgz..."
+#sleep 60
+#rm -rf ${WorkDir}/ASA-Files-ver.tgz && printf "Done.\n" || \
+#	{ printf "Failed.\n";
+#  d_errors=$((d_errors+1)); }
+#cd ${SourceDir}
+#sleep 60
+# Creating ASA-Files.tgz
+#########################################################
+printf "\n** Creating local ASA-Files.tgz..."
+/usr/bin/tar -czf ${WorkDir}/ASA-Files.tgz files/@ASA-Library-Resources >/dev/null 2>&1 && \
+	printf "Done.\n" || printf "Failed.\n"
+cd ${WorkDir}
+sleep 120
+# Transferring ASA-Files.tgz to remote
+#########################################################
+LocalFileSize="Local: $(rclone size ASA-Files.tgz)"
+printf "Transferring ASA-Files.tgz - *Size:$(fsize "ASA-Files.tgz")...\n"
+rcsync copyto "ASA-Files.tgz"
+printf "** $LocalFileSize\n"
+printf "**Remote: $(rclone size ${Dest}/ASA-Files.tgz+${day})\n"
+# Remove local files
+#########################################################
+printf "Removing local ASA-Files.tgz..."
+sleep 60
+rm -rf ${WorkDir}/ASA-Files.tgz && printf "Done.\n" || \
+	{ printf "Failed.\n";
+  d_errors=$((d_errors+1)); }
+# Show number of d_errors and t_errors during Backup transfer.
+#########################################################
+printf "\n** Backuip/Transfer completed with ${d_errors} Delete errors and ${t_errors} Transfer errors.\n"
+# Show time to do the transfer
+#########################################################
+duration=${SECONDS}
+printf "$(show_time ${duration} "** Backup Transfer copleted in: ")\n"

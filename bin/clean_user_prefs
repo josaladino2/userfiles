@@ -1,0 +1,10 @@
+#!/bin/bash
+SpamDest=${1:-'bram'}
+SpamFile="/home/${SpamDest}/.spamassassin/user_prefs"
+DIR=$(dirname "${SpamFile}")
+cd ${DIR}
+cat ${SpamFile} | \
+  awk '{if (NR < 2) print $0 > "file_sorted"; else print $0}' | \
+  sort >> file_sorted;
+cat -n file_sorted | sort -uk2 | sort -nk1 | cut -f2- > user_prefs
+rm file_sorted

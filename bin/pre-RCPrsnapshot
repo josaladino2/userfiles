@@ -1,0 +1,16 @@
+#!/bin/bash
+FileName="$(date --date "yesterday" +%F)"
+#printf "${FileName}\n"
+( cd /root/Backup/cpbackup/
+  if [ -d ${FileName} ]; then
+#    printf "Removing ${FileName}...\n"
+    rm -rf ${FileName}
+    rm -rf .meta
+  else
+    printf "${FileName} DOES NOT exist\n"
+  fi
+) > /dev/null 2>&1
+#  ( rsync --progress -R -h -avz ${FileName} root@i4x.biz:/mnt/HappyBK/cPanelBackup/${FileName} && printf "\nSuccessful Transfer of CPBackup\n" || "\nCPBackup Transfer Failed\n" ) && ( ssh root@i4x.biz '/root/bin/postCPrsync' && printf "\ncPanelBackup Remote Clean Successful...\n" || printf "\ncPanelBackup Remote Clean Failed...\n" )
+#else
+#  ( rsync -R -h -az ${FileName} root@i4x.biz:/mnt/HappyBK/cPanelBackup/${FileName} && printf "\nSuccessful Transfer of CPBackup\n" || "\nCPBackup Transfer Failed\n" ) && ( ssh root@i4x.biz '/root/bin/postCPrsync' && printf "\ncPanelBackup Remote Clean Successful...\n" || printf "\ncPanelBackup Remote Clean Failed...\n" )
+#fi

@@ -1,0 +1,14 @@
+#!/bin/bash
+. getfunction f_bgreen f_bred
+printf "Enabling Teamviewer Server..."
+/bin/systemctl enable teamviewerd.service >/dev/null 2>&1 && \
+	f_bgreen "OK" || f_bred "Failed"
+printf "Starting Teamviewer Server..."
+/bin/systemctl start teamviewerd.service >/dev/null 2>&1 && \
+	f_bgreen "OK" || f_bred "Failed"
+printf "Enabling gdm Window Manager..."
+/bin/systemctl enable gdm.service >/dev/null 2>&1 && \
+	f_bgreen "OK" || f_bred "Failed"
+printf "Starting gdm window manager..."
+/bin/systemctl start gdm.service >/dev/null 2>&1 && \
+	f_bgreen "OK" || f_bred "Failed"

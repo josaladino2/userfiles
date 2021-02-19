@@ -1,0 +1,21 @@
+#!/bin/bash
+#X="-n24 -ilist -olistout --listing"
+for i in [1..$@]; do
+  case ${@} in
+    -n[0-9]*) N=${1:2} ;;
+    -i[a-zA-Z0-9]*) infile=${1:2} ;;
+    -o[a-zA-Z0-9]*) outfile=${3:2} ;;
+    --[a-zA-Z]*) action=${4:2} ;;
+#   *) printf "Usage: ${FUNCNAME[0]} [-n24] [-i|<]filename [-o|>]filename [--action]\n" ;;
+   esac
+done
+N=${N:-${1:2}}
+infile=:q
+infile=${2nfile:-${2:2}}
+outfile=${3:-/dev/stdout}
+action=${action:-${4:2}}
+echo "${#@} - $@"
+echo "$1 - $N"
+echo "$2 - $infile"
+echo "$3 - $outfile"
+echo "$4 - $action"

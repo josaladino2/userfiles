@@ -1,0 +1,10 @@
+#!/bin/bash
+. getfunction f_bgreen f_bred
+printf "Starting Teamviewer Server..."
+/bin/systemctl start teamviewerd.service >/dev/null 2>&1 && \
+	f_bgreen "OK" || f_bred "Failed"
+printf "\nStarting gdm window manager..."
+sleep 2
+/bin/systemctl start gdm.service >/dev/null 2>&1 && \
+	f_bgreen "OK" || f_bred "Failed"
+printf "\n"

@@ -1,0 +1,12 @@
+#!/usr/local/bin/zsh
+# Assumes start at current directory and below
+if [ -z ${4} ]; then
+	echo "Usage: changeuserid olduser newuser oldgroup newgroup"
+else
+	olduser=${1}
+	newuser=${2}
+	oldgroup=${3}
+	newgroup=${4}
+	chown --from=${olduser} ${newuser} * -R
+	find . -group ${oldgroup} -exec chown :${newgroup} {} \+
+fi
