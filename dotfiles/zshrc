@@ -132,8 +132,22 @@ POWERLEVEL10K_DISABLE_GITSTATUS=true
 ZLE_RPROMPT_INDENT=0
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 
-# Settings
+# Setup History parameters
 
+# don't put duplicate lines in the history. See zsh(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
+# for setting history length see HISTSIZE and HISTFILESIZE in zsh(1)
+HISTSIZE=10000
+HISTFILE="${HOME}/.zsh_$(hostname -s)_hist"
+HISTFILESIZE=10000
+fc -p ${HISTFILE}
+
+if [ ! -f ${HISTFILE} ];then 
+  touch ${HISTFILE}
+fi  
+
+# Settings
 source $ZSH/oh-my-zsh.sh
 # See more source loads at the end of this file
 
@@ -189,19 +203,6 @@ fi
 if [ -f /tmp/.echo ]; then
 	echo "Using: $(pwd)/.zshrc@3"
 fi
-
-# Setup History parameters
-
-# don't put duplicate lines in the history. See zsh(1) for more options
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
-# for setting history length see HISTSIZE and HISTFILESIZE in zsh(1)
-#HISTSIZE=10000
-#HISTFILESIZE=10000
-
-if [ ! -f $HOME/.bash_history ];then 
-  touch $HOME/.bash_history
-fi  
 
 # Support .zsh_machine file
 if [ -f "${HOME}/.zsh_machine" ]; then
