@@ -24,14 +24,15 @@
 /UserFilesbash.tgz
 /UserFilesbashbk.tgz
 /UserFilesbk.tgz
-/bin-doc.tgz
-/bin-dopey.tgz
 /boobology
 /chkrootkit-0.52/
 /chkrootkit.sh
+/fonts/
 /ffonts.tgz
 /figlet-fonts-master.zip
+/git-completion.bash
 /localbin.tgz
+/local.tgz
 /oh-my-zsh.tgz
 /.oh-my-zsh/
 /ufBackup/
