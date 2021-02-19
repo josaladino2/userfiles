@@ -1,0 +1,4 @@
+#!/usr/local/bin/zsh
+softwareupdate --all --install --force
+sudo rm -rf /Library/Developer/CommandLineTools
+sudo xcode-select --install

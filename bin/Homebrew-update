@@ -1,0 +1,7 @@
+#!/usr/local/bin/zsh
+( cd ~
+brew update >~/Homebrew-update.out 2>~/Homebrew-update.err
+brew upgrade >~/Homebrew-upgrade.out 2>~/Homebrew-upgrade.err
+#brew cu -all >~/Homebrew-upgrade-cask.out 2>~/Homebrew-upgrade-cask.err
+Homebrew-email
+)
