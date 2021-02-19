@@ -281,9 +281,10 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 
 # shell
 .awk                  38;5;172
-*.bashrc   			      38;5;71
+#*.bashrc   			      38;5;71
 *.bash_functions      38;5;71
 *.bash_colors         38;5;71
+*.bash_completion			38;5;71
 *.bash_machine        38;5;71
 *.bash_history        38;5;71
 *.bash_PATH      		  38;5;71
@@ -298,11 +299,13 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .sed                  38;5;172
 .sh                   38;5;172
 *.zsh_history         38;5;71
+*_hist				        38;5;71
 *.zshdb_hist          38;5;71
 *.zsh_functions       38;5;71
+*.zshinfo							38;5;71
 *.zsh_colors          38;5;71
 *.zshrc.zwc           38;5;71
-*.zshrc               38;5;71
+#*.zshrc               38;5;71
 *.zsh_machine         38;5;71
 *.zsh_doc			        38;5;71
 *.zsh_dopey		        38;5;71
@@ -312,6 +315,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 *.zlogout             38;5;71
 *.zlogin              38;5;71
 *.zprofile            38;5;71
+*.zsh_linplugins			38;5;71
+*.zsh_osxplugins			38;5;71
 .zsh                  38;5;71
 .vim                  38;5;172
 .kak                  38;5;172
