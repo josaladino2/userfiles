@@ -1,27 +1,40 @@
 #!/usr/local/bin/zsh
-# dotdiff - check diff between ~/dotfiles/file and ~/.file
-#		assumes the desired ${SrcFile} is in the ${SrcDir}
+# dotupdate - copy file from ~/dotfiles/file to .file
+# 	assumes the desired ${SrcFile} is in the ${SrcDir}
 type emulate >/dev/null 2>/dev/null || alias emulate=true
 emulate -L ksh
 if [ -z ${1} ]; then
-	echo "Usage: dotdiff \"filename\" (without '.')" 
+	echo "Usage: dotupdate [-f] \"filename\" (without '.')" 
 else
+	case ${1:0:2} in
+		-f) Force="Y"
+				shift	;;
+		-s) Show="Y"
+				shift	;;
+	esac
 	SrcDir="${HOME}/dotfiles"
 	DestDir=${HOME}
 	cd ${SrcDir}
 	for i in $@; do
-		SrcFile="${i}"
-		DestFile=".${i}"
-		if [ ! -e ${SrcDir}/${SrcFile} ]; then
-			echo "$(fg_red "Error:") ${SrcDir}/${SrcFile} does not exist."
-		elif [ "${DestDir}/${DestFile}" -nt "${SrcDir}/${SrcFile}" ]; then
-			echo "${DestDir}/${DestFile} is $(fg_red "NEWER") than ${SrcDir}/${SrcFile}"
-			if [ "#(diff -q ${DestFile} ${SrcFile} >/dev/null 2>&1)" ]; then
-				echo "AND ${DestDir}/${DestFile} is $(fg_yellow "DIFFERENT") than ${SrcDir}/${SrcFile}"
-			fi
-		else
-			if [ "#(diff -q ${DestFile} ${SrcFile} >/dev/null 2>&1)" ]; then
-				echo "${DestDir}/${DestFile} is $(fg_yellow "DIFFERENT") than ${SrcDir}/${SrcFile}"
+		SrcFile="$(echo ${i}|sed -e 's/^.//')"
+		DestFile=".${SrcFile}"
+		if [ -e ${SrcDir}/${SrcFile} ]; then
+			if [ "${DestDir}/${DestFile}" -nt "${SrcDir}/${SrcFile}" ] && [ "${Force}" == "" ]; then
+				echo "${DestDir}/${DestFile} is $(fg_red "NEWER") than ${SrcDir}/${SrcFile}"
+			else
+				printf "$(fg_darkorange "Diff") ${DestDir}/${DestFile} $(fg_green "and") ${SrcDir}/${SrcFile} "
+				if [ "${Show}" = "Y" ]; then
+					diff --suppress-common-lines ${DestDir}/${DestFile} ${SrcDir}/${SrcFile} 2>/dev/null
+					result=$?
+				else
+					diff -q ${DestDir}/${DestFile} ${SrcDir}/${SrcFile} >/dev/null 2>&1
+					result=$?
+				fi
+				if [ $result -ne 0 ]; then
+					fg_red "differ"
+				else
+					fg_green "same"
+				fi
 			fi
 		fi
 	done

@@ -1,9 +1,15 @@
 #!/usr/local/bin/zsh
 # copy file from .file to ~/dotfiles/file
 # 	assumes the desired ${SrcFile} is in the ${SrcDir}
+type emulate >/dev/null 2>/dev/null || alias emulate=true
+emulate -L ksh
 if [ -z ${1} ]; then
-  echo "Usage: dotimport .dotfile" 
+  echo "Usage: dotimport [-f] .dotfile" 
 else
+	case ${1:0:2} in
+		-f) Force="Y"
+				shift	;;
+	esac
 	SrcDir=${HOME}
 	GitDir="${HOME}/dotfiles"
 	Exclude=".bash_history .zsh_$(hostname -s)_hist  .bashdb_hist .zshdb_hist .bash_sessions .zshrc.zwc .zsh_shver "
@@ -25,10 +31,15 @@ else
 						echo "Copy ${SrcDir}/${SrcFile} $(fg_green "to") ${GitDir}/${GitFile}"
 						cp -a ${SrcDir}/${SrcFile} ${GitDir}/${GitFile}
 					else
-						echo "${GitDir}/${GitFile} is NEWER than ${SrcDir}/${SrcFile}"
+						if [ "${Force}" == "Y" ]; then
+							echo "Copy ${SrcDir}/${SrcFile} $(fg_green "to") ${GitDir}/${GitFile}"
+							cp -a ${SrcDir}/${SrcFile} ${GitDir}/${GitFile}
+						else
+							echo "${GitDir}/${GitFile} is NEWER than ${SrcDir}/${SrcFile}"
+						fi
 					fi
 				fi
 			fi
 		fi
-		done
-	fi
+	done
+fi
