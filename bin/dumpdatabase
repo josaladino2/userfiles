@@ -26,10 +26,10 @@ function backupnow () {
 		printf " OK\n" || { printf " Errors.\n"; }
 	printf "Exporting ${db} database to ${ThisFile} "
 	if [ "${db}" = "all" ]; then
-		/usr/bin/mysqldump -uroot -pbokstari46 --all-databases | \
+		/usr/bin/mysqldump -uroot --all-databases | \
 			gzip -c > ${ThisFile}
 	else
-		/usr/bin/mysqldump -uroot -pbokstari46 --databases ${db} | \
+		/usr/bin/mysqldump -uroot --databases ${db} | \
 			gzip -c > ${ThisFile}
 	fi
 	result=$?
