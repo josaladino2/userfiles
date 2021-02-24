@@ -75,7 +75,7 @@ backupExternalData=true
 backupDatabase=true
 backupMainDir=${1:-/home/y4x/public_html/ncBackup}
 currentDate=$(date +"%Y%m%d_%H%M%S")
-ExcludeTheseFiles="--exclude \"*/ASA-Library-Resources/*\""
+ExcludeTheseFiles="\"*/ASA-Library-Resources/*\"," # be sure to add , between files
 
 if [ -z "$backupMainDir" ]; then
 	# TODO: The directory where you store the Nextcloud backups (when not specified by args)
@@ -219,13 +219,13 @@ if [ "${backupInternalData}" = true ]; then
 	if [ "$ignoreUpdaterBackups" = true ]; then
 		echo "Ignoring updater backup directory"
 		if [ "$useCompression" = true ] ; then
-			tar -cpzf "${backupdir}/${fileNameBackupDataDir}"  --exclude="updater-*/backups/*" -C "${nextcloudDataDir}" .
+			tar -cpzf "${backupdir}/${fileNameBackupDataDir}"  --exclude={${ExcludeTheseFiles}"updater-*/backups/*"} -C "${nextcloudDataDir}" .
 		else
-			tar -cpf "${backupdir}/${fileNameBackupDataDir}"  --exclude="updater-*/backups/*" -C "${nextcloudDataDir}" .
+			tar -cpf "${backupdir}/${fileNameBackupDataDir}"  --exclude={${ExcludeTheseFiles}"updater-*/backups/*" -C "${nextcloudDataDir}" .
 		fi
 	else
 		if [ "$useCompression" = true ] ; then
-			tar -cpzf "${backupdir}/${fileNameBackupDataDir}" ${ExcludeTheseFiles} -C "${nextcloudDataDir}" .
+			tar -cpzf "${backupdir}/${fileNameBackupDataDir}" --exclude={${ExcludeTheseFiles}} -C "${nextcloudDataDir}" .
 		else
 			tar -cpf "${backupdir}/${fileNameBackupDataDir}" ${ExcludeTheseFiles} -C "${nextcloudDataDir}" .
 		fi
