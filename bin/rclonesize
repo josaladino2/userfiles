@@ -20,6 +20,9 @@ case ${Job} in
 		# Checking Google Drive
 		sizemount GDrive
 
+		# Checking Google Drive BC
+		sizemount GDriveBC
+
 		# Checking Mega Drive
 		sizemount Mega
 
@@ -45,6 +48,11 @@ case ${Job} in
 	GD)
 		# Checking Google Drive
 		sizemount GDrive
+	;;
+
+	GDBC)
+		# Checking Google Drive BC
+		sizemount GDriveBC
 	;;
 
 	Mega)
@@ -83,7 +91,7 @@ case ${Job} in
 	;;
 
 	*)
-		echo "Usage: $0 [all|GD|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
+		echo "Usage: $0 [all|GD|GDBC|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
 	;;
 esac
 
