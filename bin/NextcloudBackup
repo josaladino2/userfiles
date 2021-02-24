@@ -79,7 +79,7 @@ ExcludeTheseFiles="\"*/ASA-Library-Resources/*\"," # be sure to add , between fi
 
 if [ -z "$backupMainDir" ]; then
 	# TODO: The directory where you store the Nextcloud backups (when not specified by args)
-    backupMainDir='/home/y4x/public_html/ncBackup'
+  backupMainDir='/home/y4x/public_html/ncBackup'
 else
 	backupMainDir=$(echo $backupMainDir | sed 's:/*$::')
 fi
@@ -184,7 +184,7 @@ fi
 # Stop web server
 #
 if [ "${disableWebServer}" = true ]; then
-	echo "Stopping web server..."
+	printf "Stopping web server..."
 	apachectl stop
 #	systemctl stop "${webserverServiceName}"
 	echo "Done"
@@ -197,7 +197,7 @@ echo
 # Backup file directory
 #
 if [ "${backupFileDir}" = true ]; then
-	echo "Creating backup of Nextcloud file directory..."
+	printf "Creating backup of Nextcloud file directory..."
 	if [ "$useCompression" = true ] ; then
 		tar -cpzf "${backupdir}/${fileNameBackupFileDir}" -C "${nextcloudFileDir}" .
 	else
@@ -215,15 +215,16 @@ fi
 #
 
 if [ "${backupInternalData}" = true ]; then
-	echo "Creating backup of Nextcloud Internal data directory..."
 	if [ "$ignoreUpdaterBackups" = true ]; then
 		echo "Ignoring updater backup directory"
+		printf "Creating backup of Nextcloud Internal data directory..."
 		if [ "$useCompression" = true ] ; then
 			tar -cpzf "${backupdir}/${fileNameBackupDataDir}"  --exclude={${ExcludeTheseFiles}"updater-*/backups/*"} -C "${nextcloudDataDir}" .
 		else
 			tar -cpf "${backupdir}/${fileNameBackupDataDir}"  --exclude={${ExcludeTheseFiles}"updater-*/backups/*" -C "${nextcloudDataDir}" .
 		fi
 	else
+		printf "Creating backup of Nextcloud Internal data directory..."
 		if [ "$useCompression" = true ] ; then
 			tar -cpzf "${backupdir}/${fileNameBackupDataDir}" --exclude={${ExcludeTheseFiles}} -C "${nextcloudDataDir}" .
 		else
@@ -240,7 +241,7 @@ fi
 # Backup local external storage.
 # Uncomment if you use local external storage
 if [ "${backupExternalData}" = true ]; then
-	echo "Creating backup of Nextcloud local external storage directory..."
+	printf "Creating backup of Nextcloud local external storage directory..."
 	if [ "$useCompression" = true ]; then
 		tar -cpzf "${backupdir}/${fileNameBackupExternalDataDir}"  -C "${nextcloudLocalExternalDataDir}" .
 	else
@@ -258,27 +259,23 @@ fi
 #
 if [ "${backupDatabase}" = true ]; then
 	if [ "${databaseSystem}" = "mysql" ] || [ "${databaseSystem}" = "mariadb" ]; then
-			echo "Backup Nextcloud database (MySQL/MariaDB)..."
-
+		printf "Backup Nextcloud database (MySQL/MariaDB)..."
 		if ! [ -x "$(command -v mysqldump)" ]; then
 			errorecho "ERROR: MySQL/MariaDB not installed (command mysqldump not found)."
 			errorecho "ERROR: No backup of database possible!"
 		else
 			mysqldump --single-transaction -h localhost -u "${dbUser}" -p"${dbPassword}" "${nextcloudDatabase}" > "${backupdir}/${fileNameBackupDb}"
 		fi
-
 		echo "Done"
 		echo
 	elif [ "${databaseSystem}" = "postgresql" ] || [ "${databaseSystem}" = "pgsql" ]; then
-		echo "Backup Nextcloud database (PostgreSQL)..."
-
+		printf "Backup Nextcloud database (PostgreSQL)..."
 		if ! [ -x "$(command -v pg_dump)" ]; then
 			errorecho "ERROR: PostgreSQL not installed (command pg_dump not found)."
 			errorecho "ERROR: No backup of database possible!"
 		else
 			PGPASSWORD="${dbPassword}" pg_dump "${nextcloudDatabase}" -h localhost -U "${dbUser}" -f "${backupdir}/${fileNameBackupDb}"
 		fi
-		
 		echo "Done"
 		echo
 	fi
@@ -291,8 +288,8 @@ fi
 # Start web serv
 #
 if [ ${disableWebServer} = true ]; then
-	echo "Starting web server..."
-	apachectl restart
+	printf "Starting web server..."
+	apachectl restart >/dev/null
 	#systemctl start "${webserverServiceName}"
 	echo "Done"
 	echo
@@ -302,7 +299,10 @@ fi
 # Disable maintenance mode
 #
 if [ "${MaintenanceModeOn}" = true ]; then
+	printf "Disabling Maintenance Mode (--off)..."
 	DisableMaintenanceMode
+	echo "Done"
+	echo
 fi
 
 #
@@ -329,6 +329,7 @@ echo
 echo "DONE!"
 echo
 echo "Backup created: ${backupdir}"
+echo
 duration=${SECONDS}
 echo -e "\n**Nextcloud Backup completed in $(show_time ${duration})"
 echo
