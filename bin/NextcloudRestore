@@ -1,5 +1,5 @@
 #!/usr/local/bin/zsh
-
+SECONDS=0
 #
 # Bash script for restoring backups of Nextcloud.
 #
@@ -156,14 +156,15 @@ echo
 
 # File directory
 echo "Deleting old Nextcloud file directory..."
-rm -r "${nextcloudFileDir}"
+mv "${nextcloudFileDir}" "${nextcloudFileDir}.$(date +"%Y%M-%H:%M")"
 mkdir -p "${nextcloudFileDir}"
 echo "Done"
 echo
 
 # Data directory
 echo "Deleting old Nextcloud data directory..."
-rm -r "${nextcloudDataDir}"
+mv "${nextcloudDataDir}" "${nextcloudDataDir}.$(date +"%Y%M-%H:%M")"
+#rm -r "${nextcloudDataDir}"
 mkdir -p "${nextcloudDataDir}"
 echo "Done"
 echo
@@ -171,7 +172,7 @@ echo
 # Local external storage
 # TODO: Uncomment if you use local external storage
 #echo "Deleting old Nextcloud local external storage directory..."
-#rm -r "${nextcloudLocalExternalDataDir}"
+#mv "${nextcloudLocalExternalDataDir}" "${nextcloudLocalExternalDataDir}.$(date +"%Y%M%H%M")"
 #mkdir -p "${nextcloudLocalExternalDataDir}"
 #echo "Done"
 #echo
@@ -296,3 +297,5 @@ echo
 echo
 echo "DONE!"
 echo "Backup ${restore} successfully restored."
+duration=${SECONDS}
+echo -e "\n**Nextcloud Restore completed in $(show_time ${duration})"
