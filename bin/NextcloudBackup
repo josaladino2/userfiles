@@ -67,7 +67,7 @@ CtrlC () {
 # Variables
 # ************************************************
 # TODO: Set these variables to control the backup
-MaintenanceModeOn=false
+MaintenanceModeOn=true
 disableWebServer=false
 backupFileDir=true
 backupInternalData=false
