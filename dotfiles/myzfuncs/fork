@@ -1,0 +1,5 @@
+fork () {
+	rm ~/fork.out ~/fork.err > /dev/null 2>&1
+	(setsid "$@") > ~/fork.out 2>~/fork.err &;
+	echo "Forking $@"
+}
