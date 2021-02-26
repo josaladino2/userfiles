@@ -41,6 +41,8 @@ CtrlC () {
 			echo "Maintenance mode still enabled."
 		else
 			DisableMaintenanceMode
+			sleep 2
+			DisableMaintenanceMode
 			echo "Maintenance mode disabled."
 		fi
 	fi
