@@ -1,0 +1,3 @@
+#!/usr/local/bin/zsh
+echo "Server reached max_children"
+grep -h "server reached max_children setting" /opt/cpanel/ea-php*/root/var/log/php-fpm/error.log|grep "2[0-9]-Feb-2021"|awk '{print $4,$5}'|sort|uniq -c|sort -n

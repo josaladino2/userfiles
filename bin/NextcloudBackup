@@ -146,7 +146,7 @@ fi
 fileNameBackupExternalDataDir='nextcloud-external-datadir.tar'
 
 if [ "$useCompression" = true ] ; then
-	fileNameBackupExternalDataDir='nextcloud-external-datadir.tar.gz'
+	fileNameBackupExternalDataDir='nextcloud-external-datadir.tgz'
 fi
 
 fileNameBackupDb='nextcloud-db.sql'
@@ -221,16 +221,16 @@ if [ "${backupInternalData}" = true ]; then
 		echo "Ignoring updater backup directory"
 		printf "Creating backup of Nextcloud Internal data directory..."
 		if [ "$useCompression" = true ] ; then
-			tar -cpzf "${backupdir}/${fileNameBackupDataDir}"  --exclude={${ExcludeTheseFiles}"updater-*/backups/*"} -C "${nextcloudDataDir}" .
+			tar -cpzf "${backupdir}/${fileNameBackupDataDir}"  --exclude="updater-*/backups/*" -C "${nextcloudDataDir}" .
 		else
-			tar -cpf "${backupdir}/${fileNameBackupDataDir}"  --exclude={${ExcludeTheseFiles}"updater-*/backups/*" -C "${nextcloudDataDir}" .
+			tar -cpf "${backupdir}/${fileNameBackupDataDir}"  --exclude="updater-*/backups/*" -C "${nextcloudDataDir}" .
 		fi
 	else
 		printf "Creating backup of Nextcloud Internal data directory..."
 		if [ "$useCompression" = true ] ; then
-			tar -cpzf "${backupdir}/${fileNameBackupDataDir}" --exclude={${ExcludeTheseFiles}} -C "${nextcloudDataDir}" .
+			tar -cpzf "${backupdir}/${fileNameBackupDataDir}" -C "${nextcloudDataDir}" .
 		else
-			tar -cpf "${backupdir}/${fileNameBackupDataDir}" ${ExcludeTheseFiles} -C "${nextcloudDataDir}" .
+			tar -cpf "${backupdir}/${fileNameBackupDataDir}" -C "${nextcloudDataDir}" .
 		fi
 	fi
 	echo "Done"

@@ -66,7 +66,7 @@ if [ -e ${FileDate} ]; then
 	result=$?
 	# Remove local files from /cpbackup/
 	if [ ${result} -eq 0 ]; then
-		rm -rf ${FileDate} .meta transports.db >/devnull 2>&1
+		rm -rf .meta ${FileDate} transports.db >/devnull 2>&1
 		echo -e "\n** /cpbackup/${FileDate}, .meta, .transports.db Deleted"
 	else
 		{ echo "${Dest}/${FileDate}+${day} transfer FAILED!";
