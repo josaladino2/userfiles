@@ -2496,7 +2496,7 @@ psinfo () {
 			tree) ps -ejM ;;
 			threads) ps -eLf ;;
 			security) ps axms ;;
-			pid) ps -C ${2} pid= ;;
+			pid) ps -C ${2} -o pid= ;;
 			*)	ps -axww | head -1	
 					ps -axww | grep ${1} ;;
 		esac
