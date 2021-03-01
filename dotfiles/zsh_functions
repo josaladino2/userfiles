@@ -1,4 +1,3 @@
-#!/usr/local/bin/zsh
 if [ -f /tmp/.echo ]; then
   echo "Using: $(pwd)/.zsh_functions"
 fi
@@ -1983,7 +1982,9 @@ pause () {
 }
 
 fork () {
-	(setsid "$@" &);
+	rm ~/fork.out ~/fork.err > /dev/null 2>&1
+	(setsid "$@") > ~/fork$$.out 2>~/fork$$.err &;
+	echo "Forking $@"
 }
 
 askany () {
@@ -2364,6 +2365,38 @@ dec2oct () {
 	fi
 }
 
+cvtemp () {
+	if [[ $# -eq 0 ]] ; then
+	  echo "
+		Usage: ${Funcstack[1]} temperature[F|C|K]
+		where the suffix:
+			F	indicates input is in Fahrenheit (default)
+	    C	indicates input is in Celsius
+			K	indicates input is in Kelvin"
+	fi
+	unit="$(echo $1|sed -e 's/[-[[:digit:]]*//g' | \
+		tr '[:lower:]' '[:upper:]' )"
+	temp="$(echo $1|sed -e 's/[^-[[:digit:]]*//g')"
+	case ${unit:=F}
+		in
+		F ) # Fahrenheit to Celsius formula:  Tc = (F -32 ) / 1.8
+			farn="$temp"
+			cels="$(echo "scale=2;($farn - 32) / 1.8" | bc)"
+			kelv="$(echo "scale=2;$cels + 273.15" | bc)";;
+		C ) # Celsius to Fahrenheit formula: Tf = (9/5)*Tc+32
+			cels=$temp
+			kelv="$(echo "scale=2;$cels + 273.15" | bc)"
+			farn="$(echo "scale=2;((9/5) * $cels) + 32" | bc)";;
+		K ) # Celsius = Kelvin + 273.15, then use Cels -> Fahr formula
+			kelv=$temp
+			cels="$(echo "scale=2; $kelv - 273.15" | bc)"
+			farn="$(echo "scale=2; ((9/5) * $cels) + 32" | bc)"
+	esac
+	echo "Fahrenheit = $farn"
+	echo "Celsius    = $cels"
+	echo "Kelvin     = $kelv"
+}
+
 allips () {
 	ifconfig | awk '/inet / {sub(/addr:/, "", $2); print $2}'
 }
@@ -2454,12 +2487,20 @@ convertsecs () {
 }
 
 psinfo () {
-	if [ -z ${1} ]; then
-		printf "Usage: ${Funcstack[1]} ProcessName\n"
+	if [ -z ${1} ] || [ -z ${2} ]; then
+		echo "Usage: ${Funcstack[1]} [all|tree|threads|security|pid processname] [ProcessName]"
 		return
+	else
+		case $1 in
+			all) ps -U root -u root u ;;
+			tree) ps -ejM ;;
+			threads) ps -eLf ;;
+			security) ps axms ;;
+			pid) ps -C ${2} pid= ;;
+			*)	ps -axww | head -1	
+					ps -axww | grep ${1} ;;
+		esac
 	fi
-  ps -axww | head -1
-	ps -axww | grep ${1}
 }
 
 psmax () {
@@ -3081,7 +3122,6 @@ gitalias () {
 		fi
 	fi
 }
-
 pbcopyr () {
 	if [ -z ${2} ]; then
 		echo "Usage: ${funcstack[1]} remote_host path-to-file"
@@ -3107,39 +3147,59 @@ repeat_char () {
 		printf "${1}%.0s" {1..${2}}
 		echo ""
 	fi
-	A
 }
 
-cvtemp () {
-	if [[ $# -eq 0 ]] ; then
-	  echo "Usage: ${Funcstack[1]} 45[F|C|K]
-		where the suffix:
-			F	indicates input is in Fahrenheit (default)
-	    C	indicates input is in Celsius
-			K	indicates input is in Kelvin"
-	fi
-	unit="$(echo $1|sed -e 's/[-[[:digit:]]*//g' | \
-		tr '[:lower:]' '[:upper:]' )"
-	temp="$(echo $1|sed -e 's/[^-[[:digit:]]*//g')"
-	case ${unit:=F}
-		in
-		F ) # Fahrenheit to Celsius formula:  Tc = (F -32 ) / 1.8
-			farn=$temp
-			cels="$(echo "scale=2;($farn - 32) / 1.8" | bc)"
-			kelv="$(echo "scale=2;$cels + 273.15" | bc)"
-			;;
-		C ) # Celsius to Fahrenheit formula: Tf = (9/5)*Tc+32
-			cels=$temp
-			kelv="$(echo "scale=2;$cels + 273.15" | bc)"
-			farn="$(echo "scale=2;((9/5) * $cels) + 32" | bc)"
-			;;
-		K ) # Celsius = Kelvin + 273.15, then use Cels -> Fahr formula
-			kelv=$temp
-			cels="$(echo "scale=2; $kelv - 273.15" | bc)"
-			farn="$(echo "scale=2; ((9/5) * $cels) + 32" | bc)"
-			;;
-	esac
-	echo "Fahrenheit = $farn"
-	echo "Celsius    = $cels"
-	echo "Kelvin     = $kelv"
-}
+#dotdrop-rmfile () {
+#	if [ -z ${1} ]; then
+#		echo "Usage: ${funcstack[1]} dotfile"
+#	else
+#		cd ${DOTDROPDIR}
+#		local d=${1}
+#		local s=$(readlink ${d})
+#		local n=$(echo ${d}|sed -e 's/\.//')
+#		if [ -L "${d}" ]; then
+#			if [ -d "${s}" ]; then
+#				trash ${d}
+#				mv ${s} ${d}
+#				result=$?
+#				if [[ "$?" -eq 0 ]]; then
+#					echo "${d} link removed"
+#					patt="d_${n}:"
+#					cat config.yaml | sed -e "/${patt}$/{N;N;N;d;}" | sed -e "/d_${n}$/d" > config.tmp
+#					mv config.tmp config.yaml
+#					result=$?
+#					if [[ "$?" -eq 0 ]]; then
+#						echo "config.yaml modified"
+#					else
+#						echo "Modification Errors"
+#					fi
+#				else
+#					echo "${d} link NOT removed"
+#				fi
+#			elif [ -e "${s}" ]; then
+#				mv ${s} ${d}
+#				result=$?
+#				if [[ "$?" -eq 0 ]]; then
+#					echo "${d} link removed"
+#					patt="f_${n}:"
+#					cat config.yaml | sed -e "/${patt}$/{N;N;N;d;}" | sed -e "/f_${n}$/d" > config.tmp
+#					mv config.tmp config.yaml
+#					result=$?
+#					if [[ "$?" -eq 0 ]]; then
+#						echo "config.yaml modified"
+#					else
+#						echo "Modification Errors"
+#					fi
+#				else
+#					echo "${d} link NOT removed"
+#				fi
+#				echo "${d} link removed"
+#			else
+#				echo "${d} not a regular file or directory"
+#			fi
+#		else
+#			echo "${d} not symbolic link"
+#		fi
+#	fi
+#}
+

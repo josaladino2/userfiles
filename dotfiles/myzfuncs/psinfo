@@ -1,8 +1,16 @@
 psinfo () {
-#	if [ -z ${1} ]; then
-#		echo "Usage: ${Funcstack[1]} ProcessName"
-#		return
-#	fi
-  ps -axww | head -1
-	ps -axww | grep ${1:-*}
+	if [ -z ${1} ] || [ -z ${2} ]; then
+		echo "Usage: ${Funcstack[1]} [all|tree|threads|security|pid processname] [ProcessName]"
+		return
+	else
+		case $1 in
+			all) ps -U root -u root u ;;
+			tree) ps -ejM ;;
+			threads) ps -eLf ;;
+			security) ps axms ;;
+			pid) ps -C ${2} pid= ;;
+			*)	ps -axww | head -1	
+					ps -axww | grep ${1} ;;
+		esac
+	fi
 }
