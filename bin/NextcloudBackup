@@ -77,7 +77,7 @@ backupExternalData=true
 backupDatabase=true
 backupMainDir=${1:-/home/y4x/public_html/ncBackup}
 currentDate=$(date +"%Y%m%d_%H%M%S")
-ExcludeTheseFiles="\"*/ASA-Library-Resources/*\"," # be sure to add , between files
+ExcludeTheseFiles="\"*/ASA-Library-Resources/*\"," # Not used at present - be sure to add , between files
 
 if [ -z "$backupMainDir" ]; then
 	# TODO: The directory where you store the Nextcloud backups (when not specified by args)
@@ -201,9 +201,9 @@ echo
 if [ "${backupFileDir}" = true ]; then
 	printf "Creating backup of Nextcloud file directory..."
 	if [ "$useCompression" = true ] ; then
-		cpulimit -l 30 tar -cpzf "${backupdir}/${fileNameBackupFileDir}" -C "${nextcloudFileDir}" .
+		tar -cpzf "${backupdir}/${fileNameBackupFileDir}" -C "${nextcloudFileDir}" .
 	else
-		cpulimit -l 30 tar -cpf "${backupdir}/${fileNameBackupFileDir}" -C "${nextcloudFileDir}" .
+		tar -cpf "${backupdir}/${fileNameBackupFileDir}" -C "${nextcloudFileDir}" .
 	fi
 	echo "Done"
 	echo
@@ -221,16 +221,16 @@ if [ "${backupInternalData}" = true ]; then
 		echo "Ignoring updater backup directory"
 		printf "Creating backup of Nextcloud Internal data directory..."
 		if [ "$useCompression" = true ] ; then
-			cpulimit -l 30 tar -cpzf "${backupdir}/${fileNameBackupDataDir}"  --exclude="updater-*/backups/*" -C "${nextcloudDataDir}" .
+			tar -cpzf "${backupdir}/${fileNameBackupDataDir}"  --exclude="updater-*/backups/*" -C "${nextcloudDataDir}" .
 		else
-			cpulimit -l 30 tar -cpf "${backupdir}/${fileNameBackupDataDir}"  --exclude="updater-*/backups/*" -C "${nextcloudDataDir}" .
+			tar -cpf "${backupdir}/${fileNameBackupDataDir}"  --exclude="updater-*/backups/*" -C "${nextcloudDataDir}" .
 		fi
 	else
 		printf "Creating backup of Nextcloud Internal data directory..."
 		if [ "$useCompression" = true ] ; then
-			cpulimit -l 30 tar -cpzf "${backupdir}/${fileNameBackupDataDir}" -C "${nextcloudDataDir}" .
+			tar -cpzf "${backupdir}/${fileNameBackupDataDir}" -C "${nextcloudDataDir}" .
 		else
-			cpulimit -l 30 tar -cpf "${backupdir}/${fileNameBackupDataDir}" -C "${nextcloudDataDir}" .
+			tar -cpf "${backupdir}/${fileNameBackupDataDir}" -C "${nextcloudDataDir}" .
 		fi
 	fi
 	echo "Done"
@@ -321,12 +321,9 @@ then
 			| while read -r dirToRemove; do
 			echo "${dirToRemove}"
 			rm -r "${backupMainDir}/${dirToRemove:?}"
-			echo "Done"
-			echo
 		done
 	fi
 fi
-
 echo
 echo "DONE!"
 echo
