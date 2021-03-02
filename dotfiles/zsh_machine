@@ -86,7 +86,9 @@ if [[ "$(uname)" =~ .*"Darwin".* ]]; then
 	export FigletDir="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
 	export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
 else
+# -------------------------------------------------------------------
 # Put Linux specific things here
+# -------------------------------------------------------------------
 # support file for .zshrc for Linux Specific Setup
 	export COLORFLAG="--color=auto"
 # Linux specific Aliases
@@ -188,7 +190,7 @@ alias grep="/usr/local/bin/ggrep  ${COLORFLAG}"
 alias cdiff='colordiff'
 alias mount='mount |column -t -c80'
 alias path='echo -e ${PATH//:/\\n}'
-alias sshy4x="ssh ${1} root@y4x.biz"
+alias sshy4x="ssh -p 9747 ${1} root@y4x.biz"
 alias sshsne="ssh ${1} joe@sneezy"
 alias sshsne2="ssh ${1} root@sneezy"
 alias sshi4x="ssh ${1} joe@i4x.biz"
