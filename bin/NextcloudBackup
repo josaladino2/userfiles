@@ -325,6 +325,8 @@ then
 	fi
 fi
 echo
+ls -la ${backupdir}
+echo
 echo "DONE!"
 echo
 echo "Backup created: ${backupdir}"
