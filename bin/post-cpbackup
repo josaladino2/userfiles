@@ -44,8 +44,8 @@ FileDate="${1:-$(date +%F)}"
 # Work starts here
 if [ -e ${FileDate} ]; then
 	date
-	FileDate7="${1:-$(date +%F --date='7 days ago')}"
-	day="$(echo ${FileDate} | date +%u)"
+	FileDate7="$(date -d "${FileDate} -7 days" +%F)"
+	day="$(date -d ${FileDate} +%u)"
 	RStorage="GDrive:"
 	Dest="${RStorage}/y4x-cPanelBackups"
 	d_errors=0
@@ -66,7 +66,10 @@ if [ -e ${FileDate} ]; then
 	result=$?
 	# Remove local files from /cpbackup/
 	if [ ${result} -eq 0 ]; then
-		rm -rf .meta ${FileDate} transports.db >/devnull 2>&1
+		(	rm -rf .meta
+			rm -rf .meta
+			rm -rf ${FileDate}
+			rm -rf transports.db ) >/devnull 2>&1
 		echo -e "\n** /cpbackup/${FileDate}, .meta, .transports.db Deleted"
 	else
 		{ echo "${Dest}/${FileDate}+${day} transfer FAILED!";
