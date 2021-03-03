@@ -325,7 +325,7 @@ then
 	fi
 fi
 echo
-ls -la ${backupdir}
+ls -lha ${backupMainDir}/*
 echo
 echo "DONE!"
 echo
