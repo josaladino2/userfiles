@@ -1,0 +1,27 @@
+cd /
+find /home/amanda/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/asalr/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/bram/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/d4x/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/h4hm/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/rejoice2018/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/t4xbiz/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+find /home/y4x/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
+
+find home/amanda/mail/* \! -type l -type f -newermt $(date +%Y-%m-%d -d '14 days ago') -not -type l >amandalist.txt ; tar -czf amandamail.tgz -T amandalist.txt
+echo "asalr"
+find home/asalr/mail/* \! -type l -type f -newermt $(date +%Y-%m-%d -d '14 days ago') -not -type l >asalrlist.txt ; tar -czf asalrmail.tgz -T asalrlist.txt
+echo "bram"
+find home/bram/mail/* \! -type l -type f -newermt $(date +%Y-%m-%d -d '14 days ago') -not -type l >bramlist.txt ; tar -czf brammail.tgz -T bramlist.txt
+echo "d4x"
+find home/d4x/mail/* \! -type l -type f -newermt $(date +%Y-%m-%d -d '14 days ago') -not -type l >d4xlist.txt ; tar -czf d4xmail.tgz -T d4xlist.txt
+echo "h4hm"
+find home/h4hm/mail/* \! -type l -type f -newermt $(date +%Y-%m-%d -d '14 days ago') -not -type l >h4hmlist.txt ; tar -czf h4hmmail.tgz -T h4hmlist.txt
+echo "rejoice2018"
+find home/rejoice2018/mail/* \! -type l -type f -newermt $(date +%Y-%m-%d -d '14 days ago') -not -type l >rejoice2018list.txt ; tar -czf rejoice2018mail.tgz -T rejoice2018list.txt
+echo "t4xbiz"
+find home/t4xbiz/mail/* \! -type l -type f -newermt $(date +%Y-%m-%d -d '14 days ago') -not -type l >t4xbizlist.txt ; tar -czf t4xbizmail.tgz -T t4xbizlist.txt
+echo "y4x"
+find home/y4x/mail/* \! -type l -type f -newermt $(date +%Y-%m-%d -d '14 days ago') -not -type l >y4xlist.txt ; tar -czf y4xmail.tgz -T y4xlist.txt
+echo "root"
+find root/* \! -type l -type f -newermt $(date +%Y-%m-%d -d '14 days ago') -not -type l >rootlist.txt ; tar -czf root.tgz -T rootlist.txt

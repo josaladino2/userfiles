@@ -1,3 +1,4 @@
+cd /
 find /home/amanda/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
 find /home/asalr/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
 find /home/bram/mail/.* \! -type l -type f -H -newermt $(date +%Y-%m-%d -d '2 days ago') -ls
