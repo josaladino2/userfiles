@@ -1,5 +1,5 @@
 fork () {
-	rm ~/fork.out ~/fork.err > /dev/null 2>&1
-	( setsid "$@" ) > ~/fork.out 2>~/fork.err &;
+	local ForkName="${HOME}/fork$(date +%j%M%S)"
+	(setsid "$@") > ${ForkName}.out 2> ${ForkName}.err &;
 	echo "Forking $@"
 }
