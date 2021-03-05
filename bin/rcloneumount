@@ -43,10 +43,10 @@ case ${Job} in
 		fixmount DropBox
 
 		# Fixing nc-cissa
-		fixmount nc-cissa
+#		fixmount nc-cissa
 
 		# Fixing nc-joe
-		fixmount nc-joe
+#		fixmount nc-joe
 
 		# Fixing OneDrive
 		fixmount OneDrive

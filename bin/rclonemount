@@ -58,10 +58,10 @@ case ${Job} in
 		checkmount DropBox
 
 		# Checking nc-cissa
-		checkmount nc-cissa
+#		checkmount nc-cissa
 
 		# Checking nc-joe
-		checkmount nc-joe
+#		checkmount nc-joe
 
 		# Checking OneDrive
 		checkmount OneDrive
@@ -119,7 +119,7 @@ case ${Job} in
 	;;
 
 	*)
-		echo "Usage: $0 [all|GD|GDBC|Mega|DB|ncj|ncc|OD|ODST|ODCS]"
+		echo "Usage: $0 [all|GD|GDBC|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
 	;;
 esac
 

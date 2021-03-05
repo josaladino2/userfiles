@@ -3,9 +3,9 @@ FileName=$(date +"%Y%m%d")
 FileName1=$(date +%Y%m%d --date="1 day ago")
 FileName7=$(date +%Y%m%d --date="7 days ago")
 SECONDS=0
-cd /home/Cloud/OneDrive/MySQL-Backups
+cd /root/Backup/mysql
 # Functions used
-#. ~/.bash_functions
+. ~/.bash_functions
 
 function backupnow () {
 	local db=${1}
@@ -16,10 +16,14 @@ function backupnow () {
 	rm ${ThisFile} >/dev/null 2>&1 && \
 		printf " OK\n" || { printf " Errors.\n"; }
 	printf "Deleting Old OneDrive:/MySQL-Backups/${ThisFile}"
-	rm ${ThisFile} 2>&1 && printf " OK\n" || { printf " Errors.\n"; }
+	rclone deletefile --drive-use-trash=false \
+		OneDrive:/MySQL-Backups/${ThisFile} >/dev/null 2>&1 && \
+		printf " OK\n" || { printf " Errors.\n"; }
 	ThisFile="${db}-${FileName}.sql.gz"
 	printf "Deleting Any Current OneDrive:/MySQL-Backups/${ThisFile}"
-	rm ${ThisFile} 2>&1 && printf " OK\n" || { printf " Errors.\n"; }
+	rclone deletefile --drive-use-trash=false \
+		OneDrive:/MySQL-Backups/${ThisFile} >/dev/null 2>&1 && \
+		printf " OK\n" || { printf " Errors.\n"; }
 	printf "Exporting ${db} database to ${ThisFile} "
 	if [ "${db}" = "all" ]; then
 		/usr/bin/mysqldump -uroot --all-databases | \
@@ -35,7 +39,10 @@ function backupnow () {
 		printf " Errors.\n"
 		errors=$((errors+1))
 	fi
-	printf "\n${db} DB Backup with ${errors} errors.\n\n"
+	printf "Transferring ${ThisFile} to OneDrive:/MySQL-Backups/"
+	rclone copyto ${ThisFile} OneDrive:/MySQL-Backups/${ThisFile} && \
+		printf " OK\n" || { printf " Errors.\n"; errors=$((errors+1)); }
+	printf "\n${db} DB Backups/Transfer with ${errors} errors.\n\n"
 }
 for DB in $(mysql -e 'show databases' -s --skip-column-names); do
 	if [ "$DB" = "information_schema" ] || \
@@ -46,7 +53,6 @@ for DB in $(mysql -e 'show databases' -s --skip-column-names); do
 	fi
 done
 backupnow "all"
-sleep 60
 printf "***rclone lsf for OneDrive:/MySQL-Backups/*${FileName1}.* files.\n"
 rclone lsf --format "tsp" --separator "	" OneDrive:/MySQL-Backups/ \
 	--include "*${FileName1}.*"
