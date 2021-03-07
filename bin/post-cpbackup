@@ -11,7 +11,7 @@ function rcpurge () {
 	rclone lsf ${Dest}/${RFileName} >/dev/null 2>&1
 	result=$?
 	if [ ${result} -eq 0 ]; then
-		rclone ${cmd} --drive-use-trash=false ${Dest}/${RFileName} && \
+		rclone ${cmd} --cache-db-purge --drive-use-trash=false ${Dest}/${RFileName} && \
 			printf "Deleted.\n" || { printf "Delete Errors.\n";
 				d_errors=$((d_errors+1)); }
 		sleep 5
@@ -26,12 +26,12 @@ function rcsync () {
 	local RFileName="${FileName}+${day}"
   local result=0
 	printf "${Dest}/${RFileName} transfer..."
-	rclone ${cmd} ${FileName} ${Dest}/${RFileName}
+	rclone ${cmd} --cache-db-purge ${FileName} ${Dest}/${RFileName}
 	result=$?
 	if [ ${result} -eq 0 ]; then
-		printf "OK\n"
+		printf "OK\n\n"
 	else
-		printf "FAILED!\n"
+		printf "FAILED!\n\n"
 		t_errors=$((t_errors+1))
 		exit 1
 	fi
@@ -69,24 +69,24 @@ if [ -e ${FileDate} ]; then
 		(	rm -rf .meta/
 			rm -rf ${FileDate}
 			rm -rf transports.db ) > ${HOME}/post-cpbackup.out 2> ${HOME}/post_cpbackup.err
-		echo -e "\n** /cpbackup/${FileDate}, .meta, .transports.db Deleted"
+		echo -e "\n** /cpbackup/${FileDate}, .meta, .transports.db Deleted\n"
 	else
 		{ echo "${Dest}/${FileDate}+${day} transfer FAILED!";
-			echo "Local files NOT Deleted.";
+			echo -e "Local files NOT Deleted.\n";
 			t_errors=$((t_errors+1)); }
 	fi
 	# Report ${FileDate} folder size
 	cat /tmp/checksize
 	echo -e "\n** ${RStorage} ${FileDate}+${day} Size:"
 	rclone size ${Dest}/${FileDate}+${day}
-	echo -e "\n** ${Dest}"
+	echo -e "\n** ${Dest}\n"
 	rclone lsf --format "tsp" --separator '	' ${Dest}
 	# Report space left on ${RStorage}
 	echo -e "\n** ${RStorage} Space:"
-	echo "$(rclone about ${RStorage})"
+	echo "$(rclone about ${RStorage})\n"
 	# Show number of t_errors during Backup transfer.
 	echo -e "\nDelete Files completed with ${d_errors} Delete errors.\n"
-	echo "Daily Backup completed with ${t_errors} Transfer errors."
+	echo -e "Daily Backup completed with ${t_errors} Transfer errors.\n"
 else
 	echo "No /cpbackup/${FileDate} backup to transfer."
 fi
