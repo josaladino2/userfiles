@@ -2619,7 +2619,7 @@ vimupdate () {
 mkuserbashbk () {
 ( pushd ~ > /dev/null 2>&1
 	printf "$(fg_cyan "	UserFilesbashbk.tgz")..."
-	tar --absolute-names -cvzf UserFilesbashbk.tgz -X "UserFiles-bashExclude" -T "UserFiles-bashInclude" >mkuserfilesbashbk.out
+	tar -cvzf UserFilesbashbk.tgz -X UserFiles-bashExclude -T UserFiles-bashInclude >mkuserfilesbashbk.out
 	printf "$(fg_white " Done")\n"
 	popd > /dev/null 2>&1
 	dirs -c > /dev/null 2>&1
@@ -2629,7 +2629,7 @@ mkuserbashbk () {
 mkuserbash () {
 ( pushd ~ > /dev/null 2>&1
 	printf "$(fg_cyan "	UserFilesbash.tgz")..."
-	tar --absolute-names -cvzf UserFilesbash.tgz -X "UserFiles-bashExclude" -T "UserFiles-bashInclude" >mkuserfilesbash.out
+	tar -cvzf UserFilesbash.tgz -X UserFiles-bashExclude -T UserFiles-bashInclude >mkuserfilesbash.out
 	printf "$(fg_white " Done")\n"
 	popd > /dev/null 2>&1
 	dirs -c > /dev/null 2>&1
@@ -2639,7 +2639,7 @@ mkuserbash () {
 mkuserbk () {
 ( pushd ~ > /dev/null 2>&1
 	printf "$(fg_cyan "	UserFilesbk.tgz")..."
-	tar --absolute-names -cvzf UserFilesbk.tgz -X "UserFiles-Exclude" -T "UserFiles-Include" >mkuserfilesbk.out
+	tar -cvzf UserFilesbk.tgz -X UserFiles-Exclude -T UserFiles-Include >mkuserfilesbk.out
 	printf "$(fg_white " Done")\n"
 	popd > /dev/null 2>&1
 	dirs -c > /dev/null 2>&1
@@ -2658,7 +2658,7 @@ mkuserfile () {
 	( cd ${BackupDir};ls -1tr | head -n -20 | xargs -d '\n' rm -f -- )
 	trash mkuserfile.*	# Delete old .out/.err files
 	printf "Creating $(fg_cyan " UserFiles.tgz")...\n"
-	tar --absolute-names -cvzf UserFiles.tgz -X "UserFiles-Exclude" -T "UserFiles-Include" >mkuserfiles.out
+	tar -cvzf UserFiles.tgz -X UserFiles-Exclude -T UserFiles-Include >mkuserfiles.out
 	printf "$(fg_white " Done")\n"
 	popd > /dev/null 2>&1
 	dirs -c > /dev/null 2>&1
