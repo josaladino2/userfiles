@@ -16,6 +16,7 @@ else
 	printf "FAILED!\n\n"
 	r_errors=$((r_errors+1))
 fi
+ls -la /cpbackup/${FileDate}/root-dir.tgz
 # Show number of t_errors during Backup transfer.
 echo -e "\n/root tarbal completed with ${r_errors} errors.\n"
 # Show time to do the transfer

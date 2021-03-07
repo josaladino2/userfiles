@@ -332,8 +332,15 @@ then
 		echo "Removing old backups..."
 		ls -t ${backupMainDir} | tail -$(( nrOfBackups - maxNrOfBackups )) \
 			| while read -r dirToRemove; do
-			echo "${dirToRemove}"
-			rm -r "${backupMainDir}/${dirToRemove:?}"
+			printf "${dirToRemove}"
+			rclone purge --cache-db-purge --drive-use-trash=false OneDrive:ncBackup/${dirToRemove:?}
+			result=$?
+			if [ ${result} -eq 0 ]; then
+				printf "OK\n\n"
+			else
+				printf "FAILED!\n\n"
+				p_errors=$((p_errors+1))
+			fi
 		done
 	fi
 fi
