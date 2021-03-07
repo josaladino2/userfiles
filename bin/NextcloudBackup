@@ -139,7 +139,7 @@ dbUser='y4x_nc_user'
 dbPassword='bokstari46'
 
 # TODO: The maximum number of backups to keep (when set to 0, all backups are kept)
-maxNrOfBackups=3
+maxNrOfBackups=2
 
 # TODO: Ignore updater's backup directory in the data directory to save space
 # Set to true to ignore the backup directory
