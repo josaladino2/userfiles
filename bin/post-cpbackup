@@ -50,12 +50,23 @@ if [ -e ${FileDate} ]; then
 	Dest="${RStorage}/y4x-cPanelBackups"
 	d_errors=0
 	t_errors=0
+	r_errors=0
 	# Start /cpbackup/ cleanup
 	echo -e "\n** ${Dest}/ Cleanup"
 	rcpurge purge "${FileDate7}"
 	rcpurge purge "${FileDate}"
 	rcpurge purge ".meta" 
 	rcpurge deletefile "transports.db" 
+	# Backup /root directory
+	printf "\n** Making /root tarball (/cpbackup/${FileDate}/root-dir.tgz)..."
+	tar -czf /cpbackup/${FileDate}/root-dir.tgz -X ${HOME}/root-Exclude /root
+	result=$?
+	if [ ${result} -eq 0 ]; then
+		printf "OK\n\n"
+	else
+		printf "FAILED!\n\n"
+		r_errors=$((r_errors+1))
+	fi
 	# Start cpanel backup transfer to ${RStorage}
 	echo -e "\n** /cpbackup/ Treansfers"
 	( echo -e "\n** Local /cpbackup/${FileDate} Size:"
@@ -85,6 +96,7 @@ if [ -e ${FileDate} ]; then
 	echo -e "\n** ${RStorage} Space:"
 	echo "$(rclone about ${RStorage})\n"
 	# Show number of t_errors during Backup transfer.
+	echo -e "\n/root tarbal completed with ${r_errors} errors.\n"
 	echo -e "\nDelete Files completed with ${d_errors} Delete errors.\n"
 	echo -e "Daily Backup completed with ${t_errors} Transfer errors.\n"
 else

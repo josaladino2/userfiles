@@ -1,0 +1,23 @@
+#!/usr/local/bin/zsh
+SECONDS=0
+cd /cpbackup/
+FileDate="${1:-$(date +%F)}"
+FileName="root-dir-${FileDate}"
+
+# Work starts here
+r_errors=0
+# Backup /root directory
+printf "\n** Making /root tarball (/cpbackup/${FileDate}/root-dir.tgz)..."
+tar -czf /cpbackup/${FileDate}/root-dir.tgz -X ${HOME}/root-Exclude /root
+result=$?
+if [ ${result} -eq 0 ]; then
+	printf "OK\n\n"
+else
+	printf "FAILED!\n\n"
+	r_errors=$((r_errors+1))
+fi
+# Show number of t_errors during Backup transfer.
+echo -e "\n/root tarbal completed with ${r_errors} errors.\n"
+# Show time to do the transfer
+duration=${SECONDS}
+echo -e "\n** /root tarbal completed in $(show_time ${duration})\n"
