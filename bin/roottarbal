@@ -8,7 +8,7 @@ FileName="root-dir-${FileDate}"
 r_errors=0
 # Backup /root directory
 printf "\n** Making /root tarball (/cpbackup/${FileDate}/root-dir.tgz)..."
-tar -czf /cpbackup/${FileDate}/root-dir.tgz -X ${HOME}/root-Exclude /root
+tar -czf /cpbackup/${FileDate}/root-dir.tgz -X ${HOME}/root-Exclude /root 2> ~/roottarbal.err
 result=$?
 if [ ${result} -eq 0 ]; then
 	printf "OK\n\n"
