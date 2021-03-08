@@ -23,6 +23,7 @@ if [[ "$(uname)" =~ .*"Darwin".* ]]; then
 	alias stat="gstat"
 	alias date='gdate'
 	alias python=/usr/local/bin/python3 
+	alias head=/usr/local/bin/ghead
 # Comment out the ls commands below if no color monitors
 	unalias l 2>/dev/null
 	unalias la 2>/dev/null
