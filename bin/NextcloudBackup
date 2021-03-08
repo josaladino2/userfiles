@@ -329,7 +329,7 @@ then
 
 	if [[ ${nrOfBackups} > ${maxNrOfBackups} ]]
 	then
-		echo "Removing old backups..."
+		echo "Removing (rlone) old backups..."
 		ls -t ${backupMainDir} | tail -$(( nrOfBackups - maxNrOfBackups )) \
 			| while read -r dirToRemove; do
 			printf "${dirToRemove}"
