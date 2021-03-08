@@ -21,13 +21,13 @@ printf "\n** Making /root tarball (/cpbackup/${FileDate}/root-dir.tgz)..."
 tar -czf /cpbackup/${FileDate}/root-dir.tgz -X ${HOME}/root-Exclude /root 2> ~/roottarbal.err
 result=$?
 check_error ${result}
-ls -la /cpbackup/${FileDate}/root-dir.tgz
+ls -hla /cpbackup/${FileDate}/root-dir.tgz
 # Backup /home/elton directory
 printf "\n** Making /home/elton tarball (/cpbackup/${FileDate}/elton-dir.tgz)..."
 tar -czf /cpbackup/${FileDate}/elton-dir.tgz -X ${HOME}/elton-Exclude /home/elton 2>> ~/roottarbal.err
 result=$?
 check_error ${result}
-ls -la /cpbackup/${FileDate}/elton-dir.tgz
+ls -hla /cpbackup/${FileDate}/elton-dir.tgz
 # Show number of t_errors during Backup transfer.
 echo -e "\nTarbals completed with ${r_errors} errors.\n"
 # Show time to do the transfer
