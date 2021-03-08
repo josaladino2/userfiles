@@ -2652,11 +2652,12 @@ mkuserfile () {
 	BackupDir="ufBackup"
 	VerFile=".zsh_shver"
 	OldVer="$(< ${VerFile})"
+	SaveFileName="UserFiles.$(date +$j%M%S)-${OldVer}.tgz"
 	printf "\nCurrent $(fg_cyan "${FileName} ") Version: $(fg_green "${OldVer}")\n"
-	cp -a ${FileName} ${BackupDir}/${FileName}-${OldVer}
-	printf "  Backup... $(fg_cyan "${FileName}") to $(fg_cyan "${FileName}-${OldVer}")\n"
+	cp -a ${FileName} ${BackupDir}/${SaveFileName}
+	printf "  Backup... $(fg_cyan "${FileName}") to $(fg_cyan "${SaveFileName}")\n"
 	( cd ${BackupDir};ls -1tr | head -n -20 | xargs -d '\n' rm -f -- )
-	trash mkuserfile.*	# Delete old .out/.err files
+	rm -f mkuserfile.*	# Delete old .out/.err files
 	printf "Creating $(fg_cyan " UserFiles.tgz")...\n"
 	tar -cvzf UserFiles.tgz -X UserFiles-Exclude -T UserFiles-Include >mkuserfiles.out
 	printf "$(fg_white " Done")\n"
