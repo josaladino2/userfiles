@@ -30,10 +30,10 @@ case ${Job} in
 		sizemount DropBox
 
 		# Checking nc-cissa
-#		sizemount nc-cissa
+		sizemount nc-cissa
 
 		# Checking nc-joe
-#		sizemount nc-joe
+		sizemount nc-joe
 
 		# Checking OneDrive
 		sizemount OneDrive

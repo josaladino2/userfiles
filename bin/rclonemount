@@ -58,10 +58,10 @@ case ${Job} in
 		checkmount DropBox
 
 		# Checking nc-cissa
-#		checkmount nc-cissa
+		checkmount nc-cissa
 
 		# Checking nc-joe
-#		checkmount nc-joe
+		checkmount nc-joe
 
 		# Checking OneDrive
 		checkmount OneDrive
