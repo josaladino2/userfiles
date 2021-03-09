@@ -692,6 +692,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .zst                  38;5;156;1
 .zstd                 38;5;156;1
 .zz                   38;5;156;1
+*clude		            38;5;156;1
+*cludeBak             38;5;156;1
 
 # packaged apps
 .apk                  38;5;215
