@@ -26,86 +26,87 @@ fixmount () {
 	fi
 }
 
-Job=${1:-all}
-case ${Job} in
+Job=${@:-all}
+for i in ${Job}
+do
+	case ${i} in
+		all)
+			# Fixing Google Drive
+			fixmount GDrive
 
-	all)
-		# Fixing Google Drive
-		fixmount GDrive
+			# Fixing Google Drive BC
+			fixmount GDriveBC
 
-		# Fixing Google Drive BC
-		fixmount GDriveBC
+			# Fixing Mega Drive
+			fixmount Mega
 
-		# Fixing Mega Drive
-		fixmount Mega
+			# Fixing DropBox
+			fixmount DropBox
 
-		# Fixing DropBox
-		fixmount DropBox
+			# Fixing nc-cissa
+			fixmount nc-cissa
 
-		# Fixing nc-cissa
-#		fixmount nc-cissa
+			# Fixing nc-joe
+			fixmount nc-joe
 
-		# Fixing nc-joe
-#		fixmount nc-joe
+			# Fixing OneDrive
+			fixmount OneDrive
 
-		# Fixing OneDrive
-		fixmount OneDrive
+			# Fixing OneDriveST
+			fixmount OneDriveST
 
-		# Fixing OneDriveST
-		fixmount OneDriveST
+			# Fixing OneDriveCS
+			fixmount OneDriveCS
+		;;
 
-		# Fixing OneDriveCS
-		fixmount OneDriveCS
-	;;
+		GD)
+			# Fixing Google Drive
+			fixmount GDrive
+		;;
 
-	GD)
-		# Fixing Google Drive
-		fixmount GDrive
-	;;
+		GDBC)
+			# Fixing Google Drive BC
+			fixmount GDriveBC
+		;;
 
-	GDBC)
-		# Fixing Google Drive BC
-		fixmount GDriveBC
-	;;
+		Mega)
+			# Fixing Mega Drive
+			fixmount Mega
+		;;
 
-	Mega)
-		# Fixing Mega Drive
-		fixmount Mega
-	;;
+		DB)
+			# Fixing DropBox
+			fixmount DropBox
+		;;
 
-	DB)
-		# Fixing DropBox
-		fixmount DropBox
-	;;
+		ncc|nc-cissa)
+			# Fixing cissa
+			fixmount cissa
+		;;
 
-	ncc)
-		# Fixing cissa
-		fixmount cissa
-	;;
+		ncj|nc-joe)
+			# Fixing joe
+			fixmount joe
+		;;
 
-	ncj)
-		# Fixing joe
-		fixmount joe
-	;;
+		OD)
+			# Fixing OneDrive
+			fixmount OneDrive
+		;;
 
-	OD)
-		# Fixing OneDrive
-		fixmount OneDrive
-	;;
+		ODST)
+			# Fixing OneDriveST
+			fixmount OneDriveST
+		;;
 
-	ODST)
-		# Fixing OneDriveST
-		fixmount OneDriveST
-	;;
+		ODCS)
+			# Fixing OneDriveCS
+			fixmount OneDriveCS
+		;;
 
-	ODCS)
-		# Fixing OneDriveCS
-		fixmount OneDriveCS
-	;;
-
-	*)
-		echo "Usage: $0 [all|GD|GDBC|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
-	;;
-esac
-
+		*)
+			echo "Usage: $0 [all|GD|GDBC|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
+		;;
+	esac
+done
 echo ""

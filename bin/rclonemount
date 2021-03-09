@@ -41,67 +41,67 @@ checkmount () {
 		fi
   fi
 }
-Job=${1:-all}
-case ${Job} in
+for i in ${@}
+do
+	case ${i} in
+		all)
+			# Checking Google Drive
+			checkmount GDrive
 
-	all)
-		# Checking Google Drive
-		checkmount GDrive
+			# Checking Google Drive BC
+			checkmount GDriveBC
 
-		# Checking Google Drive BC
-		checkmount GDriveBC
+			# Checking Mega Drive
+			checkmount Mega
 
-		# Checking Mega Drive
-		checkmount Mega
+			# Checking DropBox
+			checkmount DropBox
 
-		# Checking DropBox
-		checkmount DropBox
+			# Checking nc-cissa
+			checkmount nc-cissa
 
-		# Checking nc-cissa
-		checkmount nc-cissa
+			# Checking nc-joe
+			checkmount nc-joe
 
-		# Checking nc-joe
-		checkmount nc-joe
+			# Checking OneDrive
+			checkmount OneDrive
 
-		# Checking OneDrive
-		checkmount OneDrive
+			# Checking OneDriveST
+			checkmount OneDriveST
 
-		# Checking OneDriveST
-		checkmount OneDriveST
+			# Checking OneDriveCS
+			checkmount OneDriveCS
+		;;
 
-		# Checking OneDriveCS
-		checkmount OneDriveCS
-	;;
+		GD)
+			# Checking Google Drive
+			checkmount GDrive
+		;;
 
-	GD)
-		# Checking Google Drive
-		checkmount GDrive
-	;;
+		GDBC)
+			# Checking Google Drive BC
+			checkmount GDriveBC
+		;;
 
-	GDBC)
-		# Checking Google Drive BC
-		checkmount GDriveBC
-	;;
+		Mega)
+			# Checking Mega Drive
+			checkmount Mega
+		;;
 
-	Mega)
-		# Checking Mega Drive
-		checkmount Mega
-	;;
+		DB)
+			# Checking DropBox
+			checkmount DropBox
+		;;
 
-	DB)
-		# Checking DropBox
-		checkmount DropBox
-	;;
+		ncc|nc-cissa)
+			# Checking nc-cissa
+			checkmount nc-cissa
+		;;
 
-	ncc)
-		# Checking nc-cissa
-		checkmount nc-cissa
-	;;
-
-	ncj)
-		# Checking nc-joe
-		checkmount nc-joe
-	;;
+		ncj|nc-joe)
+			# Checking nc-joe
+			checkmount nc-joe
+		;;
 
 	OD)
 		# Checking OneDrive
@@ -121,6 +121,6 @@ case ${Job} in
 	*)
 		echo "Usage: $0 [all|GD|GDBC|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
 	;;
-esac
-
+	esac
+done
 echo ""

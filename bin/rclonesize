@@ -13,86 +13,87 @@ sizemount () {
 	printf "${1} ->> "
 	rclone size ${1}:/
 }
-Job=${1:-all}
-case ${Job} in
+Job=${@:-all}
+for i in ${Job}
+do
+	case ${i} in
+		all)
+			# Checking Google Drive
+			sizemount GDrive
 
-	all)
-		# Checking Google Drive
-		sizemount GDrive
+			# Checking Google Drive BC
+			sizemount GDriveBC
 
-		# Checking Google Drive BC
-		sizemount GDriveBC
+			# Checking Mega Drive
+			sizemount Mega
 
-		# Checking Mega Drive
-		sizemount Mega
+			# Checking DropBox
+			sizemount DropBox
 
-		# Checking DropBox
-		sizemount DropBox
+			# Checking nc-cissa
+			sizemount nc-cissa
 
-		# Checking nc-cissa
-		sizemount nc-cissa
+			# Checking nc-joe
+			sizemount nc-joe
 
-		# Checking nc-joe
-		sizemount nc-joe
+			# Checking OneDrive
+			sizemount OneDrive
 
-		# Checking OneDrive
-		sizemount OneDrive
+			# Checking OneDriveST
+			sizemount OneDriveST
 
-		# Checking OneDriveST
-		sizemount OneDriveST
+			# Checking OneDriveCS
+			sizemount OneDriveCS
+		;;
 
-		# Checking OneDriveCS
-		sizemount OneDriveCS
-	;;
+		GD)
+			# Checking Google Drive
+			sizemount GDrive
+		;;
 
-	GD)
-		# Checking Google Drive
-		sizemount GDrive
-	;;
+		GDBC)
+			# Checking Google Drive BC
+			sizemount GDriveBC
+		;;
 
-	GDBC)
-		# Checking Google Drive BC
-		sizemount GDriveBC
-	;;
+		Mega)
+			# Checking Mega Drive
+			sizemount Mega
+		;;
 
-	Mega)
-		# Checking Mega Drive
-		sizemount Mega
-	;;
+		DB)
+			# Checking DropBox
+			sizemount DropBox
+		;;
 
-	DB)
-		# Checking DropBox
-		sizemount DropBox
-	;;
+		ncc|nc-cissa)
+			# Checking nc-cissa
+			sizemount nc-cissa
+		;;
 
-	ncc)
-		# Checking nc-cissa
-		sizemount nc-cissa
-	;;
+		ncj|nc-joe)
+			# Checking nc-joe
+			sizemount nc-joe
+		;;
 
-	ncj)
-		# Checking nc-joe
-		sizemount nc-joe
-	;;
+		OD)
+			# Checking OneDrive
+			sizemount OneDrive
+		;;
 
-	OD)
-		# Checking OneDrive
-		sizemount OneDrive
-	;;
+		ODST)
+			# Checking OneDriveST
+			sizemount OneDriveST
+		;;
 
-	ODST)
-		# Checking OneDriveST
-		sizemount OneDriveST
-	;;
+		ODCS)
+			# Checking OneDriveCS
+			sizemount OneDriveCS
+		;;
 
-	ODCS)
-		# Checking OneDriveCS
-		sizemount OneDriveCS
-	;;
-
-	*)
-		echo "Usage: $0 [all|GD|GDBC|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
-	;;
-esac
-
+		*)
+			echo "Usage: $0 [all|GD|GDBC|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
+		;;
+	esac
+done
 echo ""

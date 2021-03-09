@@ -1,0 +1,6 @@
+#!/usr/local/bin/zsh
+job=$(echo "$@"|tr ' ' '\n')
+for datafile in "$job"
+do
+    echo $datafile
+done
