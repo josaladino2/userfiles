@@ -1,0 +1,377 @@
+#!/usr/local/bin/zsh
+SECONDS=0
+#
+# Bash script for creating backups of Nextcloud.
+#
+# Version 2.1.0
+#
+# Usage:
+# 	- With backup directory specified in the script:  ./NextcloudBackup.sh
+# 	- With backup directory specified by parameter: ./NextcloudBackup.sh <BackupDirectory> (e.g. ./NextcloudBackup.sh /media/hdd/nextcloud_backup)
+#
+# The script is based on an installation of Nextcloud using nginx and MariaDB, see https://decatec.de/home-server/nextcloud-auf-ubuntu-server-18-04-lts-mit-nginx-mariadb-php-lets-encrypt-redis-und-fail2ban/
+#
+
+# Function for error messages
+errorecho () { cat <<< "$@" 1>&2; }
+
+EnableMaintenanceMode () {
+	printf "Switching on maintenance mode..."
+	sudo -u "${webserverUser}" php ${nextcloudFileDir}/occ maintenance:mode --on
+	echo "Done"
+	echo
+}
+
+DisableMaintenanceMode () {
+	printf "Switching off maintenance mode..."
+	sudo -u "${webserverUser}" php ${nextcloudFileDir}/occ maintenance:mode --off
+	echo "Done"
+	echo
+}
+
+check_error () {
+	if [ ${1} -eq 0 ]; then
+		printf "OK\n\n"
+	else
+		printf "FAILED!\n\n"
+		p_errors=$((p_errors+1))
+	fi
+}
+
+# Capture CTRL+C
+trap CtrlC INT
+
+CtrlC () {
+	MaintenanceStatus="$(sudo -u "${webserverUser}" php ${nextcloudFileDir}/occ maintenance:status)"
+	if [[ "${MaintenanceStatus}" == *"enabled"* ]]; then
+		read -p "Backup cancelled. Keep maintenance mode --on? [y/n] " -n 1 -r
+		echo
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			echo "Maintenance mode still enabled."
+		else
+			DisableMaintenanceMode
+			sleep 2
+			DisableMaintenanceMode
+			echo "Maintenance mode disabled."
+		fi
+	fi
+
+	WebServerStatus="$(apachectl status)"
+	if [[ "${WebServerStatus}" == *"refused"* ]]; then
+		printf "Starting web server..."
+		apachectl restart
+#		systemctl start "${webserverServiceName}"
+		echo "Done"
+	else
+		echo "Web server is running..."
+	fi
+	echo
+	exit 1
+}
+
+#
+# IMPORTANT
+# You have to customize this script (directories, users, etc.) for your actual environment.
+# All entries which need to be customized are tagged with "TODO".
+#
+# ************************************************
+# Variables
+# ************************************************
+# TODO: Use compression for Matrix Synapse installation/lib dir
+# When this is the only script for backups, it's recommend to enable compression.
+# If the output of this script is used in another (compressing) backup (e.g. borg backup), 
+# you should probably disable compression here and only enable compression of your main backup script.
+useCompression=true
+
+# TODO: Set these variables to control the backup
+MaintenanceModeOn=false
+disableWebServer=false
+backupFileDir=true
+backupInternalData=false
+backupExternalData=true
+backupDatabase=true
+remoteDrive="OneDrive"
+currentDate=$(date +"%Y%m%d_%H%M%S")
+ExcludeTheseFiles="--exclude={\"*/files_trashbin/*\",\"*/ASA-Library-Resources/*\"}" # Be sure to add , between files
+# TODO: Ignore updater's backup directory in the data directory to save space
+# Set to true to ignore the backup directory
+ignoreUpdaterBackups=true
+
+# Make sure ${remoteDrive} is mounted
+#echo "Checking to see if ${remoteDrive} is mounted..."
+#rclonemount OD
+#result=$?
+#if [ $result = 0 ]; then
+#	echo "${remoteDrive} is mounted."
+#else
+#	backupInternalData=false
+#	backupExternalData=false
+#	backupFileDir=false
+#	backupDatabase=false
+#fi
+
+backupMainDir=${1:-ncBackup}
+
+if [ -z "$backupMainDir" ]; then
+	# TODO: The directory where you store the Nextcloud backups (when not specified by args)
+  backupMainDir='/home/Cloud/${remoteDrive}/ncBackup'
+else
+	backupMainDir=$(echo $backupMainDir | sed 's:/*$::')
+fi
+
+# The actual directory of the current backup - this is a subdirectory of the main directory above with a timestamp
+backupdir="${backupMainDir}/${currentDate}/"
+
+# TODO: The directory of your Nextcloud installation (this is a directory under your web root)
+nextcloudFileDir='/home/y4x/public_html/nextcloud'
+
+# TODO: The directory of your Nextcloud data directory (outside the Nextcloud file directory)
+# If your data directory is located under Nextcloud's file directory (somewhere in the web root), the data directory should not be a separate part of the backup
+nextcloudDataDir='/home/y4x/public_html/nextcloud/data'
+
+# TODO: The directory of your Nextcloud's local external storage.
+# Uncomment if you use local external storage.
+nextcloudLocalExternalDataDir='/var/nc_data'
+
+# TODO: The service name of the web server. Used to start/stop web server (e.g. 'systemctl start <webserverServiceName>')
+#webserverServiceName='nginx'
+webserverServiceName='apache'
+
+# TODO: Your web server user
+webserverUser='y4x'
+
+# TODO: The name of the database system (one of: mysql, mariadb, postgresql)
+databaseSystem='mariadb'
+
+# TODO: Your Nextcloud database name
+nextcloudDatabase='y4x_nc_data'
+
+# TODO: Your Nextcloud database user
+dbUser='y4x_nc_user'
+
+# TODO: The password of the Nextcloud database user
+dbPassword='bokstari46'
+
+# TODO: The maximum number of backups to keep (when set to 0, all backups are kept)
+maxNrOfBackups=2
+
+# File names for backup files
+# If you prefer other file names, you'll also have to change the NextcloudRestore.sh script.
+fileNameBackupFileDir='nextcloud-filedir.tar'
+fileNameBackupDataDir='nextcloud-datadir.tar'
+
+if [ "$useCompression" = true ] ; then
+	fileNameBackupFileDir='nextcloud-filedir.tgz'
+	fileNameBackupDataDir='nextcloud-datadir.tgz'
+fi
+
+# TODO: Uncomment if you use local external storage
+fileNameBackupExternalDataDir='nextcloud-external-datadir.tar'
+
+if [ "$useCompression" = true ] ; then
+	fileNameBackupExternalDataDir='nextcloud-external-datadir.tgz'
+fi
+
+fileNameBackupDb='nextcloud-db.sql'
+
+#
+# Print information
+#
+echo "Backup directory: ${backupMainDir}"
+
+#
+# Check for root
+#
+if [ "$(id -u)" != "0" ]
+then
+	errorecho "ERROR: This script has to be run as root!"
+	exit 1
+fi
+
+#
+# Check if backup dir already exists
+#
+if [ ! -d "${backupdir}" ]
+then
+	mkdir -p "${backupdir}"
+else
+	errorecho "ERROR: The backup directory ${backupdir} already exists!"
+	exit 1
+fi
+
+# Enable maintenance mode
+
+if [ "${MaintenanceModeOn}" = true ]; then
+	EnableMaintenanceMode
+fi
+
+#
+# Stop web server
+#
+if [ "${disableWebServer}" = true ]; then
+	printf "Stopping web server..."
+	apachectl stop
+#	systemctl stop "${webserverServiceName}"
+	echo "Done"
+else
+	echo "Web server is still running..."
+fi
+echo
+
+#
+# Backup file directory
+#
+if [ "${backupFileDir}" = true ]; then
+	printf "Creating backup of Nextcloud file directory..."
+	if [ "$useCompression" = true ] ; then
+		tar -cpzf - "${nextcloudFileDir}" ${ExcludeTheseFiles} | \
+			rclone rcat "${remoteDrive}:/${backupDir}/${fileNameBackupFileDir}"
+	else
+		tar -cpf - "${nextcloudFileDir}" ${ExcludeTheseFiles} | \
+			rclone rcat "${remoteDrive}:/${backupDir}/${fileNameBackupFileDir}"
+	fi
+	echo "Done"
+	echo
+else
+	echo "Skipping backup of Nextcloud file directory..."
+	echo
+fi
+
+#
+# Backup data directory
+#
+
+if [ "${backupInternalData}" = true ]; then
+	if [ "$ignoreUpdaterBackups" = true ]; then
+		echo "Ignoring updater backup directory"
+		printf "Creating backup of Nextcloud Internal data directory..."
+		if [ "$useCompression" = true ] ; then
+			tar -cpzf - "${nextcloudDataDir}" ${ExcludeTheseFiles} --exclude="updater-*/backups/*" | \
+				rclone rcat "${remoteDrive}:/${backupDir}/${fileNameBackupDataDir}"
+		else
+			tar -cpf - "${nextcloudDataDir}" ${ExcludeTheseFiles} --exclude="updater-*/backups/*" | \
+				rclone rcat "${remoteDrive}:/${backupDir}/${fileNameBackupDataDir}"
+		fi
+	else
+		printf "Creating backup of Nextcloud Internal data directory..."
+		if [ "$useCompression" = true ] ; then
+			tar -cpzf - "${nextcloudDataDir}" ${ExcludeTheseFiles} | \
+				rclone rcat "${remoteDrive}:/${backupDir}/${fileNameBackupDataDir}"
+		else
+			tar -cpf - "${nextcloudDataDir}" ${ExcludeTheseFiles} | \
+				rclone rcat "${remoteDrive}:/${backupDir}/${fileNameBackupDataDir}"
+		fi
+	fi
+	echo "Done"
+	echo
+else
+	echo "Skipping Internal Data Backup.."
+	echo
+fi
+
+# Backup local external storage.
+# Uncomment if you use local external storage
+if [ "${backupExternalData}" = true ]; then
+	printf "Creating backup of Nextcloud local external storage directory..."
+	if [ "$useCompression" = true ]; then
+		tar -cpzf - "${nextcloudLocalExternalDataDir}" ${ExcludeTheseFiles} | \
+			rclone rcat "${remoteDrive}:/${backupDir}/${fileNameBackupExternalDataDir}"
+	else
+		tar -cpf - "${nextcloudLocalExternalDataDir}" ${ExcludeTheseFiles} | \
+			rclone rcat "${remoteDrive}:/${backupDir}/${fileNameBackupExternalDataDir}"
+	fi
+	echo "Done"
+	echo
+else
+	echo "Skipping External Data Backup.."
+	echo
+fi
+
+#
+# Backup DB
+#
+if [ "${backupDatabase}" = true ]; then
+	if [ "${databaseSystem}" = "mysql" ] || [ "${databaseSystem}" = "mariadb" ]; then
+		printf "Backup Nextcloud database (MySQL/MariaDB)..."
+		if ! [ -x "$(command -v mysqldump)" ]; then
+			errorecho "ERROR: MySQL/MariaDB not installed (command mysqldump not found)."
+			errorecho "ERROR: No backup of database possible!"
+		else
+			mysqldump --single-transaction -h localhost -u "${dbUser}" -p"${dbPassword}" "${nextcloudDatabase}" | \
+			rclone rcat "${remoteDrive}:/${backupDir}/${fileNameBackupDb}"
+		fi
+		echo "Done"
+		echo
+	# Postgress has not been adjusted
+	elif [ "${databaseSystem}" = "postgresql" ] || [ "${databaseSystem}" = "pgsql" ]; then
+		printf "Backup Nextcloud database (PostgreSQL)..."
+		if ! [ -x "$(command -v pg_dump)" ]; then
+			errorecho "ERROR: PostgreSQL not installed (command pg_dump not found)."
+			errorecho "ERROR: No backup of database possible!"
+		else
+			PGPASSWORD="${dbPassword}" pg_dump "${nextcloudDatabase}" -h localhost -U "${dbUser}" -f "${backupdir}/${fileNameBackupDb}"
+		fi
+		echo "Done"
+		echo
+	fi
+else
+	echo "Skipping Database Backup..."
+	echo
+fi
+
+#
+# Start web serv
+#
+if [ ${disableWebServer} = true ]; then
+	printf "Starting web server..."
+	apachectl restart >/dev/null
+	#systemctl start "${webserverServiceName}"
+	echo "Done"
+	echo
+fi
+
+#
+# Disable maintenance mode
+#
+if [ "${MaintenanceModeOn}" = true ]; then
+	printf "Disabling Maintenance Mode (--off)..."
+	DisableMaintenanceMode
+	echo "Done"
+	echo
+fi
+
+#
+# Delete old backups
+#
+if [ ${maxNrOfBackups} != 0 ]
+then
+	nrOfBackups=$(ls -l ${backupMainDir} | grep -c ^d)
+
+	if [[ ${nrOfBackups} > ${maxNrOfBackups} ]]
+	then
+		echo "Removing (rlone) old backups..."
+		ls -t ${backupMainDir} | tail -$(( nrOfBackups - maxNrOfBackups )) \
+			| while read -r dirToRemove; do
+			printf "${dirToRemove}"
+			rclone purge --cache-db-purge --drive-use-trash=false ${remoteDrive}:/${backupMainDir}/${dirToRemove:?}
+			result=$?
+			check_error $result
+			printf "Removing any Trash on ${remoteDrive}:"
+			rclone cleanup ${remoteDrive}:
+			result=$?
+			check_error $result
+		done
+	fi
+fi
+echo
+ls -lha ${backupMainDir}/*
+#sleep 120
+#rcloneumount OD
+echo
+echo "DONE!"
+echo
+echo "Backup created: ${backupdir}"
+echo
+duration=${SECONDS}
+echo -e "\n**Nextcloud Backup completed in $(show_time ${duration})"
+echo
