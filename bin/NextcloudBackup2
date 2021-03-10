@@ -114,7 +114,7 @@ backupMainDir=${1:-ncBackup}
 
 if [ -z "$backupMainDir" ]; then
 	# TODO: The directory where you store the Nextcloud backups (when not specified by args)
-  backupMainDir='/home/Cloud/${remoteDrive}/ncBackup'
+  backupMainDir='home/Cloud/${remoteDrive}/ncBackup'
 else
 	backupMainDir=$(echo $backupMainDir | sed 's:/*$::')
 fi
@@ -123,15 +123,15 @@ fi
 backupdir="${backupMainDir}/${currentDate}/"
 
 # TODO: The directory of your Nextcloud installation (this is a directory under your web root)
-nextcloudFileDir='/home/y4x/public_html/nextcloud'
+nextcloudFileDir='home/y4x/public_html/nextcloud'
 
 # TODO: The directory of your Nextcloud data directory (outside the Nextcloud file directory)
 # If your data directory is located under Nextcloud's file directory (somewhere in the web root), the data directory should not be a separate part of the backup
-nextcloudDataDir='/home/y4x/public_html/nextcloud/data'
+nextcloudDataDir='home/y4x/public_html/nextcloud/data'
 
 # TODO: The directory of your Nextcloud's local external storage.
 # Uncomment if you use local external storage.
-nextcloudLocalExternalDataDir='/var/nc_data'
+nextcloudLocalExternalDataDir='var/nc_data'
 
 # TODO: The service name of the web server. Used to start/stop web server (e.g. 'systemctl start <webserverServiceName>')
 #webserverServiceName='nginx'
@@ -218,10 +218,17 @@ else
 fi
 echo
 
+cd /
+
 #
 # Backup file directory
 #
 if [ "${backupFileDir}" = true ]; then
+	echo "${ExcludeTheseFiles}"
+	echo "${nextcloudFileDir}"
+	echo "${remoteDrive}"
+	echo "${backupDir}"
+	echo "${fileNameBackupFileDir}"
 	printf "Creating backup of Nextcloud file directory..."
 	if [ "$useCompression" = true ] ; then
 		tar -cpzf - "${nextcloudFileDir}" ${ExcludeTheseFiles} | \
