@@ -142,7 +142,7 @@ else
 	alias kaa="k -auh"	# list by atime
 	# End Linux zsh k Command
 	alias du="du -h"
-	alias suwww='su -s /bin/bash d4x'
+	alias suwww='su -s /bin/bash y4x'
 	alias lpad="leafpad"
 	alias tar="tar --no-same-owner"
 	alias grep="/usr/local/bin/gegrep ${COLORFLAG}"
