@@ -10,9 +10,16 @@ else
 fi
 cd ${CloudDir}
 sizemount () {
-	sleep 1
-	printf "${1} size: ->>\n"
-	du -csh ${1}
+	checkmount () {
+		if [[ $(/bin/ps axww | egrep "umask=0.*${1}:" | egrep -v "egrep") ]]; then
+			printf "${1} ** is $(fg_green "Mounted...") **\n"
+		else
+			printf "${1} ** is $(fg_red "NOT Mounted...") **\n"
+		fi
+	}
+	echo "${1} $(checkmount ${1})"
+	echo "size: V" 
+	rclone about ${1}:|sed -e 's/^/   /'
 	echo
 }
 

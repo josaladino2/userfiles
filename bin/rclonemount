@@ -21,7 +21,7 @@ checkmount () {
 		echo "\n${1} **Already Mounted...**"
 		return
 	else
-		echo "\n${1} Not Mounted..."
+		echo "\n${1} ** NOT Mounted..."
     printf " Mount Cleanup:"
     umount ${CloudDir}/${1} > /dev/null 2>&1
 		echo " **OK**"
