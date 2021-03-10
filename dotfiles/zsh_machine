@@ -175,7 +175,6 @@ alias dotdrop="~/dotfiles/dotdrop/dotdrop.sh --cfg=~/dotfiles/config.yaml"
 alias vi='vim ' # opens an external window.-p
 export CDDIR="$HOME"
 export terminal=$(tty)
-alias su="su -l"
 unalias rm >/dev/null 2>&1
 alias ttop="top -ocpu -R -F -s 2 -n30"
 alias zshconfig=vi ${HOME}/.zshrc
@@ -212,6 +211,7 @@ alias sshspa2="ssh ${1} root@spanky"
 alias fhere='find . -name ${1}'
 alias df='df -H'
 alias sudo='sudo -iH'
+alias su="su -l"
 alias dircolors="/usr/local/bin/gdircolors"
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias cd1='cd ..s'
