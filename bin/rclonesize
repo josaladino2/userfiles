@@ -13,13 +13,13 @@ sizemount () {
 	local Mount=${1}
 	checkmount () {
 		if [[ $(/bin/ps axww | egrep "umask=0.*${Mount}:" | egrep -v "grep") ]]; then
-			printf "${Mount} ** is $(fg_green "Mounted...") **\n"
+			printf "is $(fg_green "Mounted...")\n"
 		else
-			printf "${Mount} ** is $(fg_red "NOT Mounted...") **\n"
+			printf "is $(fg_red "NOT Mounted...")\n"
 		fi
 	}
-	echo "${Mount} $(checkmount ${Mount})"
-	echo "size: V" 
+	printf "** $(fg_yellow "${Mount}") $(checkmount ${Mount})\n"
+	echo "size:" 
 	rclone about ${Mount}:|sed -e 's/^/   /'
 	echo
 }
