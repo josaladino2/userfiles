@@ -346,6 +346,8 @@ then
 fi
 echo
 ls -lha ${backupMainDir}/*
+sleep 60
+rcloneumount OD
 echo
 echo "DONE!"
 echo

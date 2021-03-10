@@ -41,9 +41,9 @@ checkmount () {
 		fi
   fi
 }
-for i in ${@}
-do
-	case ${i} in
+
+for Remote in ${@:-all}; do
+	case ${Remote} in
 		all)
 			# Checking Google Drive
 			checkmount GDrive
@@ -119,7 +119,7 @@ do
 	;;
 
 	*)
-		echo "Usage: $0 [all|GD|GDBC|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
+		echo "${i} not found.  Usage: $0 [all|GD|GDBC|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
 	;;
 	esac
 done

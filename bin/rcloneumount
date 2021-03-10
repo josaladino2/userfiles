@@ -26,9 +26,7 @@ fixmount () {
 	fi
 }
 
-Job=${@:-all}
-for i in ${Job}
-do
+for i in ${@:-all}; do
 	case ${i} in
 		all)
 			# Fixing Google Drive
@@ -105,7 +103,7 @@ do
 		;;
 
 		*)
-			echo "Usage: $0 [all|GD|GDBC|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
+			echo "${i} not found.  Usage: $0 [all|GD|GDBC|Mega|DB|ncc|ncj|OD|ODST|ODCS]"
 		;;
 	esac
 done
