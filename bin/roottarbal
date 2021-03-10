@@ -1,8 +1,7 @@
 #!/usr/local/bin/zsh
 SECONDS=0
-cd /cpbackup/
+cd /
 FileDate="${1:-$(date +%F)}"
-FileName="root-dir-${FileDate}"
 
 check_error () {
 	local result=${1}
@@ -17,17 +16,21 @@ check_error () {
 # Work starts here
 r_errors=0
 # Backup /root directory
-printf "\n** Making /root tarball (/cpbackup/${FileDate}/root-dir.tgz)..."
-tar -czf /cpbackup/${FileDate}/root-dir.tgz -X ${HOME}/root-Exclude /root 2> ~/roottarbal.err
+FileName="root-dir-${FileDate}"
+rm -f /cpbackup/${FileDate}/${FileName} >/dev/null 2>&1
+printf "\n** Making /root tarball (/cpbackup/${FileDate}/${FileName})..."
+tar -czf /cpbackup/${FileDate}/${FileName} -X root-Exclude root 2> root/roottarbal.err
 result=$?
 check_error ${result}
-ls -hla /cpbackup/${FileDate}/root-dir.tgz
+ls -hla cpbackup/${FileDate}/${FileName}
 # Backup /home/elton directory
-printf "\n** Making /home/elton tarball (/cpbackup/${FileDate}/elton-dir.tgz)..."
-tar -czf /cpbackup/${FileDate}/elton-dir.tgz -X ${HOME}/elton-Exclude /home/elton 2>> ~/roottarbal.err
+FileName="elton-dir-${FileDate}"
+rm -f /cpbackup/${FileDate}/${FileName} >/dev/null 2>&1
+printf "\n** Making /home/elton tarball (/cpbackup/${FileDate}/${FileName})..."
+tar -czf /cpbackup/${FileDate}/${FileName} -X elton-Exclude home/elton 2>> root/roottarbal.err
 result=$?
 check_error ${result}
-ls -hla /cpbackup/${FileDate}/elton-dir.tgz
+ls -hla cpbackup/${FileDate}/${FileName}
 # Show number of t_errors during Backup transfer.
 echo -e "\nTarbals completed with ${r_errors} errors.\n"
 # Show time to do the transfer
