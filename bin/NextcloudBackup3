@@ -29,6 +29,15 @@ DisableMaintenanceMode () {
 	echo
 }
 
+check_error () {
+	if [ ${1} -eq 0 ]; then
+		printf "OK\n\n"
+	else
+		printf "FAILED!\n\n"
+		p_errors=$((p_errors+1))
+	fi
+}
+
 # Capture CTRL+C
 trap CtrlC INT
 
@@ -60,15 +69,6 @@ CtrlC () {
 	exit 1
 }
 
-check_error () {
-	if [ ${1} -eq 0 ]; then
-		printf "OK\n\n"
-	else
-		printf "FAILED!\n\n"
-		p_errors=$((p_errors+1))
-	fi
-}
-
 #
 # IMPORTANT
 # You have to customize this script (directories, users, etc.) for your actual environment.
@@ -84,8 +84,8 @@ backupFileDir=true
 backupInternalData=false
 backupExternalData=true
 backupDatabase=true
-backupMainDir=${1:-/home/Cloud/OneDrive/ncBackup}
 remoteMainDir="OneDrive"
+backupMainDir=${1:-/home/Cloud/${remoteMainDir}/ncBackup}
 currentDate=$(date +"%Y%m%d_%H%M%S")
 ExcludeTheseFiles="--exclude={\"*/files_trashbin/*\",\"*/ASA-Library-Resources/*\"}" # Be sure to add , between files
 

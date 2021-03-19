@@ -16,20 +16,16 @@ check_error () {
 # Work starts here
 r_errors=0
 # Backup /root directory
-FileName="root-dir-${FileDate}"
+FileName="root-dir-${FileDate}.tgz"
 rm -f /cpbackup/${FileDate}/${FileName} >/dev/null 2>&1
 printf "\n** Making /root tarball (/cpbackup/${FileDate}/${FileName})..."
-tar -czf /cpbackup/${FileDate}/${FileName} -X root-Exclude root 2> root/roottarbal.err
-result=$?
-check_error ${result}
+tar -czf /cpbackup/${FileDate}/${FileName} -X ~/root-Exclude root 2> root/roottarbal.err
 ls -hla cpbackup/${FileDate}/${FileName}
 # Backup /home/elton directory
-FileName="elton-dir-${FileDate}"
+FileName="elton-dir-${FileDate}.tgz"
 rm -f /cpbackup/${FileDate}/${FileName} >/dev/null 2>&1
 printf "\n** Making /home/elton tarball (/cpbackup/${FileDate}/${FileName})..."
-tar -czf /cpbackup/${FileDate}/${FileName} -X elton-Exclude home/elton 2>> root/roottarbal.err
-result=$?
-check_error ${result}
+tar -czf /cpbackup/${FileDate}/${FileName} -X ~/elton-Exclude home/elton 2>> root/roottarbal.err
 ls -hla cpbackup/${FileDate}/${FileName}
 # Show number of t_errors during Backup transfer.
 echo -e "\nTarbals completed with ${r_errors} errors.\n"
