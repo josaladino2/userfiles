@@ -2847,6 +2847,11 @@ cpalluserfiles ()
 		) 2> ${ScriptName}.err
 }
 
+getdomain () {
+	local domain=${1}
+	echo "${domain}" | awk -F "@" '{print $NF}'
+}
+
 gethostip () {
 #	alias egrep="/usr/local/bin/gegrep"
 	DomIP=$(arp -a|egrep "${1}" | egrep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
@@ -2908,6 +2913,14 @@ printf "\n$(show_time ${duration} "$(fg_green "**Copy all /etc/hosts files in")"
 
 glances-spanky () {
 	glances -c $(gethostip "spanky")
+}
+
+rmonitor () {
+	local TargetHost="${1:-root@y4x.biz}"
+	local HostIP=$(gethostip "$(getdomain ${TargetHost})")
+	local TargetApp="${2:-htop}"
+	local Port=${3:-9747}
+	ssh -p ${Port} ${TargetHost} -t "${TargetApp}"
 }
 
 glances-dopey () {
