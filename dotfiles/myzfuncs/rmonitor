@@ -1,6 +1,8 @@
 rmonitor () {
-	local TargetHost=${1:-root@y4x.biz}
+	local Port=${1:-9747}
+	local TargetHost=${2:-root@y4x.biz}
 	local HostIP=$(gethostip "$(getdomain ${TargetHost})")
-	local TargetApp=${2:-htop}
-	ssh ${TargetHost} -t "${TargetApp}"
+	local TargetApp=${3:-htop}
+	echo "${HostIP}"
+	ssh -p 9747 ${TargetHost} -t "${TargetApp}"
 }
