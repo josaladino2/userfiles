@@ -5,10 +5,10 @@ FileDate="${1:-$(date +%F)}"
 
 check_error () {
 	local result=${1}
-	if [ ${result} -eq 0 ]; then
-		printf "OK\n\n"
+	if [ ${result} -eq 0 ] || [ ${result} -eq 1 ]; then
+		printf "OK! (${result})\n\n"
 	else
-		printf "FAILED!\n\n"
+		printf "FAILED! (${result})\n\n"
 		r_errors=$((r_errors+1))
 	fi
 }
@@ -20,12 +20,16 @@ FileName="root-dir-${FileDate}.tgz"
 rm -f /cpbackup/${FileDate}/${FileName} >/dev/null 2>&1
 printf "\n** Making /root tarball (/cpbackup/${FileDate}/${FileName})..."
 tar -czf /cpbackup/${FileDate}/${FileName} -X ~/root-Exclude root 2> root/roottarbal.err
+result=$?
+check_error ${result}
 ls -hla cpbackup/${FileDate}/${FileName}
 # Backup /home/elton directory
 FileName="elton-dir-${FileDate}.tgz"
 rm -f /cpbackup/${FileDate}/${FileName} >/dev/null 2>&1
 printf "\n** Making /home/elton tarball (/cpbackup/${FileDate}/${FileName})..."
 tar -czf /cpbackup/${FileDate}/${FileName} -X ~/elton-Exclude home/elton 2>> root/roottarbal.err
+result=$?
+check_error ${result}
 ls -hla cpbackup/${FileDate}/${FileName}
 # Show number of t_errors during Backup transfer.
 echo -e "\nTarbals completed with ${r_errors} errors.\n"

@@ -29,6 +29,21 @@ DisableMaintenanceMode () {
 	echo
 }
 
+CheckFileSize () {
+	local FileToCheck=$1
+	( cd "${backupDir}"
+		if [ $(stat -c %s "${FileToCheck}") -gt 107374182400 ]; then
+			echo "	**** File Size > 100G"
+			printf "	Spliting ${FileToCheck} into 100G parts..."
+			split -b 100G "${FileToCheck}" "${FileToCheck}.part"
+			echo "Done"
+			echo
+			ls -l "${FileToCheck}*"
+			echo
+		fi
+	)
+}
+
 # Capture CTRL+C
 trap CtrlC INT
 
@@ -73,11 +88,11 @@ MaintenanceModeOn=false
 disableWebServer=false
 backupFileDir=true
 backupInternalData=false
-backupExternalData=true
+backupExternalData=false
 backupDatabase=true
-backupMainDir=${1:-/home/y4x/public_html/ncBackup}
-remoteDrive="OneDrive:/ncBackup"
-currentDate=$(date +"%Y%m%d_%H%M%S")
+backupMainDir=${1:-/ncBackup}
+remoteDrive="/home/Cloud/OneDrive/ncBackup"
+currentDate=$(date +"%Y%m%d")
 ExcludeTheseFiles="--exclude=\"*/files_trashbin/*\"" # Be sure to add , between files
 
 if [ -z "$backupMainDir" ]; then
@@ -161,32 +176,46 @@ echo "Backup directory: ${backupMainDir}"
 #
 # Check for root
 #
+echo "**** Check if root user"
 if [ "$(id -u)" != "0" ]
 then
 	errorecho "ERROR: This script has to be run as root!"
 	exit 1
+else
+	echo "User is root"
 fi
+echo
 
 #
 # Check if backup dir already exists
 #
+echo "**** Check if Backup Exists"
 if [ ! -d "${backupDir}" ]
 then
 	mkdir -p "${backupDir}"
 else
 	errorecho "ERROR: The backup directory ${backupDir} already exists!"
-	exit 1
+	printf "Deleting ${backupDir}..."
+	rm -rf ${backupDir}
+	echo "Done"
+	echo
 fi
 
 # Enable maintenance mode
 
+echo "**** Maintenance Mode Check"
 if [ "${MaintenanceModeOn}" = true ]; then
+	printf "Enabling Maintenance Mode..."
 	EnableMaintenanceMode
+	echo "Done (ON)"
+else
+	echo "Maintenance Mode (OFF)"
 fi
 
 #
 # Stop web server
 #
+echo "**** Web Server Check"
 if [ "${disableWebServer}" = true ]; then
 	printf "Stopping web server..."
 	apachectl stop
@@ -198,9 +227,11 @@ fi
 echo
 
 #
-# Backup file directory
+# Backup home directory
 #
+echo "**** Nextcloud Home Directory"
 if [ "${backupFileDir}" = true ]; then
+	SECONDS2=$(date +%s)
 	printf "Creating backup of Nextcloud file directory..."
 	if [ "$useCompression" = true ] ; then
 		tar -cpzf "${backupDir}/${fileNameBackupFileDir}" ${ExcludeTheseFiles} -C "${nextcloudFileDir}" .
@@ -209,16 +240,20 @@ if [ "${backupFileDir}" = true ]; then
 	fi
 	echo "Done"
 	echo
+	CheckFileSize "${fileNameBackupFileDir}"
+	duration2=$(($(date +%s)-SECONDS2))
+	echo -e "\n**Backup File Diretory completed in $(show_time ${duration2})"
+	echo
 else
 	echo "Skipping backup of Nextcloud file directory..."
 	echo
 fi
-#exit 1
 #
 # Backup data directory
 #
-
+echo "**** Nextcloud Local Data Directory"
 if [ "${backupInternalData}" = true ]; then
+	SECONDS2=$(date +%s)
 	if [ "$ignoreUpdaterBackups" = true ]; then
 		echo "Ignoring updater backup directory"
 		printf "Creating backup of Nextcloud Internal data directory..."
@@ -237,14 +272,19 @@ if [ "${backupInternalData}" = true ]; then
 	fi
 	echo "Done"
 	echo
+	CheckFileSize "${fileNameBackupDataDir}"
+	duration2=$(($(date +%s)-SECONDS2))
+	echo -e "\n**Backup Internal Data completed in $(show_time ${duration2})"
+	echo
 else
 	echo "Skipping Internal Data Backup..."
 	echo
 fi
 
 # Backup local external storage.
-# Uncomment if you use local external storage
+echo "**** Nextcloud External Data Directory"
 if [ "${backupExternalData}" = true ]; then
+	SECONDS2=$(date +%s)
 	printf "Creating backup of Nextcloud local external storage directory..."
 	if [ "$useCompression" = true ]; then
 		tar -cpzf "${backupDir}/${fileNameBackupExternalDataDir}" ${ExcludeTheseFiles} -C "${nextcloudLocalExternalDataDir}" .
@@ -252,6 +292,10 @@ if [ "${backupExternalData}" = true ]; then
 		tar -cpf "${backupDir}/${fileNameBackupExternalDataDir}" ${ExcludeTheseFiles} -C "${nextcloudLocalExternalDataDir}" .
 	fi
 	echo "Done"
+	echo
+	CheckFileSize "${fileNameBackupExternalDataDir}"
+	duration2=$(($(date +%s)-SECONDS2))
+	echo -e "\n**Backup External Data completed in $(show_time ${duration2})"
 	echo
 else
 	echo "Skipping External Data Backup..."
@@ -261,7 +305,9 @@ fi
 #
 # Backup DB
 #
+echo "**** Nextcloud Database"
 if [ "${backupDatabase}" = true ]; then
+	SECONDS2=$(date +%s)
 	if [ "${databaseSystem}" = "mysql" ] || [ "${databaseSystem}" = "mariadb" ]; then
 		printf "Backup Nextcloud database (MySQL/MariaDB)..."
 		if ! [ -x "$(command -v mysqldump)" ]; then
@@ -283,6 +329,10 @@ if [ "${backupDatabase}" = true ]; then
 		echo "Done"
 		echo
 	fi
+	CheckFileSize "${fileNameBackupDb}"
+	duration2=$(($(date +%s)-SECONDS2))
+	echo -e "\n**Backup Nextcloud MySQL Database completed in $(show_time ${duration2})"
+	echo
 else
 	echo "Skipping Database Backup..."
 	echo
@@ -291,53 +341,73 @@ fi
 #
 # Move backup to remote dirve
 #
-printf  "Moving ${backupDir} contents to ${remoteDir}:"
-rclone moveto "${backupDir}" "${remoteDir}"
+echo "**** Moving Nextcloud Backup"
+SECONDS2=$(date +%s)
+printf  "Moving ${backupDir} contents to ${remoteDrive}:"
+cp "${backupDir}" "${remoteDrive}/"
+results=$?
+if [ $results = 0 ]; then
+	printf "Deleting ${backupDir}..."
+	rm -rf ${backupDir}
+	echo "Done"
+	echo
+fi
 echo "Done"
+echo
+duration2=$(($(date +%s)-SECONDS2))
+echo -e "\n**Move Backup to ${remoteDir} completed in $(show_time ${duration2})"
 echo
 
 #
 # Start web serv
 #
+echo "**** Check Web Server"
 if [ ${disableWebServer} = true ]; then
 	printf "Starting web server..."
 	apachectl restart >/dev/null
 	#systemctl start "${webserverServiceName}"
 	echo "Done"
-	echo
+else
+	echo "Web server is still running..."
 fi
+echo
 
 #
 # Disable maintenance mode
 #
 if [ "${MaintenanceModeOn}" = true ]; then
-	printf "Disabling Maintenance Mode (--off)..."
+	printf "Disabling Maintenance Mode (OFF)..."
 	DisableMaintenanceMode
 	echo "Done"
-	echo
+else
+	echo "Maintenance Mode (OFF)"
 fi
+echo
 
 #
 # Delete old backups
 #
+echo "**** Delete Old Nextcloud Backups"
 if [ ${maxNrOfBackups} != 0 ]
 then
 	nrOfBackups=$(ls -l ${remoteDrive} | grep -c ^d)
-
 	if [[ ${nrOfBackups} > ${maxNrOfBackups} ]]
 	then
 		echo "Removing old backups..."
 		ls -t ${remoteDrive} | tail -$(( nrOfBackups - maxNrOfBackups )) \
 			| while read -r dirToRemove; do
-			echo "${remoteDrive}/${dirToRemove}"
-			rclone purge "${remoteDrive}/${dirToRemove}"
-#			rm -r "${remoteDrive}/${dirToRemove:?}"
+			printf "Removing ${remoteDrive}/${dirToRemove}..."
+			rm -rf "${remoteDrive}/${dirToRemove:?}"
+			echo "Done"
 		done
+	else
+		echo "No Old Backups to Delete"
 	fi
+	echo
 fi
 echo
-rclone lsf ${remoteDrive}
-#ls -la ${remoteDrive}
+ls -la ${remoteDrive}
+ls -la ${remoteDir}
 echo
 echo "DONE!"
 echo
