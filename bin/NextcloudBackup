@@ -42,9 +42,10 @@ CheckFileSize () {
 				rm -f ${FileToCheck}
 			else
 				echo "Errors"
+				echo "${FileToCheck} NOT Removed!"
 			fi
 			echo
-			ls -l "${FileToCheck}*"
+			ls -l *
 			echo
 		fi
 	)
