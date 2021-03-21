@@ -1,0 +1,6 @@
+rmonitor () {
+	local TargetHost=${1:-root@y4x.biz}
+	local HostIP=$(gethostip "$(getdomain ${TargetHost})")
+	local TargetApp=${2:-htop}
+	ssh ${TargetHost} -t "${TargetApp}"
+}

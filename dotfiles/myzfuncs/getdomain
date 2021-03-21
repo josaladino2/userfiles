@@ -1,0 +1,4 @@
+getdomain () {
+	local domain=${1}
+	echo "${domain}" | awk -F "@" '{print $NF}'
+}
