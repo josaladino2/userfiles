@@ -35,8 +35,14 @@ CheckFileSize () {
 		if [ $(stat -c %s "${FileToCheck}") -gt 107374182400 ]; then
 			echo "	**** File Size > 100G"
 			printf "	Spliting ${FileToCheck} into 100G parts..."
-			split -b 100G "${FileToCheck}" "${FileToCheck}.part"
-			echo "Done"
+			cpulimit -l 30 split -d -b 50G "${FileToCheck}" "${FileToCheck}.part"
+			results=$?
+			if [ $results = 0 ]; then
+				echo "Done"
+				rm -f ${FileToCheck}
+			else
+				echo "Errors"
+			fi
 			echo
 			ls -l "${FileToCheck}*"
 			echo
@@ -343,17 +349,17 @@ fi
 #
 echo "**** Moving Nextcloud Backup"
 SECONDS2=$(date +%s)
-printf  "Moving ${backupDir} contents to ${remoteDrive}:"
+printf  "Copying ${backupDir} to ${remoteDrive}..."
 cp "${backupDir}" "${remoteDrive}/"
 results=$?
 if [ $results = 0 ]; then
-	printf "Deleting ${backupDir}..."
-	rm -rf ${backupDir}
 	echo "Done"
 	echo
+	printf "	Deleting ${backupDir}..."
+	rm -rf ${backupDir} >/dev/null 2>&1 && echo "Done" || echo "Errors"
+else
+	echo "Errors"
 fi
-echo "Done"
-echo
 duration2=$(($(date +%s)-SECONDS2))
 echo -e "\n**Move Backup to ${remoteDir} completed in $(show_time ${duration2})"
 echo
