@@ -2,6 +2,7 @@
 fpath=(${myzfuncs} ${fpath});
 autoload ${myzfuncs}/*
 autoload show_time
+RStorage="DropBox:"
 
 function rcpurge () {
 	local cmd=${1}
@@ -10,6 +11,7 @@ function rcpurge () {
 	printf "${Dest}/${RFileName}..."
 	rclone lsf ${Dest}/${RFileName} >/dev/null 2>&1
 	result=$?
+	check_error $result "d"
 	if [ ${result} -eq 0 ]; then
 		rclone ${cmd} --cache-db-purge --drive-use-trash=false ${Dest}/${RFileName} && \
 			printf "Deleted.\n" || { printf "Delete Errors.\n";
@@ -46,7 +48,6 @@ if [ -e ${FileDate} ]; then
 	date
 	FileDate7="$(date -d "${FileDate} -7 days" +%F)"
 	day="$(date -d ${FileDate} +%u)"
-	RStorage="GDrive:"
 	Dest="${RStorage}/y4x-cPanelBackups"
 	d_errors=0
 	t_errors=0
