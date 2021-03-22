@@ -6,6 +6,7 @@ splitfile () {
 	else
 		local FileToCheck=$1
 		local FileSize=${2:-30G}
+		echo "**** Checking File Size"
 		if [ $(stat -c %s "${FileToCheck}") -gt 32212254720 ]; then
 			echo "	**** File Size > 30G"
 			printf "	Spliting ${FileToCheck} into ${FileSize} parts..."
