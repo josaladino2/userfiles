@@ -314,9 +314,12 @@ fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Update/Download any changes from git.
-#checkgit
-git plom
+# Check and Update/Download any changes from git.
+if [[ $(git diff --stat) != '' ]]; then
+	git plom
+else
+	echo "Working Tree is Up to Date."
+fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
