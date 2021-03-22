@@ -2911,6 +2911,20 @@ printf "\n$(show_time ${duration} "$(fg_green "**Copy all /etc/hosts files in")"
 	) 2> ${ScriptName}.err
 }
 
+rccopy () {
+	Src="/ncBackup"
+	Dest=${1:-OneDrive}
+	ls -d */* > InFile
+	cd /ncBackup
+	while read line
+	do
+		echo $line
+		rclone --progress --buffer-size 2G copyto ${line} ${Dest}:ncBackup/${line}
+#		--multi-thread-streams 6
+	done < InFile
+	rm InFile
+}
+
 splitfile () {
 	# Assumes current directory
 	if [ -z ${2} ]; then

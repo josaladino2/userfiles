@@ -1,0 +1,13 @@
+rccopy () {
+	Src="/ncBackup"
+	Dest=${1:-OneDrive}
+	ls -d */* > InFile
+	cd /ncBackup
+	while read line
+	do
+		echo $line
+		rclone --progress --buffer-size 2G copyto ${line} ${Dest}:ncBackup/${line}
+#		--multi-thread-streams 6
+	done < InFile
+	rm InFile
+}
