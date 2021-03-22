@@ -29,28 +29,6 @@ DisableMaintenanceMode () {
 	echo
 }
 
-CheckFileSize () {
-	local FileToCheck=$1
-	( cd "${backupDir}"
-		if [ $(stat -c %s "${FileToCheck}") -gt 107374182400 ]; then
-			echo "	**** File Size > 100G"
-			printf "	Spliting ${FileToCheck} into 100G parts..."
-			cpulimit -l 30 split -d -b 30G "${FileToCheck}" "${FileToCheck}.part"
-			results=$?
-			if [ $results = 0 ]; then
-				echo "Done"
-				rm -f ${FileToCheck} >/dev/null 2>&1
-			else
-				echo "Errors"
-				echo "${FileToCheck} NOT Removed!"
-			fi
-			echo
-			ls -l *
-			echo
-		fi
-	)
-}
-
 # Capture CTRL+C
 trap CtrlC INT
 
@@ -246,7 +224,7 @@ if [ "${backupFileDir}" = true ]; then
 	fi
 	echo "Done"
 	echo
-	CheckFileSize "${fileNameBackupFileDir}"
+	splitfile "${fileNameBackupFileDir}"
 	duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup File Diretory completed in $(show_time ${duration2})"
 	echo
@@ -278,7 +256,7 @@ if [ "${backupInternalData}" = true ]; then
 	fi
 	echo "Done"
 	echo
-	CheckFileSize "${fileNameBackupDataDir}"
+	splitfile "${fileNameBackupDataDir}"
 	duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup Internal Data completed in $(show_time ${duration2})"
 	echo
@@ -300,7 +278,7 @@ if [ "${backupExternalData}" = true ]; then
 	fi
 	echo "Done"
 	echo
-	CheckFileSize "${fileNameBackupExternalDataDir}"
+	splitfile "${fileNameBackupExternalDataDir}"
 	duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup External Data completed in $(show_time ${duration2})"
 	echo
@@ -335,7 +313,7 @@ if [ "${backupDatabase}" = true ]; then
 		echo "Done"
 		echo
 	fi
-	CheckFileSize "${fileNameBackupDb}"
+	splitfile "${fileNameBackupDb}"
 	duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup Nextcloud MySQL Database completed in $(show_time ${duration2})"
 	echo

@@ -14,11 +14,10 @@ fi
 fixmount () {
 	if [ "$(uname)" = "Darwin" ]; then
 		/sbin/umount ${CloudDir}/${1} > /dev/null 2>&1
-		result=$?
 	else
 		/usr/bin/umount ${CloudDir}/${1} > /dev/null 2>&1
-		result=$?
 	fi
+	result=$?
 	if [[ $result -eq 0 ]]; then
 		printf "\n${1}: $(fg_green "**Unmounted...**\n")"
 	else

@@ -35,9 +35,9 @@ checkmount () {
 			LOGit=""
 		fi
 		if [ "$(uname)" = "Darwin" ]; then
-			rclone cmount --umask=0 ${LOGitLvl} --allow-other --buffer-size 32M --daemon --vfs-cache-mode full ${1}: ${CloudDir}/${1} && echo " **OK**" || echo " **Error(s)**"
+			rclone cmount --umask=0 ${LOGitLvl} --rc --allow-other --buffer-size 32M --daemon --vfs-cache-mode full ${1}: ${CloudDir}/${1} && echo " **OK**" || echo " **Error(s)**"
 		else
-			rclone mount --umask=0 ${LOGitLvl} --allow-other --buffer-size 32M --daemon --vfs-cache-mode full ${1}: ${CloudDir}/${1} && echo " **OK**" || echo " **Error(s)**"
+			rclone mount --umask=0 ${LOGitLvl} --rc --allow-other --buffer-size 32M --daemon --vfs-cache-mode full ${1}: ${CloudDir}/${1} && echo " **OK**" || echo " **Error(s)**"
 		fi
   fi
 }
