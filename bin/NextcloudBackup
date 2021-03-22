@@ -74,21 +74,22 @@ backupFileDir=true
 backupInternalData=false
 backupExternalData=false
 backupDatabase=true
-backupMainDir=${1:-/ncBackup}
-remoteDrive="/home/Cloud/OneDrive/ncBackup"
+localBackupDir=${1:-ncBackup}
+remoteBackupDrive="DropBox"
+remoteBackupDir="${remoteBackupDrive}:/${localBackupDir}" 
 currentDate=$(date +"%Y%m%d")
 ExcludeTheseFiles="--exclude=\"*/files_trashbin/*\"" # Be sure to add , between files
 
-if [ -z "$backupMainDir" ]; then
-	# TODO: The directory where you store the Nextcloud backups (when not specified by args)
-  backupMainDir='/home/y4x/public_html/ncBackup'
-else
-	backupMainDir=$(echo $backupMainDir | sed 's:/*$::')
-fi
+#if [ -z "$localBackupDir" ]; then
+#	# TODO: The directory where you store the Nextcloud backups (when not specified by args)
+#  localBackupDir='/home/y4x/public_html/ncBackup'
+#else
+#	localBackupDir=$(echo $localBackupDir | sed 's:/*$::')
+#fi
 
 # The actual directory of the current backup - this is a subdirectory of the main directory above with a timestamp
-backupDir="${backupMainDir}/${currentDate}/"
-remoteDir="${remoteDrive}/${currentDate}/"
+backupDir="/${localBackupDir}/${currentDate}/"
+remoteDir="${remoteBackupDir}/${currentDate}/"
 
 # TODO: Use compression for Matrix Synapse installation/lib dir
 # When this is the only script for backups, it's recommend to enable compression.
@@ -155,8 +156,8 @@ fileNameBackupDb='nextcloud-db.sql'
 #
 # Print information
 #
+echo "Backup directory: /${backupDir}"
 
-echo "Backup directory: ${backupMainDir}"
 #
 # Check for root
 #
@@ -174,13 +175,13 @@ echo
 # Check if backup dir already exists
 #
 echo "**** Check if Backup Exists"
-if [ ! -d "${backupDir}" ]
+if [ ! -d "/${backupDir}" ]
 then
-	mkdir -p "${backupDir}"
+	mkdir -p "/${backupDir}"
 else
-	errorecho "ERROR: The backup directory ${backupDir} already exists!"
-	printf "Deleting ${backupDir}..."
-	rm -rf ${backupDir}
+	errorecho "ERROR: The backup directory /${backupDir} already exists!"
+	printf "Deleting /${backupDir}..."
+	rm -rf /${backupDir}
 	echo "Done"
 	echo
 fi
@@ -218,13 +219,16 @@ if [ "${backupFileDir}" = true ]; then
 	SECONDS2=$(date +%s)
 	printf "Creating backup of Nextcloud file directory..."
 	if [ "$useCompression" = true ] ; then
-		tar -cpzf "${backupDir}/${fileNameBackupFileDir}" ${ExcludeTheseFiles} -C "${nextcloudFileDir}" .
+		tar -cpzf "/${backupDir}/${fileNameBackupFileDir}" ${ExcludeTheseFiles} -C "${nextcloudFileDir}" .
 	else
-		tar -cpf "${backupDir}/${fileNameBackupFileDir}" ${ExcludeTheseFiles} -C "${nextcloudFileDir}" .
+		tar -cpf "/${backupDir}/${fileNameBackupFileDir}" ${ExcludeTheseFiles} -C "${nextcloudFileDir}" .
 	fi
 	echo "Done"
 	echo
-	splitfile "${fileNameBackupFileDir}"
+	(
+		cd ${backupDir}
+		splitfile "${fileNameBackupFileDir}"
+	)
 	duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup File Diretory completed in $(show_time ${duration2})"
 	echo
@@ -256,7 +260,10 @@ if [ "${backupInternalData}" = true ]; then
 	fi
 	echo "Done"
 	echo
-	splitfile "${fileNameBackupDataDir}"
+	(
+		cd ${backupDir}
+		splitfile "${fileNameBackupDataDir}"
+	)
 	duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup Internal Data completed in $(show_time ${duration2})"
 	echo
@@ -278,7 +285,10 @@ if [ "${backupExternalData}" = true ]; then
 	fi
 	echo "Done"
 	echo
-	splitfile "${fileNameBackupExternalDataDir}"
+	(
+		cd ${backupDir}
+		splitfile "${fileNameBackupExternalDataDir}"
+	)
 	duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup External Data completed in $(show_time ${duration2})"
 	echo
@@ -313,8 +323,12 @@ if [ "${backupDatabase}" = true ]; then
 		echo "Done"
 		echo
 	fi
-	splitfile "${fileNameBackupDb}"
-	duration2=$(($(date +%s)-SECONDS2))
+	(
+		cd ${backupDir}
+		splitfile "${fileNameBackupDb}"
+		ls -d */* > InFile
+	)
+		duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup Nextcloud MySQL Database completed in $(show_time ${duration2})"
 	echo
 else
@@ -323,24 +337,29 @@ else
 fi
 
 #
-# Move backup to remote dirve
+# Move backup to remote remoteBackupDir
 #
-echo "**** Moving Nextcloud Backup"
-SECONDS2=$(date +%s)
-printf  "Copying ${backupDir} to ${remoteDrive}..."
-cpulimit -l 30 cp "${backupDir}" "${remoteDrive}/"
-results=$?
-if [ $results = 0 ]; then
-	echo "Done"
+(
+	SECONDS2=$(date +%s)
+	cd ${backupDir}
+	echo "**** Moving Nextcloud Backup"
+	printf  "Copying ${backupDir} to ${remoteDir}..."
+	#cpulimit -l 30 cp "${backupDir}" "${remoteBackupDir}/"
+	#rclone --buffer-size 2G copyto ${backupDir} ${remoteDir}
+	rccopy "/${localBackupDir}" "${remoteBackupDir}"
+	results=$?
+	if [ $results = 0 ]; then
+		echo "Done"
+		echo
+		printf "	Deleting ${backupDir}..."
+		rm -rf ${backupDir} >/dev/null 2>&1 && echo "Done" || echo "Errors"
+	else
+		echo "Errors"
+	fi
+	duration2=$(($(date +%s)-SECONDS2))
+	echo -e "\n**Move Backup to ${remoteDir} completed in $(show_time ${duration2})"
 	echo
-	printf "	Deleting ${backupDir}..."
-	rm -rf ${backupDir} >/dev/null 2>&1 && echo "Done" || echo "Errors"
-else
-	echo "Errors"
-fi
-duration2=$(($(date +%s)-SECONDS2))
-echo -e "\n**Move Backup to ${remoteDir} completed in $(show_time ${duration2})"
-echo
+)
 
 #
 # Start web serv
@@ -374,14 +393,14 @@ echo
 echo "**** Delete Old Nextcloud Backups"
 if [ ${maxNrOfBackups} != 0 ]
 then
-	nrOfBackups=$(ls -l ${remoteDrive} | grep -c ^d)
+	nrOfBackups=$(ls -l ${remoteBackupDrive} | grep -c ^d)
 	if [[ ${nrOfBackups} > ${maxNrOfBackups} ]]
 	then
 		echo "Removing old backups..."
-		ls -t ${remoteDrive} | tail -$(( nrOfBackups - maxNrOfBackups )) \
+		ls -t ${remoteBackupDrive} | tail -$(( nrOfBackups - maxNrOfBackups )) \
 			| while read -r dirToRemove; do
-			printf "Removing ${remoteDrive}/${dirToRemove}..."
-			rm -rf "${remoteDrive}/${dirToRemove:?}"
+			printf "Removing ${remoteBackupDrive}/${dirToRemove}..."
+			rm -rf "${remoteBackupDrive}/${dirToRemove:?}"
 			echo "Done"
 		done
 	else
@@ -390,7 +409,7 @@ then
 	echo
 fi
 echo
-ls -la ${remoteDrive}
+ls -la ${remoteBackupDrive}
 ls -la ${remoteDir}
 echo
 echo "DONE!"

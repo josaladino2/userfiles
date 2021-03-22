@@ -2912,18 +2912,30 @@ printf "\n$(show_time ${duration} "$(fg_green "**Copy all /etc/hosts files in")"
 }
 
 rccopy () {
+	if [ "$1" = "-p" ]; then
+		Progress="--progress"
+		shift
+	else
+		Progress=""
+	fi
 	if [ -z ${2} ]; then
-		echo "Usage: rccopy Src Remote"
+		echo "Usage: rccopy [-p] Src Remote"
 		exit 1
 	else
-	local Src=${1:-"/ncBackup"}
+	local Src=${1:-"/ncBackup"} # Full Path to Backup Directory
 	local Remote=${2:-"OneDrive:"}
-	ls -d */* > InFile
 	cd ${Src}
+	ls -d */* > InFile
 	while read line
 	do
-		printf "	rclone $line to ${Remote}/${line}..." #		--multi-thread-streams 6
-		rclone --progress --buffer-size 2G copyto ${line} ${Remote}/${line}
+		echo "  rclone $line"
+		echo "    to"
+		if [ -z $Progress ]; then
+			printf "  ${Remote}/${line}..." #		--multi-thread-streams 6
+		else
+			echo "  ${Remote}/${line}..." #		--multi-thread-streams 6
+		fi
+		rclone ${Progress} --cache-db-purge --buffer-size 2G copyto ${line} ${Remote}/${line}
 		results=$?
 		if [[ $results -eq 0 ]]; then
 			echo "Done"
