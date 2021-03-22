@@ -328,7 +328,7 @@ fi
 echo "**** Moving Nextcloud Backup"
 SECONDS2=$(date +%s)
 printf  "Copying ${backupDir} to ${remoteDrive}..."
-cp "${backupDir}" "${remoteDrive}/"
+cpulimit -l 30 cp "${backupDir}" "${remoteDrive}/"
 results=$?
 if [ $results = 0 ]; then
 	echo "Done"

@@ -1,26 +1,26 @@
 splitfile () {
+	# Assumes current directory
 	if [ -z ${2} ]; then
 		echo "Usage: splitfile FileName 30G"
 		exit 1
 	else
-	local FileToCheck=$1
-	local FileSize=${2:-30G}
-	( cd "${backupDir}"
-	if [ $(stat -c %s "${FileToCheck}") -gt 32212254720 ]; then
-		echo "	**** File Size > 30G"
-		printf "	Spliting ${FileToCheck} into 100G parts..."
-		cpulimit -l 30 split -d -b ${FileSize} "${FileToCheck}" "${FileToCheck}.part"
-		results=$?
-		if [ $results = 0 ]; then
-			echo "Done"
-			rm -f ${FileToCheck} >/dev/null 2>&1
-		else
-			echo "Errors"
-			echo "${FileToCheck} NOT Removed!"
+		local FileToCheck=$1
+		local FileSize=${2:-30G}
+		if [ $(stat -c %s "${FileToCheck}") -gt 32212254720 ]; then
+			echo "	**** File Size > 30G"
+			printf "	Spliting ${FileToCheck} into ${FileSize} parts..."
+			cpulimit -l 20 split -d -b ${FileSize} "${FileToCheck}" "${FileToCheck}.part"
+			results=$?
+			if [ $results = 0 ]; then
+				echo "Done"
+				rm -f ${FileToCheck} >/dev/null 2>&1
+			else
+				echo "Errors"
+				echo "${FileToCheck} NOT Removed!"
+			fi
+			echo
+			ls -l *
+			echo
 		fi
-		echo
-		ls -l *
-		echo
 	fi
-	)
 }
