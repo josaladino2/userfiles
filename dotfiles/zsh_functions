@@ -2956,7 +2956,7 @@ splitfile () {
 		local FileToCheck=$1
 		local FileSize=${2:-30G}
 		echo "**** Checking File Size"
-		if [ $(stat -c %s "${FileToCheck}") -gt 32212254720 ]; then
+		if [ $(stat -c %s "${FileToCheck}") > 32212254720 ]; then
 			echo "	**** File Size > 30G"
 			printf "	Spliting ${FileToCheck} into ${FileSize} parts..."
 			cpulimit -l 40 split -d -b ${FileSize} "${FileToCheck}" "${FileToCheck}.part"
@@ -2969,12 +2969,12 @@ splitfile () {
 				echo "${FileToCheck} NOT Removed!"
 			fi
 			echo
-			ls -l *
+			ls -hl *
 			echo
 		fi
 	fi
 }
-
+exit
 glances-spanky () {
 	glances -c $(gethostip "spanky")
 }
@@ -2984,13 +2984,14 @@ rmonitor () {
 	local HostIP=$(gethostip "$(getdomain ${TargetHost})")
 	local TargetApp="${2:-htop}"
 	local Port=${3:-9747}
-	cace $TargetApp in
-		htop)
+	case $TargetApp in
+			htop)
 			${CMD}="ssh -p ${Port} ${TargetHost} -t htop" ;;
 		glances)
 			${CMD}="glances -c ${HostIP}" ;;
-		*) echo "Usage: rmonitor TargetHost TargetApp Port" ;;
-	ecac
+				*) echo "Usage: rmonitor TargetHost TargetApp Port"
+				exit 1 ;;
+	esac
 	${CMD}
 }
 

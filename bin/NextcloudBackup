@@ -57,7 +57,6 @@ CtrlC () {
 		echo "Web server is running..."
 	fi
 	echo
-	exit 1
 }
 #
 # IMPORTANT
@@ -72,7 +71,7 @@ MaintenanceModeOn=false
 disableWebServer=false
 backupFileDir=true
 backupInternalData=false
-backupExternalData=false
+backupExternalData=true
 backupDatabase=true
 localBackupDir=${1:-ncBackup}
 remoteBackupDrive="DropBox"
@@ -177,7 +176,10 @@ echo
 echo "**** Check if Backup Exists"
 if [ ! -d "/${backupDir}" ]
 then
+	printf "Creating /${backupDir}..."
 	mkdir -p "/${backupDir}"
+	echo "Done"
+	echo
 else
 	errorecho "ERROR: The backup directory /${backupDir} already exists!"
 	printf "Deleting /${backupDir}..."
@@ -196,6 +198,7 @@ if [ "${MaintenanceModeOn}" = true ]; then
 else
 	echo "Maintenance Mode (OFF)"
 fi
+echo
 
 #
 # Stop web server
@@ -227,7 +230,7 @@ if [ "${backupFileDir}" = true ]; then
 	echo
 	(
 		cd ${backupDir}
-		splitfile "${fileNameBackupFileDir}"
+		splitfile "${fileNameBackupFileDir}" "30G"
 	)
 	duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup File Diretory completed in $(show_time ${duration2})"
@@ -236,6 +239,7 @@ else
 	echo "Skipping backup of Nextcloud file directory..."
 	echo
 fi
+
 #
 # Backup Local Data directory
 #
@@ -262,7 +266,7 @@ if [ "${backupInternalData}" = true ]; then
 	echo
 	(
 		cd ${backupDir}
-		splitfile "${fileNameBackupDataDir}"
+		splitfile "${fileNameBackupDataDir}" "30G"
 	)
 	duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup Internal Data completed in $(show_time ${duration2})"
@@ -271,6 +275,7 @@ else
 	echo "Skipping Internal Data Backup..."
 	echo
 fi
+
 #
 # Backup local external storage.
 #
@@ -287,7 +292,7 @@ if [ "${backupExternalData}" = true ]; then
 	echo
 	(
 		cd ${backupDir}
-		splitfile "${fileNameBackupExternalDataDir}"
+		splitfile "${fileNameBackupExternalDataDir}" "30G"
 	)
 	duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup External Data completed in $(show_time ${duration2})"
@@ -296,6 +301,7 @@ else
 	echo "Skipping External Data Backup..."
 	echo
 fi
+
 #
 # Backup DB
 #
@@ -318,17 +324,17 @@ if [ "${backupDatabase}" = true ]; then
 			errorecho "ERROR: PostgreSQL not installed (command pg_dump not found)."
 			errorecho "ERROR: No backup of database possible!"
 		else
-			PGPASSWORD="${dbPassword}" pg_dump "${nextcloudDatabase}" -h localhost -U "${dbUser}" -f "${backupDir}/${fileNameBackupDb}"
+			PGPASSWORD="${dbPassword}" pg_dump "${nextcloudDatabase}" -h localhost -U "${dbUser}" \
+				-f "${backupDir}/${fileNameBackupDb}"
 		fi
 		echo "Done"
 		echo
 	fi
 	(
 		cd ${backupDir}
-		splitfile "${fileNameBackupDb}"
-		ls -d */* > InFile
+		splitfile "${fileNameBackupDb}" "30G"
 	)
-		duration2=$(($(date +%s)-SECONDS2))
+	duration2=$(($(date +%s)-SECONDS2))
 	echo -e "\n**Backup Nextcloud MySQL Database completed in $(show_time ${duration2})"
 	echo
 else
@@ -343,7 +349,7 @@ fi
 	SECONDS2=$(date +%s)
 	cd ${backupDir}
 	echo "**** Moving Nextcloud Backup"
-	printf  "Copying ${backupDir} to ${remoteDir}..."
+	printf  "rclone copyto ${backupDir} to ${remoteDir}..."
 	#cpulimit -l 30 cp "${backupDir}" "${remoteBackupDir}/"
 	#rclone --buffer-size 2G copyto ${backupDir} ${remoteDir}
 	rccopy "/${localBackupDir}" "${remoteBackupDir}"
@@ -351,13 +357,13 @@ fi
 	if [ $results = 0 ]; then
 		echo "Done"
 		echo
-		printf "	Deleting ${backupDir}..."
+		printf "  ** Deleting ${backupDir}..."
 		rm -rf ${backupDir} >/dev/null 2>&1 && echo "Done" || echo "Errors"
 	else
 		echo "Errors"
 	fi
 	duration2=$(($(date +%s)-SECONDS2))
-	echo -e "\n**Move Backup to ${remoteDir} completed in $(show_time ${duration2})"
+	echo -e "\n  ** Backup to ${remoteDir} completed in $(show_time ${duration2})"
 	echo
 )
 
@@ -382,10 +388,11 @@ if [ "${MaintenanceModeOn}" = true ]; then
 	printf "Disabling Maintenance Mode (OFF)..."
 	DisableMaintenanceMode
 	echo "Done"
+	echo
 else
 	echo "Maintenance Mode (OFF)"
+	echo
 fi
-echo
 
 #
 # Delete old backups
@@ -393,14 +400,14 @@ echo
 echo "**** Delete Old Nextcloud Backups"
 if [ ${maxNrOfBackups} != 0 ]
 then
-	nrOfBackups=$(ls -l ${remoteBackupDrive} | grep -c ^d)
+	nrOfBackups=$(ls -l ${remoteBackupDir} | grep -c ^d)
 	if [[ ${nrOfBackups} > ${maxNrOfBackups} ]]
 	then
 		echo "Removing old backups..."
-		ls -t ${remoteBackupDrive} | tail -$(( nrOfBackups - maxNrOfBackups )) \
+		ls -t ${remoteBackupDir} | tail -$(( nrOfBackups - maxNrOfBackups )) \
 			| while read -r dirToRemove; do
-			printf "Removing ${remoteBackupDrive}/${dirToRemove}..."
-			rm -rf "${remoteBackupDrive}/${dirToRemove:?}"
+			printf "Removing ${remoteBackupDir}/${dirToRemove}..."
+			rm -rf "${remoteBackupDir}/${dirToRemove:?}"
 			echo "Done"
 		done
 	else
@@ -409,13 +416,12 @@ then
 	echo
 fi
 echo
-ls -la ${remoteBackupDrive}
-ls -la ${remoteDir}
+rclone lsd ${remoteBackupDir}
+echo "----------------"
+rclone lsf ${remoteDir}
 echo
-echo "DONE!"
-echo
-echo "Backup ${remoteDir} created:"
+echo "${remoteDir} Backup DONE!"
 echo
 duration=${SECONDS}
-echo -e "\n**Nextcloud Backup completed in $(show_time ${duration})"
+echo "**Nextcloud Backup completed in $(show_time ${duration})"
 echo
