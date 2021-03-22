@@ -12,7 +12,7 @@ if [[ $(git diff --stat) != '' ]]; then
 		git c -m "${gitmsg}"
 		printf "\n*** Push files ***\n"
 		git psom
-		printf "\n*** Check Results ***\n"
+		printf "\n*** Checking Results ***\n"
 		if [[ $(git diff --stat) = '' ]]; then
 			echo "Working Tree is clean."
 		else
