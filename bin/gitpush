@@ -1,10 +1,10 @@
 #!/usr/local/bin/zsh
 if [[ $(git diff --stat) != '' ]]; then
 	git s -u
-	echo ""
+	echo 
 	ask "Do you want to add, commit, and push?" "N"
 	result=$?
-	if [ $result -eq 0 ]; then
+	if [[ $result -eq 0 ]]; then
 		echo "*** Add files ***"
 		git aa
 		printf "\n*** Commit files ***\n"
@@ -13,9 +13,13 @@ if [[ $(git diff --stat) != '' ]]; then
 		printf "\n*** Push files ***\n"
 		git psom
 		printf "\n*** Check Results ***\n"
-		git s -u
+		if [[ $(git diff --stat) = '' ]]; then
+			echo "Working Tree is clean."
+		else
+			echo "Working Tree is dirty."
+		fi
 	else
-		printf "\nDo Nothing\n"
+		echo -e "\nDo Nothing\n"
 	fi
 else
 	echo "Working Tree is clean."
