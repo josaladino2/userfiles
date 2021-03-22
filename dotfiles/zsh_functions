@@ -2934,7 +2934,6 @@ splitfile () {
 		echo
 		ls -l *
 		echo
-		fi
 	fi
 	)
 }
