@@ -2920,7 +2920,14 @@ rmonitor () {
 	local HostIP=$(gethostip "$(getdomain ${TargetHost})")
 	local TargetApp="${2:-htop}"
 	local Port=${3:-9747}
-	ssh -p ${Port} ${TargetHost} -t "${TargetApp}"
+	cace $TargetApp in
+		htop)
+			${CMD}="ssh -p ${Port} ${TargetHost} -t htop" ;;
+		glances)
+			${CMD}="glances -c ${HostIP}" ;;
+		*) echo "Usage: rmonitor TargetHost TargetApp Port" ;;
+	ecac
+	${CMD}
 }
 
 glances-dopey () {
