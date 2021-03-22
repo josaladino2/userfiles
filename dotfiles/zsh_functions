@@ -2923,7 +2923,7 @@ splitfile () {
 		if [ $(stat -c %s "${FileToCheck}") -gt 32212254720 ]; then
 			echo "	**** File Size > 30G"
 			printf "	Spliting ${FileToCheck} into ${FileSize} parts..."
-			cpulimit -l 20 split -d -b ${FileSize} "${FileToCheck}" "${FileToCheck}.part"
+			cpulimit -l 40 split -d -b ${FileSize} "${FileToCheck}" "${FileToCheck}.part"
 			results=$?
 			if [ $results = 0 ]; then
 				echo "Done"
