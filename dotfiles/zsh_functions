@@ -2912,17 +2912,27 @@ printf "\n$(show_time ${duration} "$(fg_green "**Copy all /etc/hosts files in")"
 }
 
 rccopy () {
-	Src="/ncBackup"
-	Dest=${1:-OneDrive}
+	if [ -z ${2} ]; then
+		echo "Usage: rccopy Src Remote"
+		exit 1
+	else
+	local Src=${1:-"/ncBackup"}
+	local Remote=${2:-"OneDrive:"}
 	ls -d */* > InFile
-	cd /ncBackup
+	cd ${Src}
 	while read line
 	do
-		echo $line
-		rclone --progress --buffer-size 2G copyto ${line} ${Dest}:ncBackup/${line}
-#		--multi-thread-streams 6
+		printf "	rclone $line to ${Remote}/${line}..." #		--multi-thread-streams 6
+		rclone --progress --buffer-size 2G copyto ${line} ${Remote}/${line}
+		results=$?
+		if [[ $results -eq 0 ]]; then
+			echo "Done"
+		else
+			echo "Errors ($results)"
+		fi
 	done < InFile
-	rm InFile
+	rm -f InFile
+	fi
 }
 
 splitfile () {
