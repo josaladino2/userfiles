@@ -35,11 +35,11 @@ CheckFileSize () {
 		if [ $(stat -c %s "${FileToCheck}") -gt 107374182400 ]; then
 			echo "	**** File Size > 100G"
 			printf "	Spliting ${FileToCheck} into 100G parts..."
-			cpulimit -l 30 split -d -b 50G "${FileToCheck}" "${FileToCheck}.part"
+			cpulimit -l 30 split -d -b 30G "${FileToCheck}" "${FileToCheck}.part"
 			results=$?
 			if [ $results = 0 ]; then
 				echo "Done"
-				rm -f ${FileToCheck}
+				rm -f ${FileToCheck} >/dev/null 2>&1
 			else
 				echo "Errors"
 				echo "${FileToCheck} NOT Removed!"
