@@ -1,14 +1,22 @@
-#!/bin/sh
-UPSTREAM=${1:-'@{u}'}
-LOCAL=$(git rev-parse @{0})
-REMOTE=$(git rev-parse "$UPSTREAM")
-BASE=$(git merge-base @{0} "$UPSTREAM")
-if [ $LOCAL = $REMOTE ]; then
-    echo "Up-to-date"
-elif [ $LOCAL = $BASE ]; then
-    echo "Need to pull"
-elif [ $REMOTE = $BASE ]; then
-    echo "Need to push"
-else
-    echo "Diverged"
+#!/usr/local/bin/zsh
+if output=$(git diff --exit-code) && [ -z "$output" ]; then
+  fg_green "No unstaged changes."
+else 
+  fg_red "Yes, Unstaged changes."
+fi
+if output=$(git diff --cached --exit-code) && [ -z "$output" ]; then
+  fg_green "No staged and uncommed changes."
+else 
+  fg_red "Yes, Staged Changes Uncommitted."
+fi
+if output=$(git cherry -v) && [ -z "$output" ]; then
+  fg_green "No commits to Push."
+else 
+  NumChanges=${$(echo $output|wc -l)##*( )}
+  if (( NumChanges > 1 )); then
+    changes="Changes"
+  else
+    changes="Change"
+  fi
+  fg_red "Yes, ${NumChanges} $changes to Push."
 fi
