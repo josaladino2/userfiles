@@ -12,16 +12,22 @@ else
   fg_red1 "Yes, ${NumStashes} $stashes saved."
   fg_yellow "  git stash list [to view them]"
 fi
-if output=$(git diff --exit-code) && [ -z "$output" ]; then
-  fg_green "No unstaged changes."
+if output=$(git ls-files . --exclude-standard --others) && [ -z "$output" ]; then
+  fg_green "No Untracked files."
 else 
-  fg_red1 "Yes, Unstaged changes."
+  fg_red1 "Yes, Untracked files."
+  fg_red1 "  $(git ls-files . --exclude-standard --others)"
+fi
+if output=$(git diff --exit-code) && [ -z "$output" ]; then
+  fg_green "No changes to be Staged."
+else 
+  fg_red1 "Yes, changes to be Staged."
   fg_yellow "  git diff [to view them]"
 fi
 if output=$(git diff --cached --exit-code) && [ -z "$output" ]; then
-  fg_green "No staged and unCommitted changes."
+  fg_green "No staged changes to Commit."
 else 
-  fg_red1 "Yes, Staged Changes NOT Committed."
+  fg_red1 "Yes, staged changes to Commit."
   fg_yellow "  git diff --cached [to view them]"
 fi
 if output=$(git cherry -v) && [ -z "$output" ]; then
