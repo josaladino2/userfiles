@@ -310,18 +310,12 @@ if [ -f /tmp/.echo ]; then
 	echo "Using: $(pwd)/.zshrc@5"
 fi
 
-#ENHANCD_COMMAND=ecd; export ENHANCD_COMMAND
+# extport ENHANCD_COMMAND=ecd
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# Do gitcheck to see current status
 gitcheck
-
-# Check and Update/Download any changes from git.
-#if [[ $(git diff --stat) != '' ]]; then
-#	git plom
-#else
-#	echo "Working Tree is Up to Date."
-#fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh

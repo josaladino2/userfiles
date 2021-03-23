@@ -1,14 +1,28 @@
 #!/usr/local/bin/zsh
 fg_white "**** Git Status Report ****"
+if output=$(git stash list) && [ -z "$output" ]; then
+  fg_green "No Stashes saved."
+else 
+  NumStashes=${$(echo $output|wc -l)##*( )}
+  if (( NumStashes > 1 )); then
+    stashes="Stashes"
+  else
+    stashes="Stash"
+  fi
+  fg_red1 "Yes, ${NumStashes} $stashes saved."
+  fg_yellow "  git stash list [to view them]"
+fi
 if output=$(git diff --exit-code) && [ -z "$output" ]; then
   fg_green "No unstaged changes."
 else 
-  fg_red "Yes, Unstaged changes."
+  fg_red1 "Yes, Unstaged changes."
+  fg_yellow "  git diff [to view them]"
 fi
 if output=$(git diff --cached --exit-code) && [ -z "$output" ]; then
-  fg_green "No staged and uncommed changes."
+  fg_green "No staged and uncommitted changes."
 else 
-  fg_red "Yes, Staged Changes Uncommitted."
+  fg_red1 "Yes, Staged Changes Uncommitted."
+  fg_yellow "  git diff --cached [to view them]"
 fi
 if output=$(git cherry -v) && [ -z "$output" ]; then
   fg_green "No commits to Push."
@@ -19,5 +33,6 @@ else
   else
     changes="Change"
   fi
-  fg_red "Yes, ${NumChanges} $changes to Push."
+  fg_red1 "Yes, ${NumChanges} $changes to Push."
+  fg_yellow "  git cherry -v [to view them]"
 fi
