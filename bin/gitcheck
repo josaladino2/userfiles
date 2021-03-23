@@ -36,3 +36,13 @@ else
   fg_red1 "Yes, ${NumChanges} $changes to Push."
   fg_yellow "  git cherry -v [to view them]"
 fi
+git fetch
+UPSTREAM=${1:-'@{u}'}
+LOCAL=$(git rev-parse @)
+BASE=$(git merge-base @ "$UPSTREAM")
+if [ $LOCAL = $BASE ]; then
+  fg_green "No changes to Pull."
+else 
+  fg_red1 "Yes, changes to Pull."
+  fg_yellow "  git pull --dry-run [to view them]"
+fi

@@ -13,7 +13,7 @@ else
 	SrcDir=${HOME}
 	GitDir="${HOME}/dotfiles"
 	Exclude=".bash_history .zsh_$(hostname -s)_hist  .bashdb_hist .zshdb_hist .bash_sessions .zshrc.zwc .zsh_shver "
-	for i in $@
+	for i in "$@"
 	do
 		SrcFile="${i}"
 		GitFile=$(echo ${SrcFile}|sed -e 's/\.//')
