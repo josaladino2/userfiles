@@ -2947,6 +2947,13 @@ rccopy () {
 	fi
 }
 
+indent() {
+	# Usage: indent [multiplier]
+  local indent=${1:-1}
+  local indentSize=2
+  pr -to $((indent * indentSize))
+}
+
 splitfile () {
 	# Assumes current directory
 	if [ -z ${1} ]; then
