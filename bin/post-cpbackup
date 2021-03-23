@@ -76,6 +76,7 @@ if [ -e ${FileDate} ]; then
 	rcsync copyto "transports.db" 
 	rcsync sync "${FileDate}"
 	result=$?
+
 	# Remove local files from /cpbackup/
 	if [ ${result} -eq 0 ]; then
 		(	rm -rf .meta/
