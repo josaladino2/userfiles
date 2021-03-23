@@ -1,5 +1,5 @@
 #!/usr/local/bin/zsh
-fg_white "**** Git Status Report ****"
+fg_white "**** Git Working Tree Status ****"
 if output=$(git stash list) && [ -z "$output" ]; then
   fg_green "No Stashes saved."
 else 
