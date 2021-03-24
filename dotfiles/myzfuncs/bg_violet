@@ -1,3 +1,0 @@
-bg_violet () {
-	print -P %K{177}$*%k
-}

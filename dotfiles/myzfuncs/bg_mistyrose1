@@ -1,3 +1,0 @@
-bg_mistyrose1 () {
-	print -P %K{224}$*%k
-}

@@ -1,3 +1,0 @@
-f_reverse () {
-	printf "${reverse_s}$*${no_reverse_s}"
-}

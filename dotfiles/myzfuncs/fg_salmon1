@@ -1,3 +1,0 @@
-fg_salmon1 () {
-	print -P %F{209}$*%f
-}

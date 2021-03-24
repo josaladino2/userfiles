@@ -1,3 +1,0 @@
-fg_honeydew2 () {
-	print -P %F{194}$*%f
-}

@@ -1,3 +1,0 @@
-fg_royalblue1 () {
-	print -P %F{063}$*%f
-}

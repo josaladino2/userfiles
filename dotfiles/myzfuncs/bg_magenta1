@@ -1,3 +1,0 @@
-bg_magenta1 () {
-	print -P %K{201}$*%k
-}

@@ -1,7 +1,0 @@
-reboot () {
-	if [ $UID -ne 0 ]; then
-    sudo shutdown -r now
-	else
-    shutdown -r now
-	fi
-}

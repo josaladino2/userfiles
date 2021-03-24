@@ -1,8 +1,0 @@
-show_function () {
-	if function_exists ${1}
-	then
-		echo -e "$(show_function_f ${1} 2>/dev/null || declare -pf ${1} || cat ${myzfuncs}/${1})"
-	else
-		return 1
-	fi
-}

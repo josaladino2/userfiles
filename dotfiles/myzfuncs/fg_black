@@ -1,3 +1,0 @@
-fg_black () {
-	print -P %F{000}$*%f
-}

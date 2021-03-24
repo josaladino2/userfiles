@@ -1,8 +1,0 @@
-function_exists () {
-	if [[ -n $(declare -pf ${1}) && ( ! "$(declare -fp ${1})" =~ .*"# undefined".* ) ]] || \
-		[[ -n $(show_function_f ${1}) ]]; then
-		return 0
-	else
-		return $?
-	fi
-}

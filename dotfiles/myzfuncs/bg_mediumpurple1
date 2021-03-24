@@ -1,3 +1,0 @@
-bg_mediumpurple1 () {
-	print -P %K{141}$*%k
-}

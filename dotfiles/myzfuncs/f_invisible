@@ -1,3 +1,0 @@
-f_invisible () {
-	printf "${invisible_s}$*${no_invisible_s}"
-}

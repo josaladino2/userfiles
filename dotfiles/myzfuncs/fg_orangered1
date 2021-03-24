@@ -1,3 +1,0 @@
-fg_orangered1 () {
-	print -P %F{202}$*%f
-}

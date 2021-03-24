@@ -1,3 +1,0 @@
-findlarger () {
-	find . -type f -size +${1}c
-}

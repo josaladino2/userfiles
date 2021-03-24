@@ -1,3 +1,0 @@
-fg_grey3 () {
-	print -P %F{232}$*%f
-}

@@ -1,3 +1,0 @@
-fg_slateblue3 () {
-	print -P %F{062}$*%f
-}

@@ -1,3 +1,0 @@
-fg_cornsilk1 () {
-	print -P %F{230}$*%f
-}

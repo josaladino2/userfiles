@@ -1,3 +1,0 @@
-fg_slateblue1 () {
-	print -P %F{099}$*%f
-}

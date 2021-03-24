@@ -1,8 +1,0 @@
-repeat_char () {
-	if [ -z ${1} ]; then
-		echo "Usage: ${funcstack[1]} character num"
-	else
-		printf "${1}%.0s" {1..${2}}
-		echo ""
-	fi
-}

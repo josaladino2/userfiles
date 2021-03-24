@@ -1,3 +1,0 @@
-fg_green () {
-	print -P %F{002}"$*"%f
-}

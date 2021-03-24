@@ -1,3 +1,0 @@
-fg_grey0 () {
-	print -P %F{016}$*%f
-}

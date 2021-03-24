@@ -1,3 +1,0 @@
-bg_grey () {
-	print -P %K{008}$*%k
-}

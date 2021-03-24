@@ -1,3 +1,0 @@
-bg_orange3 () {
-	print -P %K{172}$*%k
-}

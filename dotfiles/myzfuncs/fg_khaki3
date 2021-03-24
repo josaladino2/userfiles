@@ -1,3 +1,0 @@
-fg_khaki3 () {
-	print -P %F{185}$*%f
-}

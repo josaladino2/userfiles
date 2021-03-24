@@ -1,3 +1,0 @@
-fg_blue3 () {
-	print -P %F{020}$*%f
-}

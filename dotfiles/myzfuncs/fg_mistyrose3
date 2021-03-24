@@ -1,3 +1,0 @@
-fg_mistyrose3 () {
-	print -P %F{181}$*%f
-}

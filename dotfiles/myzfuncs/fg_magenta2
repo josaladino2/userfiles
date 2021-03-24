@@ -1,3 +1,0 @@
-fg_magenta2 () {
-	print -P %F{200}$*%f
-}

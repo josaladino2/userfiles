@@ -1,3 +1,0 @@
-bg_palevioletred1 () {
-	print -P %K{211}$*%k
-}

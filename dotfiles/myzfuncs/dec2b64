@@ -1,5 +1,0 @@
-dec2b64 () {
-if [[ -n $1 ]]; then
-	echo "obase=64;$1" | bc
-fi
-}

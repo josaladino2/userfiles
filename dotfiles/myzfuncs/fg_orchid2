@@ -1,3 +1,0 @@
-fg_orchid2 () {
-	print -P %F{212}$*%f
-}

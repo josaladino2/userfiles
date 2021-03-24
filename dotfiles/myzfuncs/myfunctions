@@ -1,3 +1,0 @@
-myfunctions () {
-	get_fcn_list | sort | column
-}

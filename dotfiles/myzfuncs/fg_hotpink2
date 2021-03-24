@@ -1,3 +1,0 @@
-fg_hotpink2 () {
-	print -P %F{169}$*%f
-}

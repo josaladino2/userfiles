@@ -1,5 +1,0 @@
-dec2b32 () {
-	if [[ -n $1 ]]; then
-		echo "obase=32;$1" | bc
-	fi
-}

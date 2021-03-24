@@ -1,3 +1,0 @@
-fg_sandybrown () {
-	print -P %F{215}$*%f
-}

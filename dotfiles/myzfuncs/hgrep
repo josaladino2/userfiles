@@ -1,8 +1,0 @@
-hgrep () {
-	if [ -z ${1} ]; then
-		printf "Usage: ${Funcstack[1]} lookup-word
-"
-		return
-	fi
-	history | sed s/.*\ \ // | grep $@
-}

@@ -1,4 +1,0 @@
-fg_lgreen () {
-	echo -e "$(tput setaf 118)$*$(fg_nc)"
-}
-

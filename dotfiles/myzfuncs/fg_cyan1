@@ -1,3 +1,0 @@
-fg_cyan1 () {
-	print -P %F{051}$*%f
-}

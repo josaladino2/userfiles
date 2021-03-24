@@ -1,3 +1,0 @@
-fg_lightslategrey () {
-	print -P %F{103}$*%f
-}

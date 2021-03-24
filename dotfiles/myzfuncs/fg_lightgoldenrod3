@@ -1,3 +1,0 @@
-fg_lightgoldenrod3 () {
-	print -P %F{179}$*%f
-}

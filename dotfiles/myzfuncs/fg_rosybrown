@@ -1,3 +1,0 @@
-fg_rosybrown () {
-	print -P %F{138}$*%f
-}

@@ -1,3 +1,0 @@
-fg_yellow2 () {
-	print -P %F{190}$*%f
-}

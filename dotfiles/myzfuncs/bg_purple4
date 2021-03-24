@@ -1,3 +1,0 @@
-bg_purple4 () {
-	print -P %K{055}$*%k
-}

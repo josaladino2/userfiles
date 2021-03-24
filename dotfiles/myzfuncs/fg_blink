@@ -1,3 +1,0 @@
-fg_blink () {
-	printf "${blink_s}$*${reset_s}"
-}

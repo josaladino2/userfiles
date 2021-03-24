@@ -1,3 +1,0 @@
-bg_orchid1 () {
-	print -P %K{213}$*%k
-}

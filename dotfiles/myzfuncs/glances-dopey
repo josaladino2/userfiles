@@ -1,3 +1,0 @@
-glances-dopey () {
-	glances -c $(gethostip "y4x.biz")
-}

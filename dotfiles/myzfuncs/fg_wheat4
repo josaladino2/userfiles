@@ -1,3 +1,0 @@
-fg_wheat4 () {
-	print -P %F{101}$*%f
-}

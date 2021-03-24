@@ -1,3 +1,0 @@
-bg_springgreen4 () {
-	print -P %K{029}$*%k
-}

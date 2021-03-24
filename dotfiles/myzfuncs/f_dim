@@ -1,3 +1,0 @@
-f_dim () {
-	printf "${dim_s}$*${no_dim_s}"
-}

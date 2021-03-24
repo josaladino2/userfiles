@@ -1,3 +1,0 @@
-fg_white () {
-	print -P %F{007}$*%f
-}

@@ -1,3 +1,0 @@
-bg_darkturquoise () {
-	print -P %K{044}$*%k
-}

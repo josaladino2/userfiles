@@ -1,3 +1,0 @@
-fg_darkred () {
-	print -P %F{088}$*%f
-}

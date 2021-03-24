@@ -1,3 +1,0 @@
-fg_paleturquoise4 () {
-	print -P %F{066}$*%f
-}

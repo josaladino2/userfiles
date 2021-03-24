@@ -1,3 +1,0 @@
-fg_aqua () {
-	print -P %F{014}$*%f
-}

@@ -1,3 +1,0 @@
-fg_fuchsia () {
-	print -P %F{013}$*%f
-}

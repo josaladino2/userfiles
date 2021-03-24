@@ -1,3 +1,0 @@
-fg_green3 () {
-	print -P %F{040}$*%f
-}

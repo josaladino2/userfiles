@@ -1,3 +1,0 @@
-vimupdate () {
-	vim +'PlugUpdate' # +qa to auto close after update
-}

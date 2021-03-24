@@ -1,3 +1,0 @@
-fg_orange1 () {
-	print -P %F{214}$*%f
-}

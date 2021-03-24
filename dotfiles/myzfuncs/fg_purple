@@ -1,3 +1,0 @@
-fg_purple () {
-	print -P %F{129}$*%f
-}

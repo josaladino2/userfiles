@@ -1,3 +1,0 @@
-fg_darkmagenta () {
-	print -P %F{091}$*%f
-}

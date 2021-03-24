@@ -1,4 +1,0 @@
-fg_brown () {
-	echo -e "$(tput setaf 95)$*$(fg_nc)"
-}
-

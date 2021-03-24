@@ -1,3 +1,0 @@
-fg_darkslategray3 () {
-	print -P %F{116}$*%f
-}

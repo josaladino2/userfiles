@@ -1,3 +1,0 @@
-fg_plum4 () {
-	print -P %F{096}$*%f
-}

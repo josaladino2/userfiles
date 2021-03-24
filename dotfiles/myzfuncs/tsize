@@ -1,4 +1,0 @@
-tsize () {
-	printf "$(dirsize ${1:-$(pwd)} | sed 's/.*total //g')
-"
-}

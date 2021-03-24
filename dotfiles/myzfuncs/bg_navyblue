@@ -1,3 +1,0 @@
-bg_navyblue () {
-	print -P %K{017}$*%k
-}

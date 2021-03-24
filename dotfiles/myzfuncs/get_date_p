@@ -1,3 +1,0 @@
-get_date_p () {
-	pfg_green "$(date "+%a %d %b")"
-}

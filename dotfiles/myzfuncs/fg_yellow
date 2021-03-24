@@ -1,3 +1,0 @@
-fg_yellow () {
-	print -P %F{226}$*%f
-}

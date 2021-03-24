@@ -1,3 +1,0 @@
-fg_darkseagreen4 () {
-	print -P %F{071}$*%f
-}

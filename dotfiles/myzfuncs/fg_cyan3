@@ -1,3 +1,0 @@
-fg_cyan3 () {
-	print -P %F{043}$*%f
-}

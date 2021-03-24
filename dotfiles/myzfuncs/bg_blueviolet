@@ -1,3 +1,0 @@
-bg_blueviolet () {
-	print -P %K{057}$*%k
-}

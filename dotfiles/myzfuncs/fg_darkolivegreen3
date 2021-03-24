@@ -1,3 +1,0 @@
-fg_darkolivegreen3 () {
-	print -P %F{149}$*%f
-}

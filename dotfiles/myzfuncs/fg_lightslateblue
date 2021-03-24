@@ -1,3 +1,0 @@
-fg_lightslateblue () {
-	print -P %F{105}$*%f
-}
