@@ -1,3 +1,0 @@
-fg_chartreuse2 () {
-	print -P %F{112}$*%f
-}

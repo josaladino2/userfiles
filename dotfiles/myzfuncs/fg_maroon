@@ -1,3 +1,0 @@
-fg_maroon () {
-	print -P %F{009}$*%f
-}

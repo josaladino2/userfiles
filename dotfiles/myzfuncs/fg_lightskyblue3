@@ -1,3 +1,0 @@
-fg_lightskyblue3 () {
-	print -P %F{110}$*%f
-}

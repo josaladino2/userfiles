@@ -1,3 +1,0 @@
-fg_mediumorchid () {
-	print -P %F{134}$*%f
-}

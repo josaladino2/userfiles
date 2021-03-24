@@ -1,3 +1,0 @@
-fg_lightcoral () {
-	print -P %F{210}$*%f
-}

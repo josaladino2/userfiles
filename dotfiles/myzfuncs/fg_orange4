@@ -1,3 +1,0 @@
-fg_orange4 () {
-	print -P %F{094}$*%f
-}

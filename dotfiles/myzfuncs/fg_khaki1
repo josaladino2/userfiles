@@ -1,3 +1,0 @@
-fg_khaki1 () {
-	print -P %F{228}$*%f
-}

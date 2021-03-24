@@ -1,3 +1,0 @@
-fg_violet () {
-	print -P %F{177}$*%f
-}

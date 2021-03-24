@@ -1,9 +1,0 @@
-gethostip () {
-#	alias egrep="/usr/local/bin/gegrep"
-	DomIP=$(arp -a|egrep "${1}" | egrep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
-	if [ -n "${DomIP}" ]; then
-			echo ${DomIP}
-	else
-		dig +short ${1:-$(ipext)}
-	fi
-}

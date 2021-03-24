@@ -1,3 +1,0 @@
-fg_darkslategray2 () {
-	print -P %F{087}$*%f
-}

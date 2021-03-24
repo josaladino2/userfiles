@@ -1,3 +1,0 @@
-fg_plum1 () {
-	print -P %F{219}$*%f
-}

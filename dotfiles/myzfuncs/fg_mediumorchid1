@@ -1,3 +1,0 @@
-fg_mediumorchid1 () {
-	print -P %F{207}$*%f
-}

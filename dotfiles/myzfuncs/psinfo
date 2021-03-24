@@ -1,9 +1,0 @@
-psinfo () {
-	if [ -z ${1} ]; then
-		printf "Usage: ${Funcstack[1]} ProcessName
-"
-		return
-	fi
-  ps -axww | head -1
-	ps -axww | grep ${1}
-}

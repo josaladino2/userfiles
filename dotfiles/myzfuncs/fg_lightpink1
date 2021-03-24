@@ -1,3 +1,0 @@
-fg_lightpink1 () {
-	print -P %F{217}$*%f
-}

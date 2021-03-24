@@ -1,3 +1,0 @@
-fg_lightyellow3 () {
-	print -P %F{187}$*%f
-}

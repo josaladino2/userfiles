@@ -1,3 +1,0 @@
-fg_lightsalmon1 () {
-	print -P %F{216}$*%f
-}

@@ -1,3 +1,0 @@
-bg_steelblue1 () {
-	print -P %K{081}$*%k
-}

@@ -1,3 +1,0 @@
-safe_exit () {
-	exit 1
-}

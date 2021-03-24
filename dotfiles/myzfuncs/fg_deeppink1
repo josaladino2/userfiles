@@ -1,3 +1,0 @@
-fg_deeppink1 () {
-	print -P %F{199}$*%f
-}

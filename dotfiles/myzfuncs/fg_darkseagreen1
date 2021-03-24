@@ -1,3 +1,0 @@
-fg_darkseagreen1 () {
-	print -P %F{193}$*%f
-}

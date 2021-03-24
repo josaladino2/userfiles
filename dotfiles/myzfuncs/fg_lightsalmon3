@@ -1,3 +1,0 @@
-fg_lightsalmon3 () {
-	print -P %F{173}$*%f
-}

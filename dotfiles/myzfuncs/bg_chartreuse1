@@ -1,3 +1,0 @@
-bg_chartreuse1 () {
-	print -P %K{118}$*%k
-}

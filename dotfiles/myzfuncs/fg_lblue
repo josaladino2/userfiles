@@ -1,4 +1,0 @@
-fg_lblue () {
-	echo -e "$(tput setaf 32)$*$(fg_nc)"
-}
-

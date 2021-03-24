@@ -1,3 +1,0 @@
-fg_cadetblue () {
-	print -P %F{073}$*%f
-}

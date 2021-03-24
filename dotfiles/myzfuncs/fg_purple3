@@ -1,3 +1,0 @@
-fg_purple3 () {
-	print -P %F{056}$*%f
-}

@@ -1,3 +1,0 @@
-fg_thistle1 () {
-	print -P %F{225}$*%f
-}

@@ -1,3 +1,0 @@
-fg_indianred1 () {
-	print -P %F{204}$*%f
-}

@@ -1,3 +1,0 @@
-bg_lightcyan3 () {
-	print -P %K{152}$*%k
-}

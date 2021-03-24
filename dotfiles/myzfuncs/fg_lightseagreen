@@ -1,3 +1,0 @@
-fg_lightseagreen () {
-	print -P %F{037}$*%f
-}

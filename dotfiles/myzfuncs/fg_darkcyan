@@ -1,3 +1,0 @@
-fg_darkcyan () {
-	print -P %F{036}$*%f
-}

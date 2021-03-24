@@ -1,3 +1,0 @@
-bg_hotpink2 () {
-	print -P %K{169}$*%k
-}

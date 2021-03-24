@@ -1,3 +1,0 @@
-fg_silver () {
-	print -P %F{015}$*%f
-}

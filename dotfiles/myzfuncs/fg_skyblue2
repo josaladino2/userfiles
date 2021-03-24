@@ -1,3 +1,0 @@
-fg_skyblue2 () {
-	print -P %F{111}$*%f
-}

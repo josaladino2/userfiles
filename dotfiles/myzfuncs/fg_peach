@@ -1,4 +1,0 @@
-fg_peach () {
-	echo -e "$(tput setaf 208)$*$(fg_nc)"
-}
-

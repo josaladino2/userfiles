@@ -1,3 +1,0 @@
-fg_seagreen3 () {
-	print -P %F{078}$*%f
-}

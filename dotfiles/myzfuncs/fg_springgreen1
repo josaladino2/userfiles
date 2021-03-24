@@ -1,3 +1,0 @@
-fg_springgreen1 () {
-	print -P %F{048}$*%f
-}

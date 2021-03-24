@@ -1,3 +1,0 @@
-fg_darkorange () {
-	print -P %F{208}$*%f
-}

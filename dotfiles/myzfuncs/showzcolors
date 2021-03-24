@@ -1,4 +1,0 @@
-showzcolors () {
-	Mode=${1:-"foreground"}
-	getColorCode ${Mode}
-}

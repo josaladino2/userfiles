@@ -1,3 +1,0 @@
-fg_darkgoldenrod () {
-	print -P %F{136}$*%f
-}

@@ -1,3 +1,0 @@
-fg_magenta () {
-	print -P %F{005}$*%f
-}

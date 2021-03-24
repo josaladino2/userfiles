@@ -1,3 +1,0 @@
-fg_pink1 () {
-	print -P %F{218}$*%f
-}

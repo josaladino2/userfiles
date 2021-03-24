@@ -1,3 +1,0 @@
-fg_palevioletred1 () {
-	print -P %F{211}$*%f
-}

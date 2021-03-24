@@ -1,3 +1,0 @@
-fg_lightcyan1 () {
-	print -P %F{195}$*%f
-}

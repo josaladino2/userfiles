@@ -1,3 +1,0 @@
-fg_aquamarine3 () {
-	print -P %F{079}$*%f
-}

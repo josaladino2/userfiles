@@ -1,3 +1,0 @@
-bg_darkseagreen () {
-	print -P %K{108}$*%k
-}

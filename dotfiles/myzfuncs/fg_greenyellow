@@ -1,3 +1,0 @@
-fg_greenyellow () {
-	print -P %F{154}$*%f
-}

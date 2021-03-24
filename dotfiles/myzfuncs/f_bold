@@ -1,3 +1,0 @@
-f_bold () {
-	printf "${bold_s}$*${no_bold_s}"
-}

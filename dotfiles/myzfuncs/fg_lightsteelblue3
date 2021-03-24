@@ -1,3 +1,0 @@
-fg_lightsteelblue3 () {
-	print -P %F{146}$*%f
-}
