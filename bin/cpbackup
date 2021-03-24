@@ -1,8 +1,0 @@
-#!/usr/local/bin/zsh
-PATH="/usr/local/cpanel/bin:$PATH"
-if [ "$(hostname)" -eq "dopey" ]; then
-	echo "Running bin/cpbackup in background..."
-	fork backup
-else
-	echo "This app only used by 'dopey'"
-fi

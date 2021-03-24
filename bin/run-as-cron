@@ -1,3 +1,0 @@
-#!/bin/bash
-printf "Running $@ as a cron\n"
-/usr/bin/env $i $(cat ${HOME}/bin/cron-env) "$@"

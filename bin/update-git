@@ -1,8 +1,0 @@
-!/usr/local/bin/zsh
-# Update/Download any changes from git
-if [ -z "$(git status --porcelain)" ] && [ -z "$(git diff --stat origin/master)" ]; then
-	git reset --hard 
-	git pull origin master 
-else
-	echo "$(fg_red1 "Git:") You have items to '$(fg_red1 "git $(f_blink "add/commit/push")")'"
-fi

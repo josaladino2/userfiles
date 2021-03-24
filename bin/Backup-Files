@@ -1,3 +1,0 @@
-#!/usr/local/bin/bash
-cd ~
-rsync -avzh --delete --exclude-from 'bin/Backup-Files-Exclude' --update /Users/joe/Nextcloud /Users/joe/OneDrive

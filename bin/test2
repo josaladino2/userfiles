@@ -1,5 +1,0 @@
-#!/usr/local/bin/zsh
-for datafile in "${@:-all}"
-do
-    echo "x${datafile}x"
-done

@@ -1,5 +1,0 @@
-#!/usr/local/bin/zsh
-fpath=( ${myzfuncs} "${fpath[@]}" )
-autoload -U fsize
-fsize "~/.zshrc"
-fsize "~/.zsh_functions"

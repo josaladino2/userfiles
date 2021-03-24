@@ -1,6 +1,0 @@
-#!/bin/bash
-export PATH="/usr/local/bin:/usr/sbin:/bin:/Users/joe/bin:/var/root/bin:/usr/local/sbin:/usr/bin:/sbin"
-# Cleanup .DS_Store and *un~ files
-if [ -f "/Users/joe/bin/cleanup-files" ]; then
-	. "/Users/joe/bin/cleanup-files"
-fi

@@ -1,2 +1,0 @@
-#!/bin/bash
-mysql -u y4x_nc_user y4x_nc_data -e "DELETE FROM oc_file_locks WHERE 1;commit;"

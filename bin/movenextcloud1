@@ -1,3 +1,0 @@
-#!/bin/bash
-cd /Users/joe
-tar -czf /Volumes/Doc-E0/Nextcloud1.tgz Nextcloud1
