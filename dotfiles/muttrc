@@ -1,2 +1,0 @@
-set folder=/var/mail
-set mbox=+${USER}
